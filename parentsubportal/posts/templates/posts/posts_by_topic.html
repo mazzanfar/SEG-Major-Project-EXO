@@ -1,0 +1,10 @@
+{% extends 'posts/base.html' %}
+
+{% block title %} Posts in topic '{{ topic }}' {% endblock %}
+
+{% block content %}
+    <h3> Posts in topic '{{ topic }}':</h3>
+    <hr>
+    <!-- Generic post list template follows -->
+    {% include 'posts/post_list.html' %}
+{% endblock %}
