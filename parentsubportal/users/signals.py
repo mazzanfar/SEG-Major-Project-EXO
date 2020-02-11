@@ -1,15 +1,36 @@
-from django.db.models.signals import post_save
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.dispatch import receiver
 from .models import Profile
 
-
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+from django.contrib.auth import login, authenticate
 
 
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+class SignUpForm(UserCreationForm):
+
+    first_name = forms.CharField(max_length=100, help_text='Last Name')
+    last_name = forms.CharField(max_length=100, help_text='Last Name')
+    email = forms.EmailField(max_length=150, help_text='Email')
+
+    username = forms.CharField(max_length=30)
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', "password1", "password2"]
+
+class ProfileForm(forms.ModelForm):
+    CHOICES = [('1', 'Female'), ('2', 'Male')]
+    profession = forms.CharField(max_length=200)
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+    address = forms.CharField(max_length=200) 
+    
+    class Meta:
+        model = Profile
+        fields = ['profession','gender', 'address']
+
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
