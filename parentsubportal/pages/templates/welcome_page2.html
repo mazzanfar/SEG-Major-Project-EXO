@@ -16,8 +16,8 @@
 
     <style>
       #main {
-        margin-top: 250px;
-        margin-bottom: 230px;
+        margin-top: 235px;
+        margin-bottom: 215px;
       }
       #homeLogo {
         height: 60px;
@@ -30,19 +30,15 @@
       #imgIcon{
         padding-top: 30px;
       }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+      #footerColumn {
+        background-color: black;
+        color: white;
+        padding-top: 15px;
+        padding-bottom: 20px;
       }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+      #footer {
+        width: 100%;
+        position: inherit;
       }
     </style>
 
@@ -69,36 +65,36 @@
         </p>
       </main>
 
-      <footer class="container py-4">
+      <footer id="footer">
         <div class="row">
-          <div class="col-4 col-md">
-            <img src="https://img.icons8.com/ios-glyphs/40/000000/connectivity-and-help.png">
+          <div id= "footerColumn" class="col-4 col-md">
+            <img style="background-color: yellow;padding-bottom: 2px;" src="https://img.icons8.com/material-outlined/50/000000/connectivity-and-help.png">
             <small class="d-block mb-3 text-muted">&copy; 2020-2021</small>
           </div>
-          <div class="col-4 col-md">
-            <h5>Features</h5>
+          <div id= "footerColumn" class="col-4 col-md">
+            <h5><a style="color:white" href="#">Features</a></h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">future development</a></li>
-              <li><a class="text-muted" href="#">Team features</a></li>
-              <li><a class="text-muted" href="#">developers/join us</a></li>
+              <li class="text-muted">future development</li>
+              <li class="text-muted">Team features</li>
+              <li class="text-muted">developers/join us</li>
             </ul>
           </div>
-          <div class="col-4 col-md">
-            <h5>Resources</h5>
+          <div id= "footerColumn" class="col-4 col-md">
+            <h5><a style="color:white" href="#">Resources</a></h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Books</a></li>
-              <li><a class="text-muted" href="#">Internet</a></li>
-              <li><a class="text-muted" href="#">communitites</a></li>
+              <li class="text-muted">Books</li>
+              <li class="text-muted">Internet</li>
+              <li class="text-muted">communitites</li>
             </ul>
           </div>
-          <div class="col-4 col-md">
-            <h5>About</h5>
+          <div id= "footerColumn" class="col-4 col-md">
+            <h5><a style="color:white" href="#">About</a></h5>
             <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">cantact</a></li>
-              <li><a class="text-muted" href="#">Team</a></li>
-              <li><a class="text-muted" href="#">Locations</a></li>
-              <li><a class="text-muted" href="#">Privacy</a></li>
-              <li><a class="text-muted" href="#">Terms</a></li>
+              <li class="text-muted">Cantact</li>
+              <li class="text-muted">Team</li>
+              <li class="text-muted">Locations</li>
+              <li class="text-muted">Privacy</li>
+              <li class="text-muted">Terms</li>
             </ul>
           </div>
         </div>
