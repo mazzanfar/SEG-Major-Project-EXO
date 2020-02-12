@@ -20,4 +20,5 @@ import pages.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('welcome_page', pages.views.welcome_page, name="welcome_page"),
+    path('welcome_page2', pages.views.welcome_page2, name="welcome_page2")
 ]
