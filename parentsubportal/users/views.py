@@ -1,24 +1,26 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def register(response):
-    if response.method == "POST":
-        form = RegisterForm(response.POST)
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-
-        return redirect("/home")
+            username = form.cleaned_data.get('username')
+            return redirect("login")
     else: 
-       form = RegisterForm()
+       form = UserRegisterForm()
 
-    return render(response, "users/register.html", {"form": form})
+    return render(request, "users/register.html", {"form": form})
+
 
 @login_required
 def profile(request):
+    
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
