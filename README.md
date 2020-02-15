@@ -15,6 +15,6 @@ For installing postgreSQL on local machine: https://djangocentral.com/using-post
 3.	app => To make an app we use the command: python3 manage.py startapp app_name
 
 Sources:
-https://www.youtube.com/watch?v=0mCZdemSsbs&list=PLzMcBGfZo4-kQkZp-j9PNyKq7Yw5VYjq9&index=8
+https://dev.to/coderasha/create-advanced-user-sign-up-view-in-django-step-by-step-k9m
 
 
