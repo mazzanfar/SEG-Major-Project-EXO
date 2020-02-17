@@ -1,5 +1,33 @@
+import uuid
 from django.views.generic import ListView, FormView, CreateView, DetailView
+from django.http import HttpResponseForbidden
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Comment, Topic
+from .forms import CommentForm
+
+class CommentFormView(CreateView):
+    model = Comment
+    #form_class = CommentForm
+    template_name = "posts/comment_form.html"
+    fields = ['content']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["node_uid"] = self.kwargs.get("pk", None)
+        #print(context["node_uid"])
+        return context
+
+    def form_valid(self, form):
+        new_comment = form.save(commit=False)
+        if self.kwargs.get("pk") != "parent":
+            parent_comment = Comment.objects.get(uid=self.kwargs.get("pk"))
+            new_comment.parent = parent_comment
+            new_comment.post = parent_comment.post
+        else:
+            new_comment.post = Post.objects.first()
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 class CommentListView(ListView):
     model = Comment
@@ -14,10 +42,21 @@ class TopicMixin:
 
 class PostDetailView(DetailView):
     model = Post
+    
+    def get_object(self, queryset=None):
+        item = super().get_object(queryset)
+        item.views = item.views + 1
+        item.save()
+        return item
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'topic']
+    template_name = "posts/post_create.html"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class CreateListView(CreateView):
     model = Comment
@@ -45,10 +84,11 @@ class PostsListByAuthorView(TopicMixin, ListView):
     ordering = ["-date_posted"]
 
     def get_queryset(self):
-        topic = self.kwargs.get("author", None)
+        author = self.kwargs.get("name", None)
+        print(author)
         results = []
-        if topic:
-            reuslts = Post.objects.filter(author__username=topic)
+        if author:
+            results = Post.objects.filter(author__username=author)
         return results
 
     def get_context_data(self, **kwargs):
@@ -68,7 +108,6 @@ class PostsListByTopicView(TopicMixin, ListView):
 
     def get_queryset(self):
         topic = self.kwargs.get("name", None)
-        print(topic)
         results = []
         if topic:
             results = Post.objects.filter(topic__name=topic)

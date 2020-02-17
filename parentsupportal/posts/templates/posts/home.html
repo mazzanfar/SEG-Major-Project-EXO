@@ -5,12 +5,15 @@
             <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
             <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="#">{{ post.author }}</a>
+                    <small class="text-muted">
+                        Posted on <b>{{ post.date_posted|date:"F d, Y" }}</b>
+                        {{ post.author }}
+                        by <a class="mr-2" href="{% url "posts:post-author" post.author %}">{{ post.author }}</a>
+                    </small>
             </div>
             <h2><a class="article-title" href="{% url 'posts:post-detail' post.id %}">{{ post.title }}</a></h2>
                 <div class="row justify-content-between">
                     <div class="col-6">
-                        <i class="fas fa-clock"></i> {{ post.date_posted|date:"F j, Y" }}
                         <i class="fas fa-comment-dots"></i> {{ post.comments.all|length }}
                         <i class="fas fa-eye"></i> {{ post.views }}
                         <p class="text-right">

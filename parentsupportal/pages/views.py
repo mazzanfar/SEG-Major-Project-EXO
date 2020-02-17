@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import News
-from .form import profile_Form
+#from .form import profile_Form
 
 # Create your views here.
 def welcome_page(request):

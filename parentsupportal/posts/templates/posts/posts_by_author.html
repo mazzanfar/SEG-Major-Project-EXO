@@ -1,0 +1,10 @@
+{% extends 'posts/base.html' %}
+
+{% block title %} Posts by '{{ author }}' {% endblock %}
+
+{% block content %}
+    <h3> Posts by {{ author }}:</h3>
+    <hr>
+    <!-- Generic post list template follows -->
+    {% include 'posts/post_list.html' %}
+{% endblock %}

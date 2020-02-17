@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends "posts/base.html" %}
+{% load static %}
 {% load post_tags %}
 
 {% block title %} {{ post.title }} {% endblock %}
@@ -18,12 +19,21 @@
       </div>
       <h2 class="article-title">{{ post.title }}</h2>
       <p class="article-content">{{ post.content }}</p>
+        {% with post as node %}
+            {% include 'posts/comment_item.html' %}
+        {% endwith %}
+    </div>
+    <div>
     </div>
   </article>
   <article class="media content-section">
     <div>
-        <h4>{%getAmount nodes|lnegth 'comment' %}</h4>
+        <h6>{%getAmount nodes|length 'comment' %}</h6>
         {% include 'posts/post_recursetree.html' %} 
     </div>
     </article>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{% static "posts/js/thread.js" %}"></script>
+{% endblock %}

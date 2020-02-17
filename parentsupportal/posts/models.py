@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -20,18 +21,20 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    views = models.BigIntegerField(default=0)
+    views = models.IntegerField(default=0)
     topic = models.ManyToManyField(Topic, blank=True)
     #tags = TaggableManager()
+    uid = models.CharField(default="parent", max_length=15)
 
     def __str__(self):
         return '{} by {} on {}'.format(self.title, self.author.username, self.date_posted)
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('posts:post-detail', kwargs={'pk': self.pk}) #TODO: remove 'posts:'
     
 
 class Comment(MPTTModel):
+    uid = models.UUIDField(max_length=8, primary_key=True, default=uuid.uuid4, editable=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(default=timezone.now)
@@ -58,3 +61,5 @@ class Comment(MPTTModel):
     def __str__(self):
         return 'Comment by {} on {}'.format(self.author.username, self.post.title)
 
+    def get_absolute_url(self):
+        return reverse('posts:post-detail', kwargs={'pk': self.post.pk}) #TODO: remove 'posts:'
