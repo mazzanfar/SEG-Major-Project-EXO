@@ -49,6 +49,12 @@ class PostDetailView(DetailView):
         item.save()
         return item
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context['object'].comments.all())
+        return context
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content', 'topic']
