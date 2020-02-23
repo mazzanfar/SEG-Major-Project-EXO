@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'parentsubportal.urls'
+ROOT_URLCONF = 'parentsupportal.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'parentsubportal.wsgi.application'
+WSGI_APPLICATION = 'parentsupportal.wsgi.application'
 
 
 # Database

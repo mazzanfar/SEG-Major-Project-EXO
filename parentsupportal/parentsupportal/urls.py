@@ -51,6 +51,7 @@ urlpatterns = [
 
     path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
     path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
+    path('home_page/', pages_views.home_page, name="home_page"),
 
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import News
-from .form import profile_Form
 
 # Create your views here.
 def welcome_page(request):
@@ -9,3 +8,6 @@ def welcome_page(request):
 
 def welcome_page2(request):
     return render(request, 'pages/welcome_page2.html')
+
+def home_page(request):
+    return render(request, 'pages/home_page.html')
