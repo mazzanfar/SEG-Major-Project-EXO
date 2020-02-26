@@ -49,9 +49,9 @@ urlpatterns = [
 
     path('profile/', user_views.profile, name='profile'),
 
-    path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
-    path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
-    path('home_page/', pages_views.home_page, name="home_page"),
+    path('', pages_views.home_page, name="home_page"),
+    path('search_page', pages_views.search_page, name="search_page"),
+    path('search_page2', pages_views.search_page2, name="search_page2"),
 
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
