@@ -3,41 +3,35 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile
 
+from django.contrib.auth import login, authenticate
 
-class UserRegisterForm(UserCreationForm):
-    CHOICES = [('1', 'Female'), ('2', 'Male')]
 
-    email = forms.EmailField()
-    profession = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'class': 'special',
-        }
-    ))
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    address = forms.CharField() 
+class SignUpForm(UserCreationForm):
+
+    first_name = forms.CharField(max_length=100, help_text='Last Name')
+    last_name = forms.CharField(max_length=100, help_text='Last Name')
+    email = forms.EmailField(max_length=150, help_text='Email')
+
+    username = forms.CharField(max_length=30)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'profession', 
-        'password1', 'password2', 'gender', 'address']
+        fields = ['username', 'first_name', 'last_name', 'email', "password1", "password2"]
 
-class UserUpdateForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     CHOICES = [('1', 'Female'), ('2', 'Male')]
-
-    email = forms.EmailField()
-    profession = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'class': 'special',
-        }
-    ))
+    profession = forms.CharField(max_length=200)
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    address = forms.CharField() 
-
+    address = forms.CharField(max_length=200) 
+    
     class Meta:
-        model = User
-        fields = ['username', 'email', 'profession', 'gender', 'address']
+        model = Profile
+        fields = ['profession','gender', 'address']
+
+
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
