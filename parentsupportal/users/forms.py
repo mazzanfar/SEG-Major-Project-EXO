@@ -5,7 +5,6 @@ from .models import Profile
 
 from django.contrib.auth import login, authenticate
 
-
 class SignUpForm(UserCreationForm):
 
     first_name = forms.CharField(max_length=100, help_text='Last Name')
@@ -20,6 +19,7 @@ class SignUpForm(UserCreationForm):
 
 class ProfileForm(forms.ModelForm):
     CHOICES = [('1', 'Female'), ('2', 'Male')]
+
     profession = forms.CharField(max_length=200)
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     address = forms.CharField(max_length=200) 
@@ -28,10 +28,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['profession','gender', 'address']
 
-
-
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['image']
-
+#class ProfileUpdateForm(forms.ModelForm):
+ #   class Meta:
+ #       model = Profile
+ #      fields = ['image']
