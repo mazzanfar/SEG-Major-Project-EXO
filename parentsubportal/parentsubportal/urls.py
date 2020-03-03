@@ -58,7 +58,6 @@ urlpatterns = [
     #path('', include('posts.urls'))
     path('add_children/', user_views.addChild, name='children_form'),
 
->>>>>>> a3db70ca3950a4e74fa344d16545909cab666491:parentsubportal/parentsubportal/urls.py
 ]
 
 
