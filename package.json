@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch parentsupportal/frontend/src/index.js --output parentsupportal/frontend/static/frontend/main.js",
-    "build": "webpack --mode production parentsupportal/frontend/src/index.js --output parentsupportal/frontend/static/frontend/main.js"
+    "dev": "webpack --mode development --watch parentsubportal/frontend/src/index.js --output parentsubportal/frontend/static/frontend/main.js",
+    "build": "webpack --mode production parentsubportal/frontend/src/index.js --output parentsubportal/frontend/static/frontend/main.js"
   },
   "keywords": [],
   "author": "",
