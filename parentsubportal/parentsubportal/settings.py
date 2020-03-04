@@ -77,14 +77,7 @@ WSGI_APPLICATION = 'parentsubportal.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
-        'USER': 'dbuser',
-        'PASSWORD': '"db123user£$%^',
-        'HOST': '34.77.51.241',
-        'PORT': '',
-    }
+
 }
 
 

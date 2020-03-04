@@ -45,10 +45,11 @@ from pages import views as pages_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/', user_views.register, name='register'),
 
+    path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
 
+    path('', pages_views.home_page, name="home_page"),
     path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
     path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
 
