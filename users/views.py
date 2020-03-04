@@ -29,9 +29,9 @@ def register(request):
 
     return render(request, 'users/register.html', {'form': form, 'profile_form': profile_form})
 
-"""
+
 #This function is garbage and has no purpose/does not work -> note: Make it better
-@login_required
+"""@login_required
 def profile(request):
     
     if request.method == 'POST':
