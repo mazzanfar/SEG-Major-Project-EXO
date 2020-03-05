@@ -11,3 +11,6 @@ def welcome_page2(request):
 
 def home_page(request):
     return render(request, 'pages/home_page.html')
+
+def blogs_page(request):
+    return render(request, 'pages/blogs_page.html')
