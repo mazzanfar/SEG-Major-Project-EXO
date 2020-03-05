@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_TOPICS } from './types';
+import { GET_TOPICS, ADD_TOPIC } from './types';
 
 // GET TOPICS
 export const getTopics = () => dispatch => {
@@ -12,4 +12,16 @@ export const getTopics = () => dispatch => {
             payload: res.data
         });
     }).catch(err => console.log(err));
-}
+};
+
+// ADD LEAD
+export const addTopic = (topic) => dispatch => {
+    axios
+    .post('/api/topics/', topic)
+    .then(res => {
+        dispatch({
+            type: ADD_TOPIC,
+            payload: res.data
+        });
+    }).catch(err => console.log(err));
+};
