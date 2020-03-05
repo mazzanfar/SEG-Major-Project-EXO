@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from .forms import SignUpForm, ProfileForm
+from .forms import SignUpForm, ProfileForm, ProfileUpdateForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 # Create your views here.
+
 
 def register(request):
     form = SignUpForm(request.POST)
@@ -12,7 +13,7 @@ def register(request):
 
     if form.is_valid() and profile_form.is_valid():
         userMan = form.save()
-        #Create a profile object without saving it yet
+        # Create a profile object without saving it yet
         profile = profile_form.save(commit=False)
 
         profile.user = userMan
@@ -30,12 +31,12 @@ def register(request):
     return render(request, 'users/register.html', {'form': form, 'profile_form': profile_form})
 
 
-#This function is garbage and has no purpose/does not work -> note: Make it better
+# This function is garbage and has no purpose/does not work -> note: Make it better
 @login_required
 def profile(request):
-    
+
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = ProfileForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
@@ -46,7 +47,7 @@ def profile(request):
             return redirect('profile')
 
     else:
-        u_form = UserUpdateForm(instance=request.user)
+        u_form = ProfileForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
@@ -55,4 +56,3 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
-    
