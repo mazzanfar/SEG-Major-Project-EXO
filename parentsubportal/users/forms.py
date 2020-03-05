@@ -10,6 +10,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, help_text='Last Name')
     last_name = forms.CharField(max_length=100, help_text='Last Name')
     email = forms.EmailField(max_length=150, help_text='Email')
+
     username = forms.CharField(max_length=30)
 
     class Meta:
@@ -21,8 +22,8 @@ class ProfileForm(forms.ModelForm):
 
     profession = forms.CharField(max_length=200)
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    address = forms.CharField(max_length=200)
-
+    address = forms.CharField(max_length=200) 
+    
     class Meta:
         model = Profile
         fields = ['profession','gender', 'address']
