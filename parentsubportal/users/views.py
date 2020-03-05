@@ -1,9 +1,11 @@
-from django.shortcuts import render
 from .forms import SignUpForm, ProfileForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+
+from django.contrib import messages
+from .models import User
 # Create your views here.
 
 def register(request):
@@ -33,7 +35,7 @@ def register(request):
 #This function is garbage and has no purpose/does not work -> note: Make it better
 @login_required
 def profile(request):
-    
+
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -55,4 +57,3 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
-    
