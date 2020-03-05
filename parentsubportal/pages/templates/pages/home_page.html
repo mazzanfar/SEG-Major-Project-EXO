@@ -1,4 +1,4 @@
-
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -163,6 +163,7 @@
     </style>
 
   </head>
+
   <body>
     <header>
 
@@ -172,15 +173,18 @@
         </div>
         
         <ul class="nav-links">
-          <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
           <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
-          <li style="padding-left:800px;"class="nav-item"><a class="nav-link" href="#popup1">Login / Signup</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
+          <li style="padding-left:860px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>
         </ul>
       </nav>
 
     </header>
 
+
+
+    {% block content %}
     <div class="main-body">
         <div id="introduction_content" class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-12 col-sm-10">
@@ -220,6 +224,10 @@
                 </div>
             </div>
         </div>
+        {% endblock %}
+
+
+
 
         <div id="popup1" class="overlay">
         	<div class="popup">
@@ -229,6 +237,9 @@
         			<p>Thank to pop me out of that button, but now there will be the video and you need to watch it before you are able to signup.</p>
         		</div>
             <iframe class="video" height="430px" width="750px" src="https://www.youtube.com/embed/uo7x2qJuJ-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="registerlink">
+              <p> already watched it?<a href="{% url 'register' %}">Register</a><p>
+            </div>
           </div>
         </div>
 
