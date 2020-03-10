@@ -7,15 +7,113 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      .body{
+        padding-left: 340px;
+        padding-top: 50px;
+      }
+      .form {
+        background: rgba(230,230,230,0.8);
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-right: 50px;
+        padding-left: 50px;
+        width: 1000px;
+      }
+      .fieldWrapper_form {
+        padding-top: 30px;
+      }
+      label {
+        padding-left: 30px;
+        padding-right: 15px;
+        font-size: 17px;
+      }
+      p {
+        font-size: 20px;
+      }
+      #id_first_name {
+        width: 300px;
+        height: 30px;
+      }
+      #id_last_name {
+        width: 300px;
+        height: 30px;
+      }
+      #id_username {
+        width: 301px;
+        height: 30px;
+      }
+      #id_email {
+        width: 342px;
+        height: 30px;
+      }
+      #id_password1{
+        width: 305px;
+        height: 30px;
+      }
+      #id_password2 {
+        width: 250px;
+        height: 30px;
+      }
+      #id_postcode {
+        width: 340px;
+        height: 30px;
+      }
+      .profession_div {
+        padding-top: 30px;
+        display: flex;
+        padding-bottom: 15px;
+      }
+      .genderDiv li {
+        list-style-type: none;
+      }
+      button {
+        width: 120px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .fieldWrapper_profileForm {
+        padding-bottom: 20px;
+      }
+    </style>
   </head>
-  <body>
-
-    <h1>Sign up Form</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      {{ profile_form.as_p }}
-      <button type="submit">Sign up</button>
+  <body class="body">
+    <div class= "form">
+      <h1 class="text-primary">Sign up Form</h1>
+      <form method="post">
+        {% csrf_token %}
+        <div class="fieldWrapper_form">
+          <div class="div">
+            <label>First Name: </label>{{ form.first_name }}
+            <label>Last Name: </label>{{ form.last_name }}
+          </div><br>
+          <div class="div">
+            <label>Username: </label>{{ form.username }}
+            <label>Email: </label>{{ form.email }}
+          </div><br>
+          <div class="div">
+            <label>Password:</label>{{ form.password1 }}
+            <label>Confirm Password: </label>{{ form.password2 }}
+          </div>
+        </div>
+        <!-- {{ form.as_p }} -->
+        <div class="fieldWrapper_profileForm">
+          <div class="profession_div">
+            <label>Profession: </label>{{ profile_form.profession }}<br>
+          </div>
+          <div class="genderDiv">
+            <label>Gender: </label>{{ profile_form.gender }}
+          </div>
+          <div class="PostcodeDiv">
+            <label>Postcode: </label>{{ profile_form.Postcode }}<br>
+          </div>
+        </div>
+        <!-- {{ profile_form.as_p }} -->
+        <button style="margin-left: 730px;" type="submit" class=" bg-primary text-white">Sign up</button>
+      </div>
     </form>
   </body>
 </html>

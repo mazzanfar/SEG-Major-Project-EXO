@@ -7,25 +7,26 @@ from django.contrib.auth import login, authenticate
 
 class SignUpForm(UserCreationForm):
 
-    first_name = forms.CharField(max_length=100, help_text='Last Name')
-    last_name = forms.CharField(max_length=100, help_text='Last Name')
-    email = forms.EmailField(max_length=150, help_text='Email')
-    username = forms.CharField(max_length=30)
+    first_name = forms.CharField(max_length=200)
+    last_name = forms.CharField(max_length=200)
+    email = forms.EmailField(max_length=200)
+    username = forms.CharField(max_length=200)
 
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', "password1", "password2"]
 
 class ProfileForm(forms.ModelForm):
-    CHOICES = [('1', 'Female'), ('2', 'Male')]
+    CHOICES = [('1', 'Female'), ('2', 'Male'), ('3', 'Prefer not to say')]
 
-    profession = forms.CharField(max_length=200)
+    profession = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'rows':5, 'cols':90}))
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    address = forms.CharField(max_length=200)
+    Postcode = forms.CharField(max_length=200)
+    children = forms.CharField(max_length=200)
 
     class Meta:
         model = Profile
-        fields = ['profession','gender', 'address']
+        fields = ['profession','gender', 'Postcode']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
