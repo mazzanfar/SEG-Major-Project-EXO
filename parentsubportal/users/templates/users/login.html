@@ -1,20 +1,62 @@
-{% load crispy_forms_tags %}
-{% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login_page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      .loginDiv {
+        margin-left: 250px;
+        margin-right: 250px;
+        margin-top:180px;
+        padding-right: 300px;
+        padding-left: 280px;
+        background: rgba(230,230,230,0.8);
+        padding-top:80px;
+        padding-bottom:80px;
+      }
+      #login_header {
+        font-size: 40px;
+      }
+      #id_username {
+        font-size: 18px;
+      }
+      button {
+        width: 200px;
+        margin-left: 400px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      label {
+        font-size: 20px;
+      }
+      #signup-link{
+        font-size:19px;
+      }
+    </style>
+  </head>
+  <body>
+        <div class="loginDiv">
+            <form method="POST">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {% block content %}
+                <fieldset class="form-group">
+                    <legend id="login_header" class="border-bottom mb-4 text-primary">Login</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline bg-primary text-white" type="submit">Login</button>
+                </div>
+            </form>
+            <div id="signup-link" class="border-top pt-3">
+                <small class="text-muted">
+                    Need An Account?<a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+                </small>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-            </small>
         </div>
-    </div>
-{% endblock content %}
+    {% endblock content %}
+  </body>
+</html>
