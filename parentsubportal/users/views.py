@@ -1,46 +1,31 @@
-from .forms import SignUpForm, ProfileForm
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
-
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm 
+from .forms import ChildrenRegisterForm
 from django.contrib import messages
-from .models import User
-# Create your views here.
+
+
 
 def register(request):
-    form = SignUpForm(request.POST)
-    profile_form = ProfileForm(request.POST)
-
-    if form.is_valid() and profile_form.is_valid():
-        userMan = form.save()
-        #Create a profile object without saving it yet
-        profile = profile_form.save(commit=False)
-
-        profile.user = userMan
-        profile.save()
-
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        return redirect('/')
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created. Your are now able to login!')
+            return redirect('login')
     else:
-        form = SignUpForm()
-        profile_form = ProfileForm()
+        form = UserRegisterForm()
+    
+    return render(request, 'users/register.html', {'form': form})
 
-    return render(request, 'users/register.html', {'form': form, 'profile_form': profile_form})
-
-
-#This function is garbage and has no purpose/does not work -> note: Make it better
 @login_required
 def profile(request):
-
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
+        p_form = ProfileUpdateForm(request.POST, 
+                                    request.FILES,
+                                    instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -50,10 +35,26 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-
+        context= {
+            'u_form' : u_form,
+            'p_form' : p_form
+        }
     return render(request, 'users/profile.html', context)
+        
+    
+@login_required
+def addChild(request):
+    if request.method == 'POST':
+        child_form = ChildrenRegisterForm(request.POST)
+        
+        if child_form.is_valid():
+            child_form.save()
+            messages.success(request, f'Your child has been added!')
+            return redirect('profile')
+
+    else:
+        child_form = ChildrenRegisterForm(instance=request.user)
+        context= {
+            'child_form' : child_form
+        }
+    return render(request, 'users/add_children.html', context)
