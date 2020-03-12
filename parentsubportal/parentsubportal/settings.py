@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'pages',
     'posts',
     'taggit',
-    'knox',
     'rest_framework',
     'frontend'
 ]
