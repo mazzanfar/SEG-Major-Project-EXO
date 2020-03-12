@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "fomantic-ui": "^2.8.4",
     "npm-watch": "^0.6.0",
     "prop-types": "^15.7.2",
     "ra-data-drf": "^2.0.0",
@@ -41,6 +42,7 @@
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.88.2"
   }
 }

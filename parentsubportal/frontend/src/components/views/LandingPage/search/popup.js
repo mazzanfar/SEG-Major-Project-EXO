@@ -1,13 +1,13 @@
 import React from "react";
-import { AgeSlider } from './AgeSlider'
+import {AgeSlider} from './AgeSlider'
 
 export default class Popup extends React.Component {
     constructor(props) {
-    super(props);
+        super(props);
     }
 
     render() {
-        const { topics, posts, documents, isOpen } = this.props;
+        const {topics, posts, documents, isOpen} = this.props;
         // Do not show popup
         if (!isOpen) return null;
         return (
@@ -19,7 +19,7 @@ export default class Popup extends React.Component {
                                 {topics &&
                                     topics.map((topic, idx) => {
                                         return (
-                                            <div className="item" key= {idx}>
+                                            <div className="item" key={idx}>
                                                 Topic: {topic.name}
                                             </div>
                                         );
@@ -27,7 +27,7 @@ export default class Popup extends React.Component {
                                 {posts &&
                                     posts.map((post, idx) => {
                                         return (
-                                            <div className="item" key= {idx}>
+                                            <div className="item" key={idx}>
                                                 Post: {post.title}
                                             </div>
                                         );
@@ -35,7 +35,7 @@ export default class Popup extends React.Component {
                                 {documents &&
                                     documents.map((doc, idx) => {
                                         return (
-                                            <div className="item" key= {idx}>
+                                            <div className="item" key={idx}>
                                                 Document: {doc.title}
                                             </div>
                                         );
@@ -43,13 +43,13 @@ export default class Popup extends React.Component {
                                 {!topics && !posts && <div className="warning">Nothing Found!</div>}
                             </div>
                             <div class="col-md-6">
-                                <AgeSlider/>
-                            </div>
+                                <AgeSlider min={0} max={50} />
                             </div>
                         </div>
-                        <div className="footer">Type keyword to search for conditions</div>
                     </div>
+                    <div className="footer">Type keyword to search for conditions</div>
                 </div>
+            </div>
         );
     }
 }
