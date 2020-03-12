@@ -28,7 +28,7 @@ export class Posts extends Component {
                     <div class="post">
                         {this.props.posts.map(post => (
                             <div class="post-body">
-                                <PostDetail post={post} />
+                                <PostDetail postId={post.id} />
                                 <Comments post={post} />
                             </div>
                         ))}

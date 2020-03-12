@@ -2,11 +2,26 @@ import React, {Component, Fragment} from "react";
 import {connect} from "react-redux";
 import {Button, Icon, Label} from "semantic-ui-react";
 import {likePost} from "../../../actions/likes"
+import PropTypes from "prop-types";
 
 export class PostDetail extends Component {
 
+    static propTypes = {
+        post: PropTypes.array.isRequired
+    };
+
+    state = {
+        likes: this.props.post.likes_count,
+        dislikes: this.props.post.dislikes_count
+    }
+
     handleLikePost() {
         const like = {"post": this.props.post.id, "user": 14, "vote_type": "like"}
+        this.props.likePost(like)
+    }
+
+    handleDislikePost() {
+        const like = {"post": this.props.post.id, "user": 14, "vote_type": "dislike"}
         this.props.likePost(like)
     }
 
@@ -48,11 +63,10 @@ export class PostDetail extends Component {
                             {this.props.post.likes_count}
                         </Label>
                     </Button>
-                    <Button as='div' labelPosition='right'>
+                    <Button as='div' onClick={this.handleDislikePost.bind(this)} labelPosition='right'>
                         <Button color="blue">
                             <Icon name="thumbs down" />
-                            Dislike
-                                    </Button>
+                                </Button>
                         <Label as='a' basic_color="blue" pointing='left'>
                             {this.props.post.dislikes_count}
                         </Label>
@@ -63,11 +77,13 @@ export class PostDetail extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    posts: state.posts.posts
-});
+function mapStateToProps(state, ownProps) {
+    return {
+    post: state.posts.posts.find(p => p.id == ownProps.postId)
+    };
+}
 
 export default connect(
-    null,
+    mapStateToProps,
     {likePost}
 )(PostDetail);
