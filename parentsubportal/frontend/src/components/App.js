@@ -32,7 +32,8 @@ class App extends Component {
                         <div className="container">
                             <Switch>
                                 <Route exact path="/" component={LandingPage}/>
-                                <Route exact path="/post/:postId" component={Post}/>
+                                <Route exact path="/documents" components={LandingPage}/>
+                                //<Route exact path="/post/:postId" component={Post}/>
                             </Switch>
                         </div>
                     </Fragment>

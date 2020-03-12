@@ -26,9 +26,6 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True)
     topic = models.ManyToManyField(Topic, blank=True)
 
-    def __str__(self):
-        return '{} by {} on {}'.format(self.title, self.author.username, self.date_posted)
-
     def get_absolute_url(self):
         return reverse('posts:post-detail', kwargs={'pk': self.pk}) #TODO: remove 'posts:'
 
@@ -42,6 +39,7 @@ class Post(models.Model):
 
 class Document(Post):
     file = models.FileField(upload_to='pdfs', blank=False) 
+    
 
 class Comment(models.Model):
     #uid = models.UUIDField(max_length=8, primary_key=True, default=uuid.uuid4, editable=False)

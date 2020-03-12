@@ -99,7 +99,6 @@ export class Search extends Component {
         return (
             <div className="search">
                 <div className="search-container">
-                    <div className="title">Condition</div>
                     <div className="content">
                     <input ref={this.setWrapperRef}
                         type="text"
