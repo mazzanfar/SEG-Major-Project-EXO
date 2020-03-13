@@ -2,13 +2,15 @@
 {% load mptt_tags %}
 <ul>
     {% recursetree post.comments.all %}
-        <li>
-            {% include 'posts/comment_item.html' %} 
-            {% if not node.is_lead_node %}
-                <ul class="children">
-                    {{ children }}
-                </ul>
-            {% endif %}
-        </li>
-    {% endrecursetree %}
-<ul>
+        {% with True as useRecursionTree %}
+            <li>
+                {{ node.content }}
+                {% if not node.is_lead_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endwith %}
+    <ul>
+{% endrecursetree %}

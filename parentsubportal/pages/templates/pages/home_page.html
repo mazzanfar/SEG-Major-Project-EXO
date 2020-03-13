@@ -1,0 +1,284 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parent Supportal</title>
+    <link rel="icon" href="images/icon.png">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Righteous&display=swap');
+    #logo {
+      font-family: 'Bree Serif';
+      font-size: 40px;
+      cursor: pointer;
+      padding-left: 25px;
+      padding-top: 10px;
+    }
+    nav {
+      display: flex;
+      justify-content:flex-start;
+      align-items:stretch;
+      background-color:#1896a2;
+    }
+    .nav-item {
+      display: inline-block;
+      padding: 0px 2px;
+      transition: all 0.3s ease 0s;
+      font-size: 30px;
+    }
+    .nav-item a{
+      font-size: 20px;
+      padding-top: 27px;
+      padding-left: 2px;
+      color: #f8d061;
+    }
+    #introduction_content {
+      padding-left: 290px;
+      width: 100%;
+      padding-bottom: 100px;
+    }
+    .jumbotron {
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+      margin-bottom: 25px;
+      height: 680px;
+      padding-top: 20px;
+      width: 100%;
+    }
+    @import url('https://fonts.googleapis.com/css?family=Candal&display=swap');
+    #heading-text{
+      color: #1896a2;
+      font-size: 40px;
+      font-family: 'Candal', ;
+    }
+    #semi-Introduction{
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+      padding: 30px;
+      margin: 10px;
+    }
+    #viewBtn {
+      color: white;
+      padding-top: 10px;
+      text-align: center;
+      padding-bottom: 10px;
+      align-items: flex-start;
+    }
+    .row {
+      align-items: center;
+    }
+    #footer {
+      padding-bottom: 50px;
+      width: 100%;
+      padding-left: 300px;
+      padding-right: 200px;
+      background-color:  #1896a2;
+      padding-top: 30px;
+      height: 300px;
+    }
+    #footer a {
+      color:#f8d061;
+    }
+    
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+    p {
+      font-family: 'Playfair Display';
+      font-size: 22px;
+    }
+    p:hover {
+      color: #f7a36f;
+    }
+    #footer-ul {
+      font-size: 20px;
+      color: #f7a36f;
+    }
+    .main-body {
+     /* background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed; */
+     /* background: url('https://source.unsplash.com/V3dHmb1MOXM/1920x1080') no-repeat center center fixed; */
+     /* background: url('https://source.unsplash.com/BIk2ANMmNz4/1920x1080') no-repeat  fixed; */
+      background-color:#f8d061;
+    }
+    .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    }
+    .overlay:target {
+    visibility: visible;
+    opacity: 1;
+    }
+    .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 60%;
+    height: 630px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    }
+    .popup h2 {
+    margin-top: 0;
+    color:#f8d061;
+    font-family: Tahoma, Arial, sans-serif;
+    }
+    .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #1E90FF;
+    }
+    .popup .close:hover {
+    color: #06D85F;
+    }
+    .popup .content {
+    max-height: 30%;
+    overflow: auto;
+    }
+    
+    @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
+    }
+    .video {
+      margin-left: 140px;
+    }
+    </style>
+
+  </head>
+
+  <body>
+    <header>
+
+      <nav>
+        <div>
+          <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Supportal</h1>
+        </div>
+        
+        <ul class="nav-links">
+          <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
+          <li style="padding-left:860px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>
+        </ul>
+      </nav>
+
+    </header>
+
+
+
+    {% block content %}
+    <div class="main-body">
+        <div id="introduction_content" class="row row-offcanvas row-offcanvas-left">
+            <div class="col-xs-12 col-sm-10">
+                <br>
+                <div class="jumbotron">
+                    <h1 id="heading-text">Welcome!</h1>
+                    <p>Parent Suportal is a community-tech ‘one-stop shop’ for parents of children with disability and special needs.</p>
+                    <iframe class="video" height="430px" width="750px" src="https://www.youtube.com/embed/uo7x2qJuJ-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="row">
+                    <div id="semi-Introduction" class="col-7 col-sm-7 col-lg-12">
+                        <h2 id="heading-text">Introduction</h2>
+                        <!-- <img src="https://source.unsplash.com/V3dHmb1MOXM/350x300" width="360px" height="300px"> -->
+                        <p>
+                          We are creating an equal playing field for parents and carers of children with disability and additional needs. 
+                          <br>
+                          Join our movement.
+                          <br>
+                          Plan ahead, succeed now, know your options!</p>
+                        <a id= "viewBtn" class="btn btn-danger rounded" href="#">View details »</a>
+                    </div>
+
+                    <div id="semi-Introduction" class="col-7 col-sm-7 col-lg-12">
+                        <h2 id="heading-text">Our aim?</h2>
+                        <p>To live in a world where families are adequately supported. <br>
+                          Where resource is fairly distributed and simple barriers are removed, 
+                          so that parents of children with special needs and disability can be parents first and advocates second.  </p>
+                        <a id= "viewBtn" class="btn btn-danger" href="#">View details »</a>
+                    </div>
+
+                    <div id="semi-Introduction" class="col-7 col-sm-7 col-lg-12">
+                        <h2 id="heading-text">Why us?</h2>
+                        <p>The online platform consists of a directory of information covering everything you need to know, 
+                          including a customisable timeline to help plan your child’s first 25 years; an online community (think Mumsnet for disability); and a marketplace of curated products.</p>
+                        <a id= "viewBtn" class="btn btn-danger" href="#">View details »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+
+
+
+        <div id="popup1" class="overlay">
+        	<div class="popup">
+        		<h2>Here i am</h2>
+        		<a class="close" href="#">&times;</a>
+        		<div class="content">
+        			<p>Thank to pop me out of that button, but now there will be the video and you need to watch it before you are able to signup.</p>
+        		</div>
+            <iframe class="video" height="430px" width="750px" src="https://www.youtube.com/embed/uo7x2qJuJ-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="registerlink">
+              <p> already watched it?<a href="{% url 'register' %}">Register</a><p>
+            </div>
+          </div>
+        </div>
+
+        <footer id="footer">
+
+          <div id= "footer-body" class="row">
+            <div class="col-3 col-md">
+              <img src="https://img.icons8.com/officel/50/000000/mother.png">
+              <small style="font-size: 16px;" class="d-block mb-4 text-muted">&copy; 2020-2021</small>
+            </div>
+            <div class="col-4 col-md">
+              <h5><a href="#">Features</a></h5>
+              <ul id="footer-ul" class="list-unstyled text-small">
+                <li class="text-muted">future development</li>
+                <li class="text-muted">Team features</li>
+                <li class="text-muted">developers/join us</li>
+              </ul>
+            </div>
+            <div class="col-4 col-md">
+              <h5><a href="#">Resources</a></h5>
+              <ul id="footer-ul" class="list-unstyled text-small">
+                <li class="text-muted">Books</li>
+                <li class="text-muted">Internet</li>
+                <li class="text-muted">communitites</li>
+              </ul>
+            </div>
+            <div class="col-4 col-md">
+              <h5><a href="#">About us</a></h5>
+              <ul id="footer-ul" class="list-unstyled text-small">
+                <li class="text-muted">Contact us</li>
+                <li class="text-muted">Team</li>
+                <li class="text-muted">Locations</li>
+                <li class="text-muted">Privacy</li>
+                <li class="text-muted">Terms</li>
+              </ul>
+            </div>
+          </div>
+
+        </footer>
+    </div>
+  </body>
+</html>
