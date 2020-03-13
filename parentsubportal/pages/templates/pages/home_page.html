@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Parent Supportal</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">{% if title %}
+    <title>ParentSupportal - {{title}}</title>
+    {% else %}
+    <title>ParentSupportal</title>
+    {% endif %}
     <link rel="icon" href="images/icon.png">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -82,7 +85,7 @@
     #footer a {
       color:#f8d061;
     }
-    
+
     @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
     p {
       font-family: 'Playfair Display';
@@ -148,7 +151,7 @@
     max-height: 30%;
     overflow: auto;
     }
-    
+
     @media screen and (max-width: 700px){
     .box{
       width: 70%;
@@ -157,8 +160,51 @@
       width: 70%;
     }
     }
+    iframe {
+      padding-bottom: 20px;
+    }
     .video {
-      margin-left: 140px;
+      margin-left: 120px;
+    }
+    #registerForm {
+      padding-left: 400px;
+      padding-right: 450px;
+      padding-top: 80px;
+      padding-bottom: 90px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #loginForm {
+      padding-bottom: 200px;
+      padding-left: 500px;
+      padding-right: 500px;
+      padding-top: 100px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #headerForm {
+      color:#f8d061;
+      font-size: 50px;
+    }
+    .form-group {
+      font-size: 20px;
+      color: #1896a2;
+    }
+    #profileForm {
+      padding-left: 400px;
+      padding-right: 450px;
+      padding-top: 80px;
+      padding-bottom: 90px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #logoutForm {
+      padding-bottom: 420px;
+      padding-left: 500px;
+      padding-right: 500px;
+      padding-top: 100px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
     }
     </style>
 
@@ -171,12 +217,16 @@
         <div>
           <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Supportal</h1>
         </div>
-        
+
         <ul class="nav-links">
           <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
           <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
-          <li style="padding-left:860px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+          <li style="padding-left:840px;"class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}
+          <li style="padding-left:840px;"class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li style="padding-left:15px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>{% endif %}
         </ul>
       </nav>
 
@@ -199,7 +249,7 @@
                         <h2 id="heading-text">Introduction</h2>
                         <!-- <img src="https://source.unsplash.com/V3dHmb1MOXM/350x300" width="360px" height="300px"> -->
                         <p>
-                          We are creating an equal playing field for parents and carers of children with disability and additional needs. 
+                          We are creating an equal playing field for parents and carers of children with disability and additional needs.
                           <br>
                           Join our movement.
                           <br>
@@ -210,14 +260,14 @@
                     <div id="semi-Introduction" class="col-7 col-sm-7 col-lg-12">
                         <h2 id="heading-text">Our aim?</h2>
                         <p>To live in a world where families are adequately supported. <br>
-                          Where resource is fairly distributed and simple barriers are removed, 
+                          Where resource is fairly distributed and simple barriers are removed,
                           so that parents of children with special needs and disability can be parents first and advocates second.  </p>
                         <a id= "viewBtn" class="btn btn-danger" href="#">View details »</a>
                     </div>
 
                     <div id="semi-Introduction" class="col-7 col-sm-7 col-lg-12">
                         <h2 id="heading-text">Why us?</h2>
-                        <p>The online platform consists of a directory of information covering everything you need to know, 
+                        <p>The online platform consists of a directory of information covering everything you need to know,
                           including a customisable timeline to help plan your child’s first 25 years; an online community (think Mumsnet for disability); and a marketplace of curated products.</p>
                         <a id= "viewBtn" class="btn btn-danger" href="#">View details »</a>
                     </div>
