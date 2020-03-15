@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from "react";
 import {connect} from "react-redux";
+import {Item} from 'semantic-ui-react'
 import axios from 'axios';
 import PropTypes from "prop-types";
 import PostDetail from "./PostDetail"
 import {getPosts} from "../../../actions/posts";
 import {likePost} from "../../../actions/likes";
 import Comments from "./Comments"
-import './styles.scss'
 
 export class Posts extends Component {
     static propTypes = {
@@ -14,6 +14,10 @@ export class Posts extends Component {
         getPosts: PropTypes.func.isRequired,
         //deletePost: PropTypes.func.isRequired
     };
+
+    componentDidMount() {
+        this.props.getPosts();
+    }
 
     state = {
         author: 0
@@ -24,16 +28,12 @@ export class Posts extends Component {
         return (
             <Fragment>
                 <br />
-                <div class="container">
-                    <div class="post">
-                        {this.props.posts.map(post => (
-                            <div class="post-body">
-                                <PostDetail postId={post.id} />
-                                <Comments post={post} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                    {this.props.posts.map(post => (
+                        <Item.Group>
+                            <PostDetail postId={post.id} />
+                            <Comments post={post} />
+                        </Item.Group>
+                    ))}
             </Fragment >
         );
     }

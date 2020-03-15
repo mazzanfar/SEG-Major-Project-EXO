@@ -3,14 +3,14 @@ from .models import (
     Topic, 
     Post, 
     Comment, 
-    Document,
-    Like
+    Rating,
+    PDF
 )
 
 # Vote Serializer
-class LikeSerializer(serializers.ModelSerializer):
+class RatingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Like
+        model = Rating
         fields = '__all__'
 
 # Topic Serializer
@@ -24,6 +24,12 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ["content", "author", "post"]
 
+class PDFSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PDF
+        fields = '__all__'
+        #fields = ["content", "author", "title", "source", "content", "topics"]
+
 class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
     total_comments = serializers.IntegerField(read_only=True)
@@ -33,13 +39,6 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = '__all__'
-
-class DocumentSerializer(serializers.ModelSerializer):
-    """DRF serializer listing all the documents"""
-
-    class Meta:
-        model = Document
         fields = '__all__'
 
 class PostDetailSerializer(serializers.ModelSerializer):

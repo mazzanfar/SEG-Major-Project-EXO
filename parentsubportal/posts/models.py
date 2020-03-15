@@ -3,6 +3,7 @@ from django.core.files import File
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from taggit.managers import TaggableManager
 
@@ -15,23 +16,31 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.name
-
-class Post(models.Model):
+    
+class Content(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
     topic = models.ManyToManyField(Topic, blank=True)
+    visible = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
 
     def votes_count(self):
-        return self.post_likes.all().count()
+        return self.post_ratings.all().count()
 
-    def likes_count(self):
-        return sum(v.vote_type == "like" for v in self.post_likes.all())
+    # def likes_count(self):
+    #     return sum(v.vote_type == "like" for v in self.post_likes.all())
 
-    def dislikes_count(self):
-        return sum(v.vote_type == "dislike" for v in self.post_likes.all())
+    # def dislikes_count(self):
+    #    return sum(v.vote_type == "dislike" for v in self.post_likes.all())
+
+    def is_negative_post(self):
+        """Returns whether the post has more likes than dislikes (min 10 votes)"""
+        return True
 
     def get_absolute_url(self):
         return reverse('posts:post-detail', kwargs={'pk': self.pk}) #TODO: remove 'posts:'
@@ -44,13 +53,25 @@ class Post(models.Model):
     def total_likes(self):
         return self.likes.count()
 
-class Document(Post):
-    file = models.FileField(upload_to='pdfs', blank=False) 
+class Post(Content):
+    pass
 
-class Like(models.Model):
-    post = models.ForeignKey(Post, related_name="post_likes", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name="user_likes", on_delete=models.CASCADE)
-    vote_type = models.CharField(max_length=8)
+class Resource(Content):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="resources", blank=False)
+    source = models.URLField(blank=True)
+    lower_age = models.IntegerField(blank=True)
+    upper_age = models.IntegerField(blank=True)
+
+    class Meta:
+        abstract = True
+
+class PDF(Resource):
+    pdf_file = models.FileField(upload_to='resources/pdfs/', null=False, blank=False)
+
+class Rating(models.Model):
+    post = models.ForeignKey(Post, related_name="post_ratings", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user_ratings", on_delete=models.CASCADE)
+    rating  = models.PositiveIntegerField(default=3, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     class Meta:
         unique_together = [('user', 'post')]
@@ -64,16 +85,6 @@ class Comment(models.Model):
     #modified_on = models.DateTimeField(auto_now_add=False, auto_now=True)
     content = models.TextField()
     #parent = TreeForeignKey('self', blank=True, related_name='children', null=True, on_delete=models.CASCADE)
-
-    #class Meta:
-        #ordering = ['created_on']
-    
-   #  @property
-   #  def post(self): #TODO: post should be stored in comment
-   #      post = self
-   #      while post.parent:
-   #          post = post.parent
-   #      return Post.objects.get(op=post)
 
 
     def __str__(self):

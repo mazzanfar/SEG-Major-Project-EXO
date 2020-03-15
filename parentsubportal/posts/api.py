@@ -1,26 +1,26 @@
 from .models import (
     Topic,
     Post, 
-    Document, 
     Comment,
-    Like
+    Rating,
+    PDF
 )
 from rest_framework import viewsets, permissions
 from .serializers import (
     TopicSerializer, 
     PostListSerializer, 
-    DocumentSerializer, 
     CommentSerializer,
-    LikeSerializer
+    RatingSerializer,
+    PDFSerializer
 )
 
 # Votes ViewSet
-class LikeViewSet(viewsets.ModelViewSet):
-    queryset = Like.objects.all()
+class RatingViewSet(viewsets.ModelViewSet):
+    queryset = Rating.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = LikeSerializer
+    serializer_class = RatingSerializer
 
 # Topic Viewset
 class TopicViewSet(viewsets.ModelViewSet):
@@ -37,16 +37,16 @@ class PostViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PostListSerializer
 
-class DocumentViewSet(viewsets.ModelViewSet):
-    queryset = Document.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = DocumentSerializer
-
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = CommentSerializer
+
+class PDFViewSet(viewsets.ModelViewSet):
+    queryset = PDF.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PDFSerializer

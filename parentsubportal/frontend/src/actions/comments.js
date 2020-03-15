@@ -22,6 +22,7 @@ export const getComments = id => dispatch => {
 
 // POST COMMENT 
 export const postComment = (comment) => dispatch => {
+    console.log("hi")
     axios
     .post('/api/comments/', comment)
     .then(res => {

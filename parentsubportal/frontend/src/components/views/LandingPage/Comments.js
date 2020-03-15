@@ -3,9 +3,8 @@ import axios from 'axios'
 import PropTypes from "prop-types";
 import {Button, Comment, Form, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {postComment} from "../../../actions/comments"
 import {getPosts} from "../../../actions/posts";
-import './styles.scss'
+import CommentForm from "./CommentForm"
 
 // TODO: pass posts in ways besides props
 export class Comments extends Component {
@@ -18,7 +17,6 @@ export class Comments extends Component {
         }
     }
     static propTypes = {
-        postComment: PropTypes.func.isRequired,
         getPosts: PropTypes.func.isRequired
     };
 
@@ -67,10 +65,7 @@ export class Comments extends Component {
                         </Comment.Content>
                     </Comment>
                 ))}
-                <Form reply>
-                    <Form.TextArea />
-                    <Button content="Add Reply" labelPosition="left" icon="edit" primary />
-                </Form>
+                <CommentForm post={this.props.post}/>
             </Comment.Group>
         );
     }
@@ -82,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {postComment, getPosts}
+    {getPosts}
 )(Comments);

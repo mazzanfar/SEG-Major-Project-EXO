@@ -3,12 +3,12 @@ from .models import (
     Post,
     Topic, 
     Comment, 
-    Document,
-    Like
+    PDF,
+    Rating
 )
 
 admin.site.register(Post)
 admin.site.register(Topic)
 admin.site.register(Comment)
-admin.site.register(Document)
-admin.site.register(Like)
+admin.site.register(PDF)
+admin.site.register(Rating)

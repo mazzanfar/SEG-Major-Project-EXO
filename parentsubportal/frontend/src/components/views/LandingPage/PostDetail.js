@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {connect} from "react-redux";
-import {Button, Icon, Label} from "semantic-ui-react";
+import {Dropdown, Button, Icon, Label, Item, Rating} from "semantic-ui-react";
 import {likePost} from "../../../actions/likes"
 import PropTypes from "prop-types";
 
@@ -12,9 +12,15 @@ export class PostDetail extends Component {
 
     state = {
         likes: this.props.post.likes_count,
-        dislikes: this.props.post.dislikes_count
+        dislikes: this.props.post.dislikes_count,
+        options: [
+          { key: 'edit', icon: 'edit', text: 'Edit Post', value: 'edit' },
+          { key: 'delete', icon: 'delete', text: 'Remove Post', value: 'delete' },
+          { key: 'hide', icon: 'hide', text: 'Hide Post', value: 'hide' },
+        ]
     }
 
+    /*
     handleLikePost() {
         const like = {"post": this.props.post.id, "user": 14, "vote_type": "like"}
         this.props.likePost(like)
@@ -24,55 +30,38 @@ export class PostDetail extends Component {
         const like = {"post": this.props.post.id, "user": 14, "vote_type": "dislike"}
         this.props.likePost(like)
     }
+    */
+
+    checkRating = (event, data) => {
+        console.log(data.rating)
+    }
 
     render() {
         return (
-            <Fragment>
-                <div class="post-header">
-                    <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" /></span>
-                    <span class="username"><a href="javascript:;">John Smith</a> <small></small></span>
-                    <span class="float-right text-muted">{this.props.post.views} Views</span>
-                </div>
-                <div class="post-content">
-                    <p>
+            <Item>
+                <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+                <Item.Content>
+                    <Item.Header as='a'>Header</Item.Header>
+                    <Item.Meta>Posted by tom</Item.Meta>
+                    <Item.Description>
                         {this.props.post.content}
-                    </p>
-                </div>
-                <div class="post-likes">
-                    <div class="stats-right">
-                        <span class="stats-text">{}</span>
-                        <span class="stats-text">{this.props.post.total_comments} Comments</span>
-                    </div>
-                    <div class="stats">
-                        <span class="fa-stack fa-fw stats-icon">
-                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                            <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                        </span>
-                        <span class="fa-stack fa-fw stats-icon">
-                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="post-footer">
-                    <Button as='div' onClick={this.handleLikePost.bind(this)} labelPosition='right'>
-                        <Button color="red">
-                            <Icon name="heart" />
-                        </Button>
-                        <Label as='a' basic_color="red" pointing='left'>
-                            {this.props.post.likes_count}
-                        </Label>
-                    </Button>
-                    <Button as='div' onClick={this.handleDislikePost.bind(this)} labelPosition='right'>
-                        <Button color="blue">
-                            <Icon name="thumbs down" />
-                                </Button>
-                        <Label as='a' basic_color="blue" pointing='left'>
-                            {this.props.post.dislikes_count}
-                        </Label>
-                    </Button>
-                </div>
-            </Fragment>
+                    </Item.Description>
+                    <Item.Extra>
+                        <Label>Autism</Label>
+                        <Label>Something</Label>
+                        <Button.Group floated="right" color='teal'>
+                            <Button>Save</Button>
+                            <Dropdown
+                              className='button icon'
+                              floating
+                              options={this.state.options}
+                              trigger={<React.Fragment />}
+                            />
+                        </Button.Group>
+                    </Item.Extra>
+                <Rating maxRating={5} defaultRating={3} onRate={this.checkRating} icon='star' size='tiny' />
+                </Item.Content>
+            </Item>
         )
     }
 }
