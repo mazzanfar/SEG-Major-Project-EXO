@@ -25,6 +25,7 @@ export class Comments extends Component {
             this.setState({[fieldName]: event.target.value});
         }
     }
+
     componentDidMount() {
         this.props.getPosts();
         axios

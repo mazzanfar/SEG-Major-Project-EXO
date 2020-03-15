@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import LandingPage from "./views/LandingPage/LandingPage";
 import Post from "./views/PostPage/Post";
 import AdminPage from "./views/admin/AdminPage";
+import TopicPage from "./views/TopicPage";
 
 class App extends Component {
     render() {
@@ -18,7 +19,7 @@ class App extends Component {
                         <Switch>
                             <Route path="/blogs" component={LandingPage}/>
                             <Route path="/adminpage" component ={AdminPage}/>
-                            <Route path="/test" component={LandingPage}/>
+                            <Route path="/topic/:topic" component={TopicPage}/>
                             //<Route exact path="/post/:postId" component={Post}/>
                         </Switch>
                     </div>

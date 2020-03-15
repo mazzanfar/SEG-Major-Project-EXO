@@ -5,7 +5,6 @@ import axios from 'axios';
 import PropTypes from "prop-types";
 import PostDetail from "./PostDetail"
 import {getPosts} from "../../../actions/posts";
-import {likePost} from "../../../actions/likes";
 import Comments from "./Comments"
 
 export class Posts extends Component {
@@ -22,8 +21,6 @@ export class Posts extends Component {
     state = {
         author: 0
     };
-
-
     render() {
         return (
             <Fragment>

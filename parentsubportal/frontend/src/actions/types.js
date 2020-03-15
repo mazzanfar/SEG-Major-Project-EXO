@@ -7,5 +7,4 @@ export const GET_COMMENTS = "GET_COMMENTS"
 export const POST_COMMENT = "POST_COMMENT";
 export const GET_DOCUMENTS = "GET_DOCUMENTS";
 export const GET_USER = "GET_USER";
-export const LIKE_POST = "LIKE_POST"
-export const DISLIKE_POST = "DISLIKE_POST"
+export const RATE_POST = "RATE_POST";

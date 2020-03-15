@@ -23,7 +23,7 @@ class Content(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
-    topic = models.ManyToManyField(Topic, blank=True)
+    topics = models.ManyToManyField(Topic, blank=True)
     visible = models.BooleanField(default=True)
 
     class Meta:

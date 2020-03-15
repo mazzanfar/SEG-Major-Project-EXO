@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from "react";
 import {connect} from "react-redux";
 import {Dropdown, Button, Icon, Label, Item, Rating} from "semantic-ui-react";
-import {likePost} from "../../../actions/likes"
 import PropTypes from "prop-types";
+import {getUser} from "../../../actions/auth";
 
 export class PostDetail extends Component {
 
@@ -47,8 +47,11 @@ export class PostDetail extends Component {
                         {this.props.post.content}
                     </Item.Description>
                     <Item.Extra>
-                        <Label>Autism</Label>
-                        <Label>Something</Label>
+                        {this.props.post.topics.map(topic => (
+                            <Label
+                            href={"/topic/" + topic.name}
+                            >{topic.name}</Label>
+                        ))}
                         <Button.Group floated="right" color='teal'>
                             <Button>Save</Button>
                             <Dropdown
@@ -59,7 +62,7 @@ export class PostDetail extends Component {
                             />
                         </Button.Group>
                     </Item.Extra>
-                <Rating maxRating={5} defaultRating={3} onRate={this.checkRating} icon='star' size='tiny' />
+                <Rating maxRating={5} defaultRating={3} onRate={this.checkRating} icon='star' size='tiny'/>
                 </Item.Content>
             </Item>
         )
@@ -74,5 +77,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    {likePost}
+    null
 )(PostDetail);
