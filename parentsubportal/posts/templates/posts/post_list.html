@@ -1,0 +1,38 @@
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                <small class="text-muted">
+                    Posted on <b>{{ post.date_posted|date:"F d, Y" }}</b>
+                    by <a class="mr-2" href="{% url 'posts:post-author' post.author %}'">{{ object.author }}</a>
+                </small>
+            </div>
+            <h2><a class="article-title" href="{% url 'posts:post-detail' post.id %}">{{ post.title }}</a></h2>
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        <i class="fas fa-comment-dots"></i> {{ post.comments.all|length }}
+                        <i class="fas fa-eye"></i> {{ post.views }}
+                        <p class="text-right">
+                    </div>
+                    <div class="col-6 text-right">
+                        <b>Topics:</b> &nbsp;
+                        {% for topic in post.topic.all %}
+                            {{ topic.name }}, 
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--
+                <div>
+                    <form method="post">
+                        <img height="42" width="42" class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                        <input id="comment" type="text" name="comment_field" value="Enter comment">
+                        <input type = "submit" value="OK">
+                    </form>
+                </div>
+                -->
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

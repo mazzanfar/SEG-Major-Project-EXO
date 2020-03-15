@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "posts/base.html" %}
+{% load static %}
+{% load post_tags %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <small class="text-muted">
+            Posted on <b>{{ post.date_posted|date:"F d, Y" }}</b>
+            by <a class="mr-2" href="#'">{{ object.author }}</a>
+            {{ post.author.profile }}
+        </small>
+          <div>
+          </div>
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.content }}</p>
+        {% with post as node %}
+            {% include 'posts/comment_item.html' %}
+        {% endwith %}
+    </div>
+    <div>
+    </div>
+  </article>
+  <article class="media content-section">
+    <div>
+        <b>{%getAmount post.comments.all|length 'comment' %}</b>
+        {% include 'posts/post_recursetree.html' %} 
+    </div>
+    </article>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static "posts/js/thread.js" %}"></script>
+{% endblock %}

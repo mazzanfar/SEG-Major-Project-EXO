@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load post_tags %}
+{% load mptt_tags %}
+{% load static %}
+<div id="{{ node.uid }}" class="post-container">
+    <div class="bs-callout-main">
+        {% if node.uid != "parent" %}
+            <img class="rounded-circle article-img" src="{{ node.author.profile.image.url }}">
+            {{ node.content }}
+        {% endif %}
+        <br/>
+        <button onclick="window.commentFuncs.toggleCommentForm('{{ node.uid }}', this, '{% url 'posts:reply-comment' node.uid %}')" class="btn btn-default">
+            Reply
+        </button>
+        {% if node.uid != "parent" %}
+            <button class="btn btn-default">
+                Parent
+            </button>
+        {% endif %}
+        <br/>
+    </div>
+</div>
+
+{% block custom_js %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/url-join.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/post.js' %}"></script>
+{% endblock %}

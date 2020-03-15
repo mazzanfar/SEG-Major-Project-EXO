@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="comment-container">
+    <div class="comment-heading">
+        <h6 class="text-muted">Reply to</h6>
+    </div>
+    <form method="POST" action="{% url 'posts:reply-comment' node_uid %}" accept-charset="utf8"> {% csrf_token %}
+        {{ form|crispy }}
+        <div class="form-group">
+            <button class="btn" type="submit">Post</button>
+        </div>
+    </form>
+    </div>
+</div>
