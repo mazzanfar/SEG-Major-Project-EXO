@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import topics from './topics';
 import posts from './posts'
 import comments from './comments'
@@ -10,5 +10,5 @@ export default combineReducers({
     topics,
     documents,
     comments,
-    auth
+    auth,
 });

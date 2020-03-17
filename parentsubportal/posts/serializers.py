@@ -1,6 +1,17 @@
 from rest_framework import serializers
-from .models import Topic, Post, Comment, Document
+from .models import (
+    Topic, 
+    Post, 
+    Comment, 
+    Document,
+    Like
+)
 
+# Vote Serializer
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = '__all__'
 
 # Topic Serializer
 class TopicSerializer(serializers.ModelSerializer):
@@ -15,7 +26,9 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
-    total_comments = serializers.IntegerField()
+    total_comments = serializers.IntegerField(read_only=True)
+    likes_count = serializers.IntegerField(read_only=True)
+    dislikes_count = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:

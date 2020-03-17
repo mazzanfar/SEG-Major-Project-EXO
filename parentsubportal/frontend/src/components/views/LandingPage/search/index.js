@@ -53,7 +53,7 @@ export class Search extends Component {
 
     handleClickOutside(e) {
         if (this.wrapperRef && !this.wrapperRef.contains(e.target) && this.state.isPopupOpen) {
-            this.hidePopup();
+            //this.hidePopup();
         }
     }
 

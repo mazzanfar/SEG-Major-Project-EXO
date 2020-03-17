@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.core.files import File
 from django.utils import timezone
@@ -23,8 +22,16 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
-    likes = models.ManyToManyField(User, blank=True)
     topic = models.ManyToManyField(Topic, blank=True)
+
+    def votes_count(self):
+        return self.post_likes.all().count()
+
+    def likes_count(self):
+        return sum(v.vote_type == "like" for v in self.post_likes.all())
+
+    def dislikes_count(self):
+        return sum(v.vote_type == "dislike" for v in self.post_likes.all())
 
     def get_absolute_url(self):
         return reverse('posts:post-detail', kwargs={'pk': self.pk}) #TODO: remove 'posts:'
@@ -39,6 +46,14 @@ class Post(models.Model):
 
 class Document(Post):
     file = models.FileField(upload_to='pdfs', blank=False) 
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, related_name="post_likes", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user_likes", on_delete=models.CASCADE)
+    vote_type = models.CharField(max_length=8)
+
+    class Meta:
+        unique_together = [('user', 'post')]
     
 
 class Comment(models.Model):
