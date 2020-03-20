@@ -1,7 +1,7 @@
 from django import forms
-from models import .Timeline
+from .models import Timeline
 
 class TimelineForm(forms.ModelForm):
     class Meta:
         model = Timeline
-        fields = ('title','ageRange','pdf','child')
+        fields = ('title','ageRange','pdf')

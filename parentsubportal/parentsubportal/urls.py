@@ -63,7 +63,7 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('', include('users.urls')),
     re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
-    path('timeline/', timeline_views.timeline_contents, name='timeline'),
+    path('timeline/', timeline_views.timeline, name='timeline'),
     path('upload/', timeline_views.upload_pdf, name = 'upload')
 ]
 

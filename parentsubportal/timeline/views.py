@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def timeline_contents(request):
+def timeline(request):
     timeline = Timeline.objects.all()
     return render(request, 'timeline.html', {
         'timeline': timeline

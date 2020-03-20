@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'posts',
     'taggit',
     'rest_framework',
-    'frontend'
+    'frontend',
+    'timeline'
 ]
 
 REST_FRAMEWORK = {
