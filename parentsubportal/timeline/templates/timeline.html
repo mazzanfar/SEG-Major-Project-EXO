@@ -1,6 +1,6 @@
 {% block content %}
 <div class="span4">
-    <h1> Timeline</h1>
+    <h1>Timeline</h1>
     <table class="timeline-table">
     <tr>
         <th>0-4</th>
@@ -8,28 +8,27 @@
         <th>11-18</th>
         <th>18-25</th>
     </tr>
-    {% for timeline in Timeline %}
+    {% for tl in timeline %}
     <tr>
         <td>
             <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
-                      <h3>{{ timeline.header }}</h3>
+                      <h3>{{ tl.title }}</h3>
                        <span class="right-caret right"></span>
                  </a>
-        
                 <ul class="dropdown-menu rightMenu">
-                    {% for pdf in Timeline.pdfs.all %}
+                    {% for pdf in tl.pdf.all %}
                     <li>
                         <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
-                           <h5>{{ pdf.name }}ß</h5>
+                           <h5>{{ pdf.title }}</h5>
                            </a>
                         </div>
                     </li>
-                    {% end for %}
+                    {% endfor %}
                 </ul>
             </div>
         </td>
     </tr>
-    {% end for %}
+    {% endfor %}
     </table>
 </div>
 

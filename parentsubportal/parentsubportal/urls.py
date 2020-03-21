@@ -59,12 +59,12 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('add_children/', user_views.addChild, name='children_form'),
+    path('timeline/', timeline_views.timeline, name='timeline'),
+    path('upload/', timeline_views.upload_pdf, name = 'upload'),
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
     path('', include('users.urls')),
     re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
-    path('timeline/', timeline_views.timeline, name='timeline'),
-    path('upload/', timeline_views.upload_pdf, name = 'upload')
 ]
 
 

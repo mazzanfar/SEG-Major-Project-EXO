@@ -5,8 +5,6 @@ from .models import Timeline
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
-
 @login_required
 def timeline(request):
     timeline = Timeline.objects.all()
