@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages',
+    'metadata',
+    'bluebeam',
 ]
+# majorProjectEXO.parentsubportal.metadata
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
