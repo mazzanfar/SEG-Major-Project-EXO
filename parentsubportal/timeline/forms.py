@@ -4,4 +4,4 @@ from .models import Timeline
 class TimelineForm(forms.ModelForm):
     class Meta:
         model = Timeline
-        fields = ('title','ageRange','pdf')
+        fields = ('header','age','pdf')
