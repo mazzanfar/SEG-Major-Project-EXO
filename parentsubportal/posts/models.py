@@ -20,10 +20,10 @@ class Topic(models.Model):
 class Content(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", blank=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="content", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
-    topics = models.ManyToManyField(Topic, blank=True)
+    topics = models.ManyToManyField(Topic, null=True, blank=True)
     visible = models.BooleanField(default=True)
 
     class Meta:
@@ -66,7 +66,12 @@ class Resource(Content):
         abstract = True
 
 class PDF(Resource):
-    pdf_file = models.FileField(upload_to='resources/pdfs/', null=False, blank=False)
+    pdf_file = models.FileField(upload_to=f'resources/pdfs', null=False, blank=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pdfs", blank=False)
+
+class Video(Resource):
+    videoId = models.CharField(max_length=150, blank=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="videos", blank=False)
 
 class Rating(models.Model):
     post = models.ForeignKey(Post, related_name="post_ratings", on_delete=models.CASCADE)

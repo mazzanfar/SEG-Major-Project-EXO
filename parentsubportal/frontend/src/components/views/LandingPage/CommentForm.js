@@ -1,40 +1,43 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Button, Form, Message } from 'semantic-ui-react'
-import {postComment} from "../../../actions/comments"
-import {connect} from 'react-redux'
+import React, { Component, useState } from "react";
+import axios from "axios";
+import { Button, Form, Message } from "semantic-ui-react";
+import { postComment } from "../../../actions/comments";
+import { useSelector, useDispatch } from "react-redux";
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-class CommentForm extends Component {
-    state = {
-        content: "",
-    }
+function CommentForm(props) {
+    const [content, setContent] = useState("");
+    const author = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const comment = {'post': this.props.post.id, 'content': this.state.content, 'author': 15} 
-        console.log(comment)
-        this.props.postComment(comment)
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
+        const comment = {
+            post: props.post.id,
+            content: content,
+            author: author.id,
+        };
+        dispatch(postComment(comment));
     };
 
-    render() {
-        return (
-            <Form reply onSubmit={this.handleSubmit}>
-                <Form.TextArea required id="content" value={this.state.content} onChange={this.handleChange}/>
-                <Button content="Add Reply" labelPosition="left" icon="edit" primary />
-            </Form>
-        );
-    }
+    return (
+        <Form reply onSubmit={handleSubmit}>
+            <Form.TextArea
+                required
+                id="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+            />
+            <Button
+                content="Add Reply"
+                labelPosition="left"
+                icon="edit"
+                primary
+            />
+        </Form>
+    );
 }
-export default connect(
-    null,
-    {postComment}
-)(CommentForm);
+
+export default CommentForm;

@@ -4,7 +4,8 @@ from .models import (
     Topic, 
     Comment, 
     PDF,
-    Rating
+    Rating,
+    Video
 )
 
 admin.site.register(Post)
@@ -12,3 +13,4 @@ admin.site.register(Topic)
 admin.site.register(Comment)
 admin.site.register(PDF)
 admin.site.register(Rating)
+admin.site.register(Video)
