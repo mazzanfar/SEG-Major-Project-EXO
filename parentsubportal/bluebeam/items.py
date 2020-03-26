@@ -7,7 +7,7 @@
 
 import scrapy
 from scrapy_djangoitem import DjangoItem
-from metadata.models import FetchedData, BlogPost
+from metadata.models import FetchedData
 
 
 class BluebeamItem(DjangoItem):

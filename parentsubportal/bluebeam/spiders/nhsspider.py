@@ -16,8 +16,10 @@ class NhsSpider(scrapy.Spider):
         v = "https://www.nhs.uk"
         for sick in response.css('li.nhsuk-list-panel__item'):
             item = BluebeamItem()
-            item["nameDisease"]: sick.css(
+            nameOfDisease = sick.css(
                 ".nhsuk-list-panel__link::text").extract_first()
-            item["urllink"]: v + \
+            link = v + \
                 sick.css(".nhsuk-list-panel__link::attr(href)").extract_first()
+            item["nameDisease"] = nameOfDisease
+            item["urllink"] = link
             yield item
