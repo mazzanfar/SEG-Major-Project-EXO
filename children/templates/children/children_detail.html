@@ -1,0 +1,20 @@
+{% extends 'pages/home_page.html' %} {% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <div>
+                <h3 class="article-title">First name : {{ object.first_name }}</h3>
+                <h3 class="article-content">Last name : {{ object.last_name }}</h3>
+                <h3 class="article-title">Age : {{ object.age }}</h3>
+                <h3 class="article-content">Disability : {{ object.disability }}</h3>
+            </div>
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'children-update' object.id %}">Update Info</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'children-delete' object.id %}">Delete Child</a>
+            </div>
+        </div>
+
+
+    </div>
+</article>
+{% endblock content %}
