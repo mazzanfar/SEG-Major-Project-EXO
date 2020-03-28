@@ -1,10 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey 
 from django.core.files import File
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
-from mptt.models import MPTTModel, TreeForeignKey
 from taggit.managers import TaggableManager
 
 class Topic(models.Model):

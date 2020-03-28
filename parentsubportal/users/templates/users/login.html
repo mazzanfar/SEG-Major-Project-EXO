@@ -1,9 +1,9 @@
-{% extends "pages/base.html" %} {% load crispy_forms_tags %} {% block content %}
-<div class="content-section">
+{% extends 'pages/home_page.html' %} {% load crispy_forms_tags %} {% block content %}
+<div id="loginForm" class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Log In</legend>
+            <legend id="headerForm" class="border-bottom mb-4">Log In</legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">

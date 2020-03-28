@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm 
-from .forms import ChildrenRegisterForm
 from django.contrib import messages
 
 
@@ -42,19 +41,3 @@ def profile(request):
     return render(request, 'users/profile.html', context)
         
     
-@login_required
-def addChild(request):
-    if request.method == 'POST':
-        child_form = ChildrenRegisterForm(request.POST)
-        
-        if child_form.is_valid():
-            child_form.save()
-            messages.success(request, f'Your child has been added!')
-            return redirect('profile')
-
-    else:
-        child_form = ChildrenRegisterForm(instance=request.user)
-        context= {
-            'child_form' : child_form
-        }
-    return render(request, 'users/add_children.html', context)
