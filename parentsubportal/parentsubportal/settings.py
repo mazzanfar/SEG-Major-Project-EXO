@@ -32,7 +32,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'children.apps.ChildrenConfig',
+    'posts.apps.PostsConfig',
+    'frontend.apps.FrontendConfig',
+    'disability.apps.DisabilityConfig',
     'crispy_forms',
+    'taggit',
+    'mptt',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,10 +130,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),
-)
-STATIC_URL = '/pages/static/'
+
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

@@ -1,11 +1,11 @@
-{% extends "pages/home_page.html" %} {% block content %}
+{% extends 'pages/home_page.html' %} {% block content %}
 <div id="logoutForm" class="content-section">
-  <h2>You have been logged out. </h2>
-  <div class="border-top pt-3">
-      <h3 class="text-muted">
-          <a class="ml-2" href="{% url 'login' %}">Log In Again</a>
-      </h3>
-  </div>
+    <h2>You have been logged out. </h2>
+    <div class="border-top pt-3">
+        <h3 class="text-muted">
+            <a class="ml-2" href="{% url 'login' %}">Log In Again</a>
+        </h3>
+    </div>
 </div>
 
 {% endblock content %}
