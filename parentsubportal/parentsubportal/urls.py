@@ -44,6 +44,7 @@ from django.views.generic import TemplateView
 from users import views as user_views
 from pages import views as pages_views
 from frontend import views as views
+from timeline import views as timeline_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -62,6 +63,8 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('', include('users.urls')),
     re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
+
+    path('timeline/', timeline_views.timeline, name="timeline"),
 ]
 
 

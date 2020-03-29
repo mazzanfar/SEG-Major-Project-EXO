@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'posts',
     'taggit',
     'rest_framework',
-    'frontend'
+    'frontend',
+    'timeline'
 ]
 
 REST_FRAMEWORK = {
@@ -144,4 +145,3 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
-
