@@ -17,4 +17,10 @@ For installing postgreSQL on local machine: https://djangocentral.com/using-post
 Sources:
 https://dev.to/coderasha/create-advanced-user-sign-up-view-in-django-step-by-step-k9m
 
+Have coverage installed:
+pip install coverage
 
+Run test suite with coverage:
+coverage erase  # ensure previous reports are removed
+coverage run manage.py test
+coverage report 
