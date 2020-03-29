@@ -30,6 +30,10 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }        
 
     else:
         u_form = UserUpdateForm(instance=request.user)
