@@ -1,4 +1,38 @@
+{% extends 'pages/home_page.html' %}
+{% block content %}
+<style>
+    .rightMenu {
+
+        position:relative;
+        float:right;
+    }
+    .right-caret {
+        
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #000000;
+        display: inline-block;
+        height: 0;
+        opacity: 1;
+        vertical-align: top;
+        width: 0;
+        
+    }
+    .right
+    {
+        float:right;
+    }
+
+    .thead {
+        font-size: 28px;
+    }
+</style>
+
+
 <div class="span4">
+
+    
+
     <h1> Timeline for u</h1>
     <label for="child">Choose a Child:</label>
 
@@ -8,6 +42,10 @@
     <option value="child3">child3</option>
     <option value="child4">child4</option>
     </select>
+
+    <form action="{% url 'upload' %}">
+        <input type="submit" value="Add to timeline" />
+    </form>
 
     <table class="timeline-table">
     <tr>
@@ -467,3 +505,4 @@
     </table>
 </div>
     
+{% endblock %}

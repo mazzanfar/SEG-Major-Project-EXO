@@ -14,6 +14,8 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,14 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
-    'children.apps.ChildrenConfig',
-    'posts.apps.PostsConfig',
-    'frontend.apps.FrontendConfig',
-    'disability.apps.DisabilityConfig',
     'crispy_forms',
-    'taggit',
-    'mptt',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages',
+    'posts',
+    'taggit',
+    'rest_framework',
+    'frontend',
+    'timeline',
+    'children.apps.ChildrenConfig'
+
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication',
+                                       'rest_framework.authentication.BasicAuthentication']
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
