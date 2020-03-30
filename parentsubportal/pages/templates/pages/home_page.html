@@ -231,7 +231,7 @@
                 <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'search_page' %}">Search</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'timeline_page' %}">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
                 <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}

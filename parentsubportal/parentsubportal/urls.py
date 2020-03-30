@@ -56,8 +56,8 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('timeline/', timeline_views.timeline, name='timeline'),
-    path('upload/', timeline_views.upload, name = 'upload'),
+    path('timeline/', timeline_view.timeline, name='timeline'),
+    path('upload/', timeline_view.upload, name = 'upload'),
     path('children', include('children.urls')),
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
@@ -66,7 +66,6 @@ urlpatterns = [
 
     path('children', include('children.urls')),
     path('search/', disability_view.search_view, name="search_page"),
-    path('timeline/', timeline_view.timeline, name="timeline_page"),
     path('blogs/', blog_view.index, name="blogs_page"),
 ]
 

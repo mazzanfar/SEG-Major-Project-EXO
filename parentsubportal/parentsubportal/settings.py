@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
     'timeline',
-    'children.apps.ChildrenConfig'
-
+    'children.apps.ChildrenConfig',
+    'disability'
 ]
 
 REST_FRAMEWORK = {
