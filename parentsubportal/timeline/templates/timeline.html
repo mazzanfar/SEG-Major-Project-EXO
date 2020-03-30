@@ -1,0 +1,79 @@
+{% extends 'pages/home_page.html' %}
+{% block content %}
+<style>
+    .rightMenu {
+
+        position:relative;
+        float:right;
+    }
+    .right-caret {
+        
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #000000;
+        display: inline-block;
+        height: 0;
+        opacity: 1;
+        vertical-align: top;
+        width: 0;
+        
+    }
+    .right
+    {
+        float:right;
+    }
+
+    .thead {
+        font-size: 28px;
+    }
+</style>
+
+<div class="span4">
+    <h1> Timeline</h1>
+    
+    <label for="child">Choose a Child:</label>
+
+    <select id="child">
+        {% for child in children %} {% if child.parent == user %}
+        <option value="{{child.first_name}}">{{ child.first_name }}  {{ child.last_name }}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+
+    <form action="{% url 'upload' %}">
+        <input type="submit" value="Add to timeline" />
+    </form>
+
+    <table class="timeline-table">
+    <tr>
+        <th>0-4</th>
+        <th>4-11</th>
+        <th>11-18</th>
+        <th>18-25</th>
+    </tr>
+    {% for timeline in Timeline %}
+    <tr>
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ timeline.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+        
+                <ul class="dropdown-menu rightMenu">
+                    {% for pdf in Pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

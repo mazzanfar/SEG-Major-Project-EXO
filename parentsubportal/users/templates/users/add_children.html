@@ -1,9 +1,9 @@
-{% extends "pages/home_page.html" %} {% load crispy_forms_tags %} {% block content %}
-<div id="childrenForm" class="content-section">
+{% extends "pages/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend id="headerForm" class="border-bottom mb-4">Add a child</legend>
+            <legend class="border-bottom mb-4">Add a child</legend>
             {{ child_form|crispy }}
         </fieldset>
         <div class="form-group">

@@ -4,6 +4,7 @@ from PIL import Image
 from django.urls import reverse
 
 
+
 DIAGNOSIS_CHOICES = [
         (1, ("Yes")), 
         (2, ("No"))

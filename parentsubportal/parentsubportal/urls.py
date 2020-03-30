@@ -37,9 +37,10 @@ if settings.DEBUG:
 
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 from users import views as user_views
 from pages import views as pages_views
 from disability import views as disability_view
@@ -55,7 +56,13 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('timeline/', timeline_views.timeline, name='timeline'),
+    path('upload/', timeline_views.upload, name = 'upload'),
+    path('children', include('children.urls')),
+    path('', include('frontend.urls')),
     path('', include('posts.urls')),
+    path('', include('users.urls')),
+    re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
 
     path('children', include('children.urls')),
     path('search/', disability_view.search_view, name="search_page"),
