@@ -42,6 +42,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
 from pages import views as pages_views
+from disability import views as disability_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -57,7 +58,7 @@ urlpatterns = [
     path('', include('posts.urls')),
 
     path('children', include('children.urls')),
-
+    path('search/', disability_view.search_view, name="search_page"),
 ]
 
 

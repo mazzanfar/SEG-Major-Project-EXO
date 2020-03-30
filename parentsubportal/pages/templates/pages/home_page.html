@@ -21,34 +21,34 @@
             padding-left: 25px;
             padding-top: 10px;
         }
-        
+
         nav {
             display: flex;
             justify-content: flex-start;
             align-items: stretch;
             background-color: #1896a2;
         }
-        
+
         .nav-item {
             display: inline-block;
             padding: 0px 2px;
             transition: all 0.3s ease 0s;
             font-size: 30px;
         }
-        
+
         .nav-item a {
             font-size: 20px;
             padding-top: 27px;
             padding-left: 2px;
             color: #f8d061;
         }
-        
+
         #introduction_content {
             padding-left: 290px;
             width: 100%;
             padding-bottom: 100px;
         }
-        
+
         .jumbotron {
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
@@ -57,21 +57,21 @@
             padding-top: 20px;
             width: 100%;
         }
-        
+
         @import url('https://fonts.googleapis.com/css?family=Candal&display=swap');
         #heading-text {
             color: #1896a2;
             font-size: 40px;
             font-family: 'Candal', ;
         }
-        
+
         #semi-Introduction {
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
             padding: 30px;
             margin: 10px;
         }
-        
+
         #viewBtn {
             color: white;
             padding-top: 10px;
@@ -79,11 +79,11 @@
             padding-bottom: 10px;
             align-items: flex-start;
         }
-        
+
         .row {
             align-items: center;
         }
-        
+
         #footer {
             padding-bottom: 50px;
             width: 100%;
@@ -94,33 +94,33 @@
             padding-top: 30px;
             height: 300px;
         }
-        
+
         #footer a {
             color: #f8d061;
         }
-        
+
         @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
         p {
             font-family: 'Playfair Display';
             font-size: 22px;
         }
-        
+
         p:hover {
             color: #f7a36f;
         }
-        
+
         #footer-ul {
             font-size: 20px;
             color: #f7a36f;
         }
-        
+
         .main-body {
             /* background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed; */
             /* background: url('https://source.unsplash.com/V3dHmb1MOXM/1920x1080') no-repeat center center fixed; */
             /* background: url('https://source.unsplash.com/BIk2ANMmNz4/1920x1080') no-repeat  fixed; */
             background-color: #f8d061;
         }
-        
+
         .overlay {
             position: fixed;
             top: 0;
@@ -132,12 +132,12 @@
             visibility: hidden;
             opacity: 0;
         }
-        
+
         .overlay:target {
             visibility: visible;
             opacity: 1;
         }
-        
+
         .popup {
             margin: 70px auto;
             padding: 20px;
@@ -148,13 +148,13 @@
             position: relative;
             transition: all 5s ease-in-out;
         }
-        
+
         .popup h2 {
             margin-top: 0;
             color: #f8d061;
             font-family: Tahoma, Arial, sans-serif;
         }
-        
+
         .popup .close {
             position: absolute;
             top: 20px;
@@ -165,16 +165,16 @@
             text-decoration: none;
             color: #1E90FF;
         }
-        
+
         .popup .close:hover {
             color: #06D85F;
         }
-        
+
         .popup .content {
             max-height: 30%;
             overflow: auto;
         }
-        
+
         @media screen and (max-width: 700px) {
             .box {
                 width: 70%;
@@ -183,15 +183,15 @@
                 width: 70%;
             }
         }
-        
+
         iframe {
             padding-bottom: 20px;
         }
-        
+
         .video {
             margin-left: 120px;
         }
-        
+
         #registerForm {
             padding-left: 400px;
             padding-right: 450px;
@@ -200,7 +200,7 @@
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
         }
-        
+
         #loginForm {
             padding-bottom: 200px;
             padding-left: 500px;
@@ -209,17 +209,17 @@
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
         }
-        
+
         #headerForm {
             color: #f8d061;
             font-size: 50px;
         }
-        
+
         .form-group {
             font-size: 20px;
             color: #1896a2;
         }
-        
+
         #profileForm {
             padding-left: 400px;
             padding-right: 450px;
@@ -228,7 +228,7 @@
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
         }
-        
+
         #logoutForm {
             padding-bottom: 420px;
             padding-left: 500px;
@@ -237,7 +237,7 @@
             background-color: #1896a2;
             background: rgba(230, 230, 230, 0.8);
         }
-        
+
         #childrenForm {
             padding-left: 400px;
             padding-right: 450px;
@@ -260,7 +260,7 @@
 
             <ul class="nav-links">
                 <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'search_page' %}">Search</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
