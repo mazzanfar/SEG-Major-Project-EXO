@@ -43,13 +43,13 @@ from django.conf.urls.static import static
 from users import views as user_views
 from pages import views as pages_views
 from disability import views as disability_view
+from timeline import views as timeline_view
+from frontend import views as blog_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', pages_views.home_page, name="home_page"),
-    path('blogs/', pages_views.blogs_page, name="blogs_page"),
-    path('about/', pages_views.about_page, name="about_page"),
 
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
@@ -59,6 +59,8 @@ urlpatterns = [
 
     path('children', include('children.urls')),
     path('search/', disability_view.search_view, name="search_page"),
+    path('timeline/', timeline_view.timeline, name="timeline_page"),
+    path('blogs/', blog_view.index, name="blogs_page"),
 ]
 
 
