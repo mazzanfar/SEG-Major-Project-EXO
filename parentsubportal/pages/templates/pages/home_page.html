@@ -227,18 +227,18 @@
           <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Supportal</h1>
         </div>
 
-            <ul class="nav-links">
-                <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'search_page' %}">Search</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
-                {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>{% endif %}
-            </ul>
-        </nav>
+        <ul class="nav-links">
+          <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+          <li style="padding-left:20px;"class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}
+          <li style="padding-left:15px;"class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li style="padding-left:15px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>{% endif %}
+        </ul>
+      </nav>
 
     </header>
 
