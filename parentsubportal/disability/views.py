@@ -1,25 +1,21 @@
 from django.shortcuts import render
+from django.db.models import Q
 from .models import Disability
 from django.views.generic import TemplateView, ListView
-from django.db.models import Q
 # Create your views here.
 
-class disability_detail(ListView):
+class HomePageView(TemplateView):
+    template_name = "disability/homepage.html"
+
+class SearchResultsView(ListView):
     model = Disability
-    template_name = 'disability/disability_detail.html'
+    template_name = "disability/search_results.html"
 
     def get_queryset(self):
         query = self.request.GET.get('q')
+
         object_list = Disability.objects.filter(
-            Q(keywords__icontains=query) | Q(name__icontains=query)
+            Q(name__icontains = query) | Q(tags__title__icontains = query)
         )
-        return object_list
 
-class search_view(TemplateView):
-    model = Disability
-    template_name = 'disability/search.html'
-
-    def get_queryset(self):
-        object_list = Disability.objects.all()[:1].get()
         return object_list
-    
