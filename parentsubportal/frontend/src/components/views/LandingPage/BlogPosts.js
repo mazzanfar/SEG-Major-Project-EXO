@@ -5,7 +5,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import PostDetail from "./PostDetail";
 import { getPosts } from "../../../actions/posts";
-import Comments from "./Comments";
 
 function BlogPosts() {
     const dispatch = useDispatch();
@@ -21,7 +20,6 @@ function BlogPosts() {
             {posts.map((post) => (
                 <Item.Group>
                     <PostDetail post={post}></PostDetail>
-                    <Comments post={post} />
                 </Item.Group>
             ))}
         </Fragment>

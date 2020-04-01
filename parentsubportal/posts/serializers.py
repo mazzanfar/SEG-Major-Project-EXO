@@ -31,10 +31,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ["content", "author", "post"]
 
 class PDFSerializer(serializers.ModelSerializer):
+    total_comments = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source="author.username", read_only=True)
     class Meta:
         model = PDF
         fields = '__all__'
-        #fields = ["content", "author", "title", "source", "content", "topics"]
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,7 +49,7 @@ class PostListSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     #rating = serializers.SerializerMethodField()
     author_username = serializers.CharField(source="author.username", read_only=True)
-    #topics = TopicSerializer(many=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
 
     class Meta:
         model = Post

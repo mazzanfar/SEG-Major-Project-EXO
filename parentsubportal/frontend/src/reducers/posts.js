@@ -1,5 +1,6 @@
 import {
     GET_POSTS,
+    GET_POST,
     ADD_POST,
     DELETE_POST,
     LIKE_POST,
@@ -7,6 +8,7 @@ import {
 
 const initialState = {
     posts: [],
+    post: null,
 };
 
 export default function (state = initialState, action) {
@@ -16,6 +18,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 posts: action.payload,
+            };
+        }
+        case GET_POST: {
+            return {
+                ...state,
+                post: action.payload,
             };
         }
         case ADD_POST:
