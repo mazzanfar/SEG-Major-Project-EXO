@@ -1,37 +1,9 @@
 {% extends 'pages/home_page.html' %}
 {% block content %}
-<style>
-    .rightMenu {
+<div id="timeline-base" class="span4">
+    <h1 id="timeline-base-header">Your Timeline</h1>
 
-        position:relative;
-        float:right;
-    }
-    .right-caret {
-        
-        border-bottom: 4px solid transparent;
-        border-top: 4px solid transparent;
-        border-left: 4px solid #000000;
-        display: inline-block;
-        height: 0;
-        opacity: 1;
-        vertical-align: top;
-        width: 0;
-        
-    }
-    .right
-    {
-        float:right;
-    }
-
-    .thead {
-        font-size: 28px;
-    }
-</style>
-
-<div class="span4">
-    <h1> Timeline</h1>
-    
-    <label for="child">Choose a Child:</label>
+    <label id="timeline-base-label" for="child">Choose a Child:</label>
 
     <select id="child">
         {% for child in children %} {% if child.parent == user %}
@@ -40,12 +12,8 @@
         {% endfor %}
     </select>
 
-    <form action="{% url 'upload' %}">
-        <input type="submit" value="Add to timeline" />
-    </form>
-
-    <table class="timeline-table">
-    <tr>
+    <table id="timeline-table"class="timeline-table">
+    <tr id="timeline-base-label">
         <th>0-4</th>
         <th>4-11</th>
         <th>11-18</th>
@@ -58,12 +26,12 @@
                       <h3>{{ timeline.header }}</h3>
                        <span class="right-caret right"></span>
                  </a>
-        
+
                 <ul class="dropdown-menu rightMenu">
                     {% for pdf in Pdf %}
                     <li>
                         <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
-                           Download pdf 
+                           Download pdf
                            </a>
                         </div>
                     </li>
@@ -74,6 +42,10 @@
     </tr>
     {% endfor %}
     </table>
+
+    <form action="{% url 'upload' %}">
+        <input class="btn btn-outline-info" type="submit" value="Add to timeline" />
+    </form>
 </div>
 
 {% endblock %}

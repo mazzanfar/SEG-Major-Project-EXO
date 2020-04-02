@@ -207,13 +207,80 @@
       background-color:#1896a2;
       background: rgba(230,230,230,0.8);
     }
-    #childrenForm{
+    div.content-section {
       padding-left: 400px;
       padding-right: 450px;
       padding-top: 80px;
       padding-bottom: 90px;
       background-color:#1896a2;
       background: rgba(230,230,230,0.8);
+    }
+    #search_page {
+      padding-bottom: 280px;
+      padding-left: 450px;
+      padding-right: 450px;
+      padding-top: 100px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #search-header{
+      font-size: 40px;
+      /* color:#f8d061; */
+      color:#1E90FF;
+    }
+    #search-input {
+      width: 550px;
+      height: 45px;
+    }
+    ::placeholder {
+      font-size: 20px;
+    }
+    #info-search {
+      color:#1E90FF;
+    }
+    #list {
+      display:subgrid;
+      font-size: 20px;
+      color:#1896a2;
+    }
+    #timeline-base {
+      padding-bottom: 200px;
+      padding-left: 500px;
+      padding-right: 500px;
+      padding-top: 120px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #timeline-table th{
+      padding-bottom: 20px;
+      display: flex;
+    }
+    #timeline-base-header{
+      font-size: 30px;
+
+      color:#f8d061;
+    }
+    #timeline-base-label{
+      font-size: 20px;
+      color:#1896a2;
+    }
+    #child{
+      width: 150px;
+      height: 30px;
+    }
+    #timeline-upload-header{
+      font-size: 40px;
+      color:#1E90FF;
+    }
+    .timeline-form p{
+      color:#1896a2;
+    }
+    .timeline-form input {
+      color: red;
+      padding-top: 10px;
+      text-align: center;
+      padding-bottom: 10px;
+      align-items: flex-start;
     }
     </style>
 
@@ -224,12 +291,12 @@
 
       <nav>
         <div>
-          <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Supportal</h1>
+          <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Subportal</h1>
         </div>
 
         <ul class="nav-links">
           <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Search</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
           {% if user.is_authenticated %}

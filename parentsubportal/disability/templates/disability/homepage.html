@@ -1,24 +1,17 @@
-<head>
-    <style>
-        *{background-color: #1896a2; color: #f8d061;}
-        input{text-align: center; height: 50px; width: 100%; margin-left: auto; margin-right: auto; font-size: 40px; border: #f8d061 2px solid; background-color: #1896a2; }
-        .box{width: 60%; margin: 10% auto; border: #f8d061 3px solid; padding: 50px}
-        h2{margin-top: 100px}
-        li{margin-top: 30px;}
-    </style>
-</head>
+{% extends 'pages/home_page.html' %}{% block content %}
+<div id="search_page" class="box">
 
-<div class="box">
-    
 
 <form action="{% url 'search_results' %}" method="get">
-    <input name='q' type="text" placeholder="search keywords...">
+  <label id= "search-header"> Search: </label>
+  <input id= "search-input" name='q' type="text" placeholder="search keywords...">
 </form>
 
-<h2 style="">Recent Searches Disabilities</h2>
-<li>Autism</li>
-<li>Down Syndrome</li>
-<li>Headache</li>
-<li>Memory </li>
+<h2 id= "info-search">Recent Searches Disabilities</h2>
+<li id= "list">Autism</li>
+<li id= "list">Down Syndrome</li>
+<li id= "list">Headache</li>
+<li id= "list">Memory </li>
 
 </div>
+{% endblock content %}
