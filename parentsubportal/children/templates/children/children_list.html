@@ -1,0 +1,11 @@
+{% extends 'pages/home_page.html' %} {% block content %} {% for child in children %} {% if child.parent == user %}
+<article class="media content-section">
+    <div class="media-body">
+
+        <h2><a class="article-title" href="{% url 'children-detail' child.id %}">{{ child.first_name }}  {{ child.last_name }}</a></h2>
+
+
+
+    </div>
+</article>
+{% endif %} {% endfor %} {% endblock content %}
