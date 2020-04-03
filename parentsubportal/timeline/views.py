@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
-<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required
 
 from .models import Timeline, Pdf
 from .forms import TimelineForm, PdfForm
-=======
-from .forms import TimelineForm
-from .models import Timeline
-from django.contrib.auth.decorators import login_required
->>>>>>> timeline
 # Create your views here.
 
 @login_required
@@ -19,7 +13,6 @@ def timeline(request):
         'timeline': timeline
     })
 
-<<<<<<< HEAD
 def upload(request):
     if request.method == 'POST':
         form = TimelineForm(request.POST, request.FILES)
@@ -36,17 +29,3 @@ def upload(request):
         'form': form,
         'form_pdf': form_pdf
     })
-=======
-def upload_pdf(request):
-    if request.method == 'POST':
-        form = TimelineForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('timeline.html')
-    
-    else:
-        form = TimelineForm()
-    return render(request, 'upload_pdf.html',{
-        'form': form
-    })
->>>>>>> timeline
