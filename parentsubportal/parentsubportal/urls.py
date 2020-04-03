@@ -45,7 +45,10 @@ from users import views as user_views
 from pages import views as pages_views
 from frontend import views as views
 from timeline import views as timeline_views
+<<<<<<< HEAD
 from disability import views  as disability_views
+=======
+>>>>>>> timeline
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -54,20 +57,32 @@ urlpatterns = [
     #path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
     #path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
     path('blogs/', pages_views.blogs_page, name="blogs_page"),
+<<<<<<< HEAD
+=======
+    path('resources/', pages_views.blogs_page, name="blogs_page"),
+    path('videos/', pages_views.blogs_page, name="blogs_page"),
+    path('pdfs/', pages_views.blogs_page, name="blogs_page"),
+
+>>>>>>> timeline
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+<<<<<<< HEAD
     path('timeline/', timeline_views.timeline, name='timeline'),
     path('upload/', timeline_views.upload, name = 'upload'),
     path('children', include('children.urls')),
     #Need to  fix  the serach URL 
     path('search/', disability_views.HomePageView.as_view(), name="search"),
     path('results/', disability_views.SearchResultsView.as_view(), name="search_results"),
+=======
+    path('add_children/', user_views.addChild, name='children_form'),
+    path('upload/', timeline_views.upload_pdf, name = 'upload'),
+>>>>>>> timeline
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
     path('', include('users.urls')),
-    re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
+    #re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
 ]
 
 

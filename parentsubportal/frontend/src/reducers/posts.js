@@ -1,41 +1,46 @@
-import { GET_POSTS, ADD_POST, DELETE_POST, LIKE_POST } from '../actions/types.js';
+import {
+    GET_POSTS,
+    ADD_POST,
+    DELETE_POST,
+    LIKE_POST,
+} from "../actions/types.js";
 
 const initialState = {
-    posts: []
+    posts: [],
 };
 
-export default function(state = initialState, action) {
-    switch(action.type) {
+export default function (state = initialState, action) {
+    switch (action.type) {
         case GET_POSTS: {
-            console.log(action.type)
+            console.log(action.type);
             return {
                 ...state,
-                posts: action.payload
+                posts: action.payload,
             };
         }
         case ADD_POST:
             return {
                 ...state,
-                posts: [ ...state.posts, action.payload]
+                posts: [action.payload, ...state.posts],
             };
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(post => post.id !== action.payload)
-            }
+                posts: state.posts.filter((post) => post.id !== action.payload),
+            };
         case LIKE_POST:
-              return {
+            return {
                 ...state,
-                posts: state.posts.map(post => {
-                  if (post.id === action.payload.post) {
-                    return {
-                        ...post,
-                        likes_count: post.likes_count + 1
+                posts: state.posts.map((post) => {
+                    if (post.id === action.payload.post) {
+                        return {
+                            ...post,
+                            likes_count: post.likes_count + 1,
+                        };
                     }
-                  }
-                  return post;
-                })
-              };
+                    return post;
+                }),
+            };
         default:
             return state;
     }

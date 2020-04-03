@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from posts.models import PDF
 from children.models import Children
 
@@ -26,3 +27,15 @@ class Timeline(models.Model):
 class Pdf(models.Model):
     pdf = models.FileField(upload_to='timelinepdfs')
     timeline = models.ForeignKey(Timeline, on_delete=models.CASCADE)
+=======
+from users import models as user_models
+from posts.models import PDF
+
+class Timeline(models.Model):
+    header = models.CharField(max_length=100)
+    age = models.CharField(max_length=100)
+    pdf = models.ManyToManyField(PDF, default = None, related_name="timelines")
+
+    def __str__(self):
+        return self.header
+>>>>>>> timeline

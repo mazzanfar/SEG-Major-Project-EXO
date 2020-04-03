@@ -1,82 +1,37 @@
-import React, {Component, Fragment} from 'react'
-import axios from 'axios'
+import React, { Component, Fragment } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
-import {Button, Comment, Form, Header} from 'semantic-ui-react'
-import {connect} from 'react-redux'
-import {getPosts} from "../../../actions/posts";
-import CommentForm from "./CommentForm"
+import { Button, Comment, Form, Header } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { getPosts } from "../../../actions/posts";
+import CommentForm from "./CommentForm";
 
 // TODO: pass posts in ways besides props
-export class Comments extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            comment: "",
-            author: null
-        }
-    }
-    static propTypes = {
-        getPosts: PropTypes.func.isRequired
-    };
-
-    onFieldChange(fieldName) {
-        return function (event) {
-            this.setState({[fieldName]: event.target.value});
-        }
-    }
-
-    componentDidMount() {
-        this.props.getPosts();
-        axios
-            .get(`/api/auth/user`)
-            .then(res => {
-                const author = res.data.id
-                this.setState({author});
-            })
-            .catch(err => console.log(err));
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
-        const variables = {
-            content: this.state.comment,
-            post: this.props.post.id,
-            author: this.state.author
-        }
-        this.props.postComment(variables)
-        this.setState({comment: ""});
-    }
-
-    render() {
-        return (
-            <Comment.Group>
-                <Header as='h3' dividing>
-                    Comments ({this.props.post.total_comments})
-                        </Header>
-                {/* Comment Lists */}
-                {this.props.post.comments.map(comment => (
-                    <Comment>
-                        <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
-                        <Comment.Content>
-                            <Comment.Author as='a'>Some Name</Comment.Author>
-                            <Comment.Metadata><div>Today at 5:42pm</div></Comment.Metadata>
-                            <Comment.Text>{comment.content}</Comment.Text>
-                            <Comment.Actions>Reply</Comment.Actions>
-                        </Comment.Content>
-                    </Comment>
-                ))}
-                <CommentForm post={this.props.post}/>
-            </Comment.Group>
-        );
-    }
+function Comments(props) {
+    return (
+        <Comment.Group>
+            <Header as="h3" dividing>
+                Comments ({props.post.total_comments})
+            </Header>
+            {/* Comment Lists */}
+            {props.post.comments.map((comment) => (
+                <Comment>
+                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                    <Comment.Content>
+                        <Comment.Author as="a">
+                            {props.post.author_username}
+                        </Comment.Author>
+                        <Comment.Metadata>
+                            <div>Today at 5:42pm</div>
+                        </Comment.Metadata>
+                        <Comment.Text>{comment.content}</Comment.Text>
+                        <Comment.Actions>Reply</Comment.Actions>
+                    </Comment.Content>
+                </Comment>
+            ))}
+            <CommentForm post={props.post} />
+        </Comment.Group>
+    );
 }
 
-const mapStateToProps = state => ({
-    posts: state.posts.posts
-});
-
-export default connect(
-    mapStateToProps,
-    {getPosts}
-)(Comments);
+export default Comments;

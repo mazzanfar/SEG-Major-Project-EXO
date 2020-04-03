@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'pages/home_page.html' %}
 {% block content %}
 <div id="timeline-base" class="span4">
@@ -14,11 +15,19 @@
 
     <table id="timeline-table"class="timeline-table">
     <tr id="timeline-base-label">
+=======
+{% block content %}
+<div class="span4">
+    <h1>Timeline</h1>
+    <table class="timeline-table">
+    <tr>
+>>>>>>> timeline
         <th>0-4</th>
         <th>4-11</th>
         <th>11-18</th>
         <th>18-25</th>
     </tr>
+<<<<<<< HEAD
     {% for timeline in Timeline %}
     <tr>
         <td>
@@ -32,6 +41,20 @@
                     <li>
                         <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
                            Download pdf
+=======
+    {% for tl in timeline %}
+    <tr>
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.title }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                <ul class="dropdown-menu rightMenu">
+                    {% for pdf in tl.pdf.all %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           <h5>{{ pdf.title }}</h5>
+>>>>>>> timeline
                            </a>
                         </div>
                     </li>
@@ -42,10 +65,13 @@
     </tr>
     {% endfor %}
     </table>
+<<<<<<< HEAD
 
     <form action="{% url 'upload' %}">
         <input class="btn btn-outline-info" type="submit" value="Add to timeline" />
     </form>
+=======
+>>>>>>> timeline
 </div>
 
 {% endblock %}

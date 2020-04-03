@@ -1,19 +1,19 @@
-import axios from 'axios'
+import axios from "axios";
 
-import {RATE_POST} from './types';
+import { RATE_POST } from "./types";
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 // GET POSTS
-export const ratePost = (ratePost) => dispatch => {
+export const ratePost = (rating) => (dispatch) => {
     axios
-        .post('/api/ratings/', like)
-        .then(res => {
+        .post("/api/ratings/", rating)
+        .then((res) => {
             dispatch({
                 type: RATE_POST,
-                payload: res.data
+                payload: res.data,
             });
-        }).catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
 };
