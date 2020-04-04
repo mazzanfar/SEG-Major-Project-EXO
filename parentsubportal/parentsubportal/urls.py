@@ -67,8 +67,6 @@ urlpatterns = [
     #Need to  fix  the serach URL 
     path('search/', disability_views.HomePageView.as_view(), name="search"),
     path('results/', disability_views.SearchResultsView.as_view(), name="search_results"),
-    path('add_children/', user_views.addChild, name='children_form'),
-    path('upload/', timeline_views.upload_pdf, name = 'upload'),
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
     path('', include('users.urls')),

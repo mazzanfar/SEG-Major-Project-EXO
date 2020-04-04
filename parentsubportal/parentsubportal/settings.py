@@ -47,13 +47,8 @@ INSTALLED_APPS = [
     'taggit',
     'rest_framework',
     'frontend',
-<<<<<<< HEAD
     'timeline',
     'children.apps.ChildrenConfig'
-
-=======
-    'timeline'
->>>>>>> timeline
 ]
 
 REST_FRAMEWORK = {
