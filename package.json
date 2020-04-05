@@ -31,7 +31,9 @@
     "dependencies": {
         "axios": "^0.19.2",
         "craco": "0.0.3",
+        "faker": "^4.1.0",
         "fomantic-ui": "^2.8.4",
+        "lodash": "^4.17.15",
         "npm-watch": "^0.6.0",
         "prop-types": "^15.7.2",
         "ra-data-drf": "^2.0.0",

@@ -12,6 +12,8 @@ import TopicPage from "./views/TopicPage";
 import PDFPosts from "./views/LandingPage/PDFPosts";
 import VideoPosts from "./views/LandingPage/VideoPosts";
 
+import SearchBar from "./SearchBar";
+
 import {
     Sidebar,
     Menu,
@@ -31,6 +33,7 @@ function App() {
         <Provider store={store}>
             <Router>
                 <Container>
+                    <SearchBar />
                     <Sidebar.Pushable as={Segment}>
                         <Sidebar
                             as={Menu}

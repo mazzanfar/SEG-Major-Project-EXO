@@ -23,8 +23,9 @@ class ResourceViewSet(viewsets.ViewSet):
     def get_queryset(self):
         queryset_a = PDF.objects.all()
         queryset_b = Video.objects.all()
+        queryset_c = Post.objects.all()
 
-        results_list = list(chain(queryset_a, queryset_b))
+        results_list = list(chain(queryset_a, queryset_b, queryset_c))
 
         #sorted_list = sorted(results_list, key=lambda instance: -instance.date_posted)
 
@@ -33,8 +34,10 @@ class ResourceViewSet(viewsets.ViewSet):
             item_type = entry.__class__.__name__.lower()
             if isinstance(entry, PDF):
                 serializer = PDFSerializer(entry)
-            if isinstance(entry, Video):
+            elif isinstance(entry, Video):
                 serializer = VideoSerializer(entry)
+            elif isinstance(entry, Post):
+                serializer = PostListSerializer(entry)
 
             results.append({'type': item_type, 'data': serializer.data})
 

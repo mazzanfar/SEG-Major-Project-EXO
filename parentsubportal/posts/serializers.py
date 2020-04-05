@@ -45,7 +45,7 @@ class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
     total_comments = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
-    rating = serializers.SerializerMethodField()
+    #rating = serializers.SerializerMethodField()
     author_username = serializers.CharField(source="author.username", read_only=True)
     #topics = TopicSerializer(many=True)
 
