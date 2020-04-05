@@ -23,3 +23,5 @@ class NhsSpider(scrapy.Spider):
             item["nameDisease"] = nameOfDisease
             item["urllink"] = link
             yield item
+
+            #next_url = response.css('').get()
