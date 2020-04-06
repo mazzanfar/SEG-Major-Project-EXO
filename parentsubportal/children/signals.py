@@ -8,7 +8,7 @@ Timeline = apps.get_model("timeline", "Timeline")
 
 @receiver(signals.post_save, sender=Children)
 def create_child(sender, instance, created, **kwargs):
-    print("child is created")
+    print("child is tested created")
     # raw is set when model is created from loaddata.
     if created:
         Timeline.objects.create(header = "Financial Support", age = "0-4", child =instance)
