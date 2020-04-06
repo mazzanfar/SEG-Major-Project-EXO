@@ -11,8 +11,8 @@ class Migration(migrations.Migration):
             ]
         User = apps.get_model("auth", "User")
         PDF = apps.get_model("posts", "PDF")
-        p = PDF(title="Test PDF title", content="Test PDF content", author = User.objects.first(), lower_age = 0, upper_age = 4, pdf_file="resources/pdfs/test_iD2LEKW.pdf")
-        p.save()
+        #p = PDF(title="Test PDF title", content="Test PDF content", author = User.objects.first(), lower_age = 0, upper_age = 4, pdf_file="resources/pdfs/test_iD2LEKW.pdf")
+        #p.save()
 
     dependencies = [
         ('posts', '0001_initial'),
