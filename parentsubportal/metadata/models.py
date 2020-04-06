@@ -7,3 +7,11 @@ class FetchedData(models.Model):
 
     def __str__(self):
         return self.nameDisease
+
+
+class Test(models.Model):
+    nameDisease = models.CharField(max_length=200)
+    urllink = models.URLField()
+
+    def __str__(self):
+        return self.nameDisease

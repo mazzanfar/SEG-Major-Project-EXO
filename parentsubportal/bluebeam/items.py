@@ -7,9 +7,9 @@
 
 import scrapy
 from scrapy_djangoitem import DjangoItem
-from metadata.models import FetchedData
+from metadata.models import FetchedData, Test
 
 
 class BluebeamItem(DjangoItem):
     # change with which model you want to use
-    django_model = FetchedData
+    django_model = Test
