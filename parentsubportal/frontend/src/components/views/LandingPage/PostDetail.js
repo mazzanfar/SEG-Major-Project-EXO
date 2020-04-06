@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useEffect } from "react-redux";
 import { Dropdown, Button, Icon, Label, Item, Rating } from "semantic-ui-react";
+import Comments from "./Comments";
 import { ratePost } from "../../../actions/ratings";
 
 function PostDetail(props) {
@@ -37,41 +38,46 @@ function PostDetail(props) {
     };
 
     return (
-        <Item>
-            <Item.Image
-                size="tiny"
-                src="https://react.semantic-ui.com/images/wireframe/image.png"
-            />
-            <Item.Content>
-                <Item.Header as="a">{props.post.title}</Item.Header>
-                <Item.Meta>Posted by {props.post.author_username}</Item.Meta>
-                <Item.Description>{props.post.content}</Item.Description>
-                {props.children}
-                <Item.Extra>
-                    {props.post.topics.map((topic) => (
-                        <Label href={"/topic/" + topic.name}>
-                            {topic.name}
-                        </Label>
-                    ))}
-                    <Button.Group color="teal">
-                        <Button>Save</Button>
-                        <Dropdown
-                            className="button icon"
-                            floating
-                            options={state.options}
-                            trigger={<React.Fragment />}
-                        />
-                    </Button.Group>
-                </Item.Extra>
-                <Rating
-                    maxRating={5}
-                    defaultRating={props.post.rating}
-                    onRate={checkRating}
-                    icon="star"
+        <Fragment>
+            <Item>
+                <Item.Image
                     size="tiny"
+                    src="https://react.semantic-ui.com/images/wireframe/image.png"
                 />
-            </Item.Content>
-        </Item>
+                <Item.Content>
+                    <Item.Header as="a">{props.post.title}</Item.Header>
+                    <Item.Meta>
+                        Posted by {props.post.author_username}
+                    </Item.Meta>
+                    <Item.Description>{props.post.content}</Item.Description>
+                    {props.children}
+                    <Item.Extra>
+                        {props.post.topics.map((topic) => (
+                            <Label href={"/topic/" + topic.name}>
+                                {topic.name}
+                            </Label>
+                        ))}
+                        <Button.Group color="teal">
+                            <Button>Save</Button>
+                            <Dropdown
+                                className="button icon"
+                                floating
+                                options={state.options}
+                                trigger={<React.Fragment />}
+                            />
+                        </Button.Group>
+                    </Item.Extra>
+                    <Rating
+                        maxRating={5}
+                        defaultRating={props.post.rating}
+                        onRate={checkRating}
+                        icon="star"
+                        size="tiny"
+                    />
+                </Item.Content>
+            </Item>
+            <Comments post={props.post} />
+        </Fragment>
     );
 }
 

@@ -11,8 +11,9 @@ import AdminPage from "./views/admin/AdminPage";
 import TopicPage from "./views/TopicPage";
 import PDFPosts from "./views/LandingPage/PDFPosts";
 import VideoPosts from "./views/LandingPage/VideoPosts";
+import PostDetail from "./views/LandingPage/PostDetail";
 
-import SearchBar from "./SearchBar";
+import Search from "./SearchBar";
 
 import {
     Sidebar,
@@ -33,7 +34,7 @@ function App() {
         <Provider store={store}>
             <Router>
                 <Container>
-                    <SearchBar />
+                    <Search />
                     <Sidebar.Pushable as={Segment}>
                         <Sidebar
                             as={Menu}
@@ -81,7 +82,7 @@ function App() {
                                     <Route
                                         exact
                                         path="/post/:postId"
-                                        component={Post}
+                                        component={PostDetail}
                                     />
                                 </Switch>
                             </Segment>
