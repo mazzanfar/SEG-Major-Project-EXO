@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'frontend',
     'timeline',
     'children.apps.ChildrenConfig',
-    'disability'
+    'disability',
+    'health_data'
 ]
 
 REST_FRAMEWORK = {

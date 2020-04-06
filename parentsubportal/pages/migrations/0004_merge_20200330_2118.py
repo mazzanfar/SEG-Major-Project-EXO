@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('pages', '0003_delete_news'),
-        ('pages', '0002_delete_news'),
     ]
 
     operations = [
