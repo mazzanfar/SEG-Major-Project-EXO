@@ -28,7 +28,7 @@ def upload(request):
             )
             form_pdf.instance.timeline = search_result
             form_pdf.save()
-            return redirect('timeline.html')
+            return redirect('timeline')
     else:
         form = TimelineForm()
         form_pdf = PdfForm()
