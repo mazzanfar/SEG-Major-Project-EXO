@@ -46,6 +46,7 @@ from pages import views as pages_views
 from disability import views as disability_view
 from timeline import views as timeline_view
 from frontend import views as blog_view
+from health_data.urls import crawler_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -67,6 +68,7 @@ urlpatterns = [
     path('children', include('children.urls')),
     path('search/', disability_view.search_view, name="search_page"),
     path('blogs/', blog_view.index, name="blogs_page"),
+    path('crawl/', include((crawler_urls, 'crawler'), namespace='crawler')),
 ]
 
 

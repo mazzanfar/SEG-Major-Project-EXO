@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
-from health_data.models import HealthCondition, HealthInfo
 import requests
 import pickle
 import time
-
+from health_data.models import HealthCondition, HealthInfo
 
 BASE_URL = 'https://www.nhs.uk'
 
@@ -12,29 +11,35 @@ BASE_PATH = '/conditions/'
 
 def run_fetch_nhs():
 
-    import pdb
-    #results = nhs_conditions_scraper()
-    results = pickle.load(open('nhs.pkl', 'rb'))
-    #pickle.dump(results, open())
-    #pdb.set_trace()
+    results = nhs_conditions_scraper()
+
     for cond in results:
-        condition = HealthCondition(
-            name=cond['name'],
-            url=cond['url'])
 
-        condition.save()
-        print(condition)
+        condition = HealthCondition.objects.filter(url=cond['url']).first()
+
+        if condition is None:
+            condition = HealthCondition(
+                name=cond['name'],
+                url=cond['url'])
+
+            condition.save()
+        else:
+            print(f'Health condition {cond["name"]} already exists')
+
         for info in cond['info']:
-            information = HealthInfo(
-                name=info,
-                url=cond['info'][info],
-                health_condition_id=condition)
+            hi_query = HealthInfo.objects.filter(
+                url=cond['info'][info], health_condition_id=condition)
 
-            information.save()
+            if len(hi_query) == 0:
+                information = HealthInfo(
+                    name=info,
+                    url=cond['info'][info],
+                    health_condition_id=condition)
 
-            print(information)
-    print('Done')
+                information.save()
 
+            else:
+                print(f'Health info {info} already exists')
 
 def nhs_conditions_scraper():
 
