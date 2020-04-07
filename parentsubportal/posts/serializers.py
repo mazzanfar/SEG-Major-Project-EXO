@@ -34,11 +34,18 @@ class PDFSerializer(serializers.ModelSerializer):
     total_comments = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     author_username = serializers.CharField(source="author.username", read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     class Meta:
         model = PDF
         fields = '__all__'
 
 class VideoSerializer(serializers.ModelSerializer):
+    total_comments = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source="author.username", read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     class Meta:
         model = Video
         fields = '__all__'
