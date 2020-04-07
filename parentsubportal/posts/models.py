@@ -23,8 +23,11 @@ class Content(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="%(class)s", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
-    topics = models.ManyToManyField(Topic, null=True, blank=True)
+    topics = models.ManyToManyField(Topic, null=True, blank=True, related_name="topics")
     visible = models.BooleanField(default=True)
+
+    class Meta:
+        ordering=['-date_posted']
 
     def votes_count(self):
         return self.post_ratings.all().count()

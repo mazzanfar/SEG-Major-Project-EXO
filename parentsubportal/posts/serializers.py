@@ -55,6 +55,15 @@ class PostListSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        topic = self.request.query_params.get('topic', None)
+        print("test")
+        if queryset is not None:
+            queryset = queryset.filter(topics__id[topic])
+
+        return queryset
+
     def get_rating(self, obj):
         requestUser = self.context['request'].user
         r = obj.post_ratings.filter(user=requestUser).first()

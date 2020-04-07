@@ -15,6 +15,18 @@ export const getTopics = () => (dispatch) => {
         .catch((err) => console.log(err));
 };
 
+export const getTopic = (id) => (dispatch) => {
+    axios
+        .get("/api/topics/", id)
+        .then((res) => {
+            dispatch({
+                type: GET_TOPIC,
+                payload: res.data,
+            });
+        })
+        .catch((err) => console.log(err));
+};
+
 // ADD LEAD
 export const addTopic = (topic) => (dispatch) => {
     axios

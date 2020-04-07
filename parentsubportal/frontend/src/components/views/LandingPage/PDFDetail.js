@@ -32,9 +32,7 @@ export class PDFDetail extends Component {
     }
     */
 
-    checkRating = (event, data) => {
-        console.log(data.rating);
-    };
+    checkRating = (event, data) => {};
 
     render() {
         return (

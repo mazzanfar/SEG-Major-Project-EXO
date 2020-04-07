@@ -10,7 +10,7 @@ import { getTopics } from "../../../actions/topics";
 function PostForm() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [topic, setTopic] = useState("");
+    const [topic, setTopic] = useState([]);
     const author = useSelector((state) => state.auth.user);
     const topics = useSelector((state) => state.topics.topics);
     const options = topics.map((topic) => ({
@@ -24,7 +24,6 @@ function PostForm() {
         { key: "f", text: "Female", value: "female" },
         { key: "o", text: "Other", value: "other" },
     ];
-    console.log(options);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,8 +38,10 @@ function PostForm() {
             author: author.id,
             topics: topic,
         };
-        console.log(post);
         dispatch(addPost(post));
+        setTitle("");
+        setContent("");
+        setTopic([]);
     };
 
     return (
@@ -59,13 +60,14 @@ function PostForm() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
             />
-            <Dropdown
+            <Form.Dropdown
                 fluid
                 multiple
                 selection
                 placeholder="Topics"
                 label="Topics"
                 options={options}
+                value={topic}
                 onChange={(e, { value }) => setTopic(value)}
             />
 
