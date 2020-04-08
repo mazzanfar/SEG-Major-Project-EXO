@@ -51,8 +51,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', pages_views.home_page, name="home_page"),
-    #path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
-    #path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
     path('blogs/', pages_views.blogs_page, name="blogs_page"),
     path('resources/', pages_views.blogs_page, name="blogs_page"),
     path('videos/', pages_views.blogs_page, name="blogs_page"),
@@ -64,7 +62,7 @@ urlpatterns = [
     path('timeline/', timeline_views.timeline, name='timeline'),
     path('upload/', timeline_views.upload, name = 'upload'),
     path('children', include('children.urls')),
-    #Need to  fix  the serach URL 
+    #Need to  fix  the serach URL
     path('search/', disability_views.HomePageView.as_view(), name="search"),
     path('results/', disability_views.SearchResultsView.as_view(), name="search_results"),
     path('', include('frontend.urls')),
