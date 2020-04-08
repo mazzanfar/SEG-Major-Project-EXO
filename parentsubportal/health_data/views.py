@@ -5,8 +5,8 @@ from .data_fetch.crawler import scrape
 
 
 def healthData_page(request):
-    if request.method == 'POST':
-        form = UrlForm(request.POST)
+    if request.method == 'GET':
+        form = UrlForm(request.GET)
 
         if form.is_valid():
             print("called ")
