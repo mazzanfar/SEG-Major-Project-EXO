@@ -12,7 +12,7 @@ def create_child(sender, instance, created, **kwargs):
     # raw is set when model is created from loaddata.
     if created:
         Timeline.objects.create(header = "Financial Support", age = "0-4", child =instance)
-        Timeline.objects.create(header = "Financial Support", age = "4-11",child=instance)
+        Timeline.objects.create(header = "Financial Support", age = "4-11", child=instance)
         Timeline.objects.create(header = "Financial Support", age = "11-18",child=instance)
         Timeline.objects.create(header = "Financial Support", age = "18-25",child=instance)
 
