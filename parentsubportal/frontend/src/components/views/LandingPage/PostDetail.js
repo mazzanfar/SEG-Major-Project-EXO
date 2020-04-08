@@ -53,12 +53,11 @@ function PostDetail(props) {
                     <Item.Description>{props.post.content}</Item.Description>
                     {props.children}
                     <Item.Extra>
-                        {props.post.topic_names &&
-                            props.post.topic_names.map((topic) => (
-                                <Label href={"/topic/" + topic.name}>
-                                    {topic.name}
-                                </Label>
-                            ))}
+                        {props.post.topic_names.map((topic) => (
+                            <Label href={"/topic/" + topic.name}>
+                                {topic.name}
+                            </Label>
+                        ))}
                         <Button.Group color="teal">
                             <Button>Save</Button>
                             <Dropdown

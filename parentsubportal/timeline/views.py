@@ -24,11 +24,11 @@ def upload(request):
         form_pdf = PdfForm(request.POST, request.FILES)
         if form.is_valid() and form_pdf.is_valid():
             search_result = Timeline.objects.get(
-                Q(header = form.data['header']) & Q(age = form.data['age']) & Q(child = form.data['child'])
+                Q(header = form.header) | Q(age = form.age) | Q(child = form.child)
             )
             form_pdf.instance.timeline = search_result
             form_pdf.save()
-            return redirect('timeline')
+            return redirect('timeline.html')
     else:
         form = TimelineForm()
         form_pdf = PdfForm()

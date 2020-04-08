@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 from django.urls import reverse
-from django.dispatch import receiver
-from django.db.models import signals
+
+
 
 DIAGNOSIS_CHOICES = [
         (1, ("Yes")), 
@@ -25,4 +25,3 @@ class Children(models.Model):
  
     def get_absolute_url(self):
         return reverse('children-detail', kwargs={'pk': self.pk})
-

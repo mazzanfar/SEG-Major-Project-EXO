@@ -46,6 +46,7 @@ from pages import views as pages_views
 from frontend import views as views
 from timeline import views as timeline_views
 from disability import views  as disability_views
+from health_data import views  as healthData_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -59,7 +60,6 @@ urlpatterns = [
     path('pdfs/', pages_views.blogs_page, name="blogs_page"),
     path('adminpage/', pages_views.blogs_page, name="blogs_page"),
     path('topics/<int:id>', pages_views.blogs_page, name="blogs_page"),
-    path('posts/<int:id>', pages_views.blogs_page, name="blogs_page"),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
