@@ -10,4 +10,3 @@ export const GET_USER = "GET_USER";
 export const RATE_POST = "RATE_POST";
 export const GET_PDFS = "GET_PDFS";
 export const GET_VIDEOS = "GET_VIDEOS";
-export const GET_TOPIC = "GET_TOPIC";

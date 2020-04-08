@@ -63,22 +63,11 @@ class TopicViewSet(viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = PostListSerializer
-
-    def get_queryset(self):
-        queryset = None
-        topic = self.request.query_params.get('topic', None)
-        print(topic)
-        if topic is not None:
-            queryset = Post.objects.filter(topics=topic)
-        else:
-            queryset = Post.objects.all()
-
-        return queryset
-
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()

@@ -9,9 +9,9 @@ import pdfs from "./pdfs";
 import videos from "./videos";
 
 export default combineReducers({
-    comments,
     posts,
     topics,
+    comments,
     ratings,
     auth,
     pdfs,
