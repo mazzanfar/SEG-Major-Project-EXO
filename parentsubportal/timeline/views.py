@@ -21,7 +21,7 @@ def timeline(request):
 
 def upload(request):
     if request.method == 'POST':
-        form = TimelineForm(request.POST, request.FILES, user)
+        form = TimelineForm(request.POST, request.FILES)
         form_pdf = PdfForm(request.POST, request.FILES)
         if form.is_valid() and form_pdf.is_valid():
             search_result = Timeline.objects.get(
@@ -31,7 +31,7 @@ def upload(request):
             form_pdf.save()
             return redirect('timeline')
     else:
-        form = TimelineForm()
+        form = TimelineForm(request.user)
         form_pdf = PdfForm()
     return render(request, 'upload.html', {
         'form': form,
