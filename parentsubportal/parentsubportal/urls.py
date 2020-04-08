@@ -59,6 +59,7 @@ urlpatterns = [
     path('pdfs/', pages_views.blogs_page, name="blogs_page"),
     path('adminpage/', pages_views.blogs_page, name="blogs_page"),
     path('topics/<int:id>', pages_views.blogs_page, name="blogs_page"),
+    path('posts/<int:id>', pages_views.blogs_page, name="blogs_page"),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),

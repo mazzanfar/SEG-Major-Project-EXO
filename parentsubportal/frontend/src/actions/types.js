@@ -2,6 +2,7 @@ export const GET_TOPICS = "GET_TOPICS";
 export const ADD_TOPIC = "ADD_TOPIC";
 export const GET_POSTS = "GET_POSTS";
 export const ADD_POST = "ADD_POST";
+export const GET_POST = "GET_POST";
 export const DELETE_POST = "DELETE_POST";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const POST_COMMENT = "POST_COMMENT";

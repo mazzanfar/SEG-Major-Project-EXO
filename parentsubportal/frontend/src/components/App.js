@@ -11,7 +11,6 @@ import AdminPage from "./views/admin/AdminPage";
 import TopicPage from "./views/TopicPage";
 import PDFPosts from "./views/LandingPage/PDFPosts";
 import VideoPosts from "./views/LandingPage/VideoPosts";
-import PostDetail from "./views/LandingPage/PostDetail";
 import NavBar from "./views/NavBar";
 import Search from "./SearchBar";
 
@@ -27,6 +26,7 @@ import {
 
 import { Link } from "react-router-dom";
 import VideoDetail from "./views/LandingPage/VideoDetail";
+import PostPage from "./views/PostPage";
 
 function App() {
     return (
@@ -45,11 +45,7 @@ function App() {
                                 path="/topics/:topicId"
                                 component={TopicPage}
                             />
-                            <Route
-                                exact
-                                path="/post/:postId"
-                                component={PostDetail}
-                            />
+                            <Route path="/posts/:postId" component={PostPage} />
                         </Switch>
                     </NavBar>
                 </Container>

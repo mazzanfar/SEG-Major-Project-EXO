@@ -9,7 +9,7 @@ import {
 
 const initialState = {
     posts: [],
-    post: null,
+    post: {},
 };
 
 export default function (state = initialState, action) {

@@ -13,6 +13,7 @@ function TopicPage(props) {
         (topic) => topic.id == props.match.params.topicId
     )[0];
     const dispatch = useDispatch();
+    console.log(topic);
 
     useEffect(() => {
         dispatch(getTopics());
