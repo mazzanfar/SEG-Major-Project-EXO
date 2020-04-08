@@ -1,0 +1,29 @@
+<head>
+    <style>
+        *{background-color: #1896a2; color: #f8d061;}
+        input{text-align: center; height: 50px; width: 100%; margin-left: auto; margin-right: auto; font-size: 40px; border: #f8d061 2px solid; background-color: #1896a2; }
+        .box{width: 60%; margin: 10% auto; border: #f8d061 3px solid; padding: 50px}
+        h2{margin-top: 100px}
+        li{margin-top: 30px;}
+    </style>
+</head>
+
+<h1>Search Results</h1>
+
+<ul>
+    {% for  item in object_list %}
+    <li>
+        <p>Name {{ item.name }}</p>
+        <p>PDFs: 
+        {% for file in item.pdffile_set.all %}
+        <a href="{{ file.pdffile.url }}/">{{ file.pk }}</a>,
+        {% endfor %}
+        </p>
+        <p>Tags: 
+        {% for tag in item.tags.all %}
+            {{ tag }}, 
+        {% endfor %}
+        </p>
+    </li>
+    {%  endfor %}
+</ul>

@@ -1,0 +1,11 @@
+{% extends 'pages/home_page.html' %}{% block content %}
+<div id="search_page" class="box">
+
+
+<form action="{% url 'search_results' %}" method="get">
+  <label id= "search-header"> Search: </label>
+  <input id= "search-input" name='q' type="text" placeholder="search keywords...">
+</form>
+
+</div>
+{% endblock content %}

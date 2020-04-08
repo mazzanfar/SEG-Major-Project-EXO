@@ -1,17 +1,19 @@
 from django.shortcuts import render
-# Create your views here.
-from django.http import HttpResponse
-import pdb
+from django.http import HttpResponseRedirect
+from .forms import UrlForm
+from .data_fetch.crawler import scrape
 
 
-def scrape_webpage(request):
-    print("im here")
-    if request.method == 'GET':
-        html = '''
-        <form action="/your-name/" method="post">
-            <label for="your_name">Your name: </label>
-            <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
-            <input type="submit" value="OK">
-        </form>
-        '''
-        return HttpResponse(html)
+def healthData_page(request):
+    if request.method == 'POST':
+        form = UrlForm(request.POST)
+
+        if form.is_valid():
+            print("called ")
+            scrape(UrlForm)
+            return HttpResponseRedirect('')
+
+    else:
+        form = UrlForm()
+
+    return render(request, 'health_data/healthData_page.html', {'form': form})

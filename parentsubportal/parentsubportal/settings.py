@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
+    'disability.apps.DisabilityConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'frontend',
     'timeline',
     'children.apps.ChildrenConfig',
-    'disability',
+    # 'disability',
     'health_data'
 ]
 

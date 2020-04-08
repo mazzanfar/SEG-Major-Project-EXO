@@ -1,11 +1,17 @@
 from rest_framework import serializers
+from itertools import chain
 from .models import (
     Topic, 
     Post, 
     Comment, 
     Rating,
-    PDF
+    PDF,
+    Content,
+    Video
 )
+
+class ResourceSerializer(serializers.Serializer):
+    pass
 
 # Vote Serializer
 class RatingSerializer(serializers.ModelSerializer):
@@ -30,17 +36,29 @@ class PDFSerializer(serializers.ModelSerializer):
         fields = '__all__'
         #fields = ["content", "author", "title", "source", "content", "topics"]
 
+class VideoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video
+        fields = '__all__'
+
 class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
     total_comments = serializers.IntegerField(read_only=True)
-    likes_count = serializers.IntegerField(read_only=True)
-    dislikes_count = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
-    topics = TopicSerializer(many=True)
+    #rating = serializers.SerializerMethodField()
+    author_username = serializers.CharField(source="author.username", read_only=True)
+    #topics = TopicSerializer(many=True)
 
     class Meta:
         model = Post
         fields = '__all__'
+
+    def get_rating(self, obj):
+        requestUser = self.context['request'].user
+        r = obj.post_ratings.filter(user=requestUser).first()
+        if (r is not None):
+            return r.rating
+        return None
 
 class PostDetailSerializer(serializers.ModelSerializer):
     """DRF serializer listing details of a blog post"""
@@ -50,4 +68,3 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['title', 'content', 'total_comments', 'comments_list']
-

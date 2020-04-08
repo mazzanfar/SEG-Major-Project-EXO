@@ -29,15 +29,17 @@
 </style>
 
 <div class="span4">
-    <h1> Timeline</h1>
-    
-    <label for="child">Choose a Child:</label>
+    <h1 id="timeline-base-header">Your Timeline</h1>
+    <label id="timeline-base-label" for="child">Choose a Child:</label>
 
     <select id="child">
-        {% for child in children %} {% if child.parent == user %}
-        <option value="{{child.first_name}}">{{ child.first_name }}  {{ child.last_name }}</option>
-        {% endif %}
+        {% for cl in children %}
+            {% if cl.parent == user %}
+                <option value="{{child.first_name}}">{{ cl.first_name }}  {{ cl.last_name }}</option>
+            {% endif %}
         {% endfor %}
+        
+        
     </select>
 
     <form action="{% url 'upload' %}">
@@ -45,24 +47,27 @@
     </form>
 
     <table class="timeline-table">
-    <tr>
+    <tr id="timeline-base-label">
         <th>0-4</th>
         <th>4-11</th>
         <th>11-18</th>
         <th>18-25</th>
     </tr>
-    {% for timeline in Timeline %}
+    
     <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Financial Support" in tl.header %}
         <td>
             <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
-                      <h3>{{ timeline.header }}</h3>
+                      <h3>{{ tl.header }}</h3>
                        <span class="right-caret right"></span>
                  </a>
-        
+                 
                 <ul class="dropdown-menu rightMenu">
-                    {% for pdf in Pdf %}
+                    {% for p in pdf %}
                     <li>
-                        <div class="btn-group"> <a href="{{ pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
                            Download pdf 
                            </a>
                         </div>
@@ -71,9 +76,143 @@
                 </ul>
             </div>
         </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
     </tr>
-    {% endfor %}
+    <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Educational Support" in tl.header %}
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                 
+                <ul class="dropdown-menu rightMenu">
+                    {% for p in pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </tr> 
+    <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Governmental Support" in tl.header %}
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                 
+                <ul class="dropdown-menu rightMenu">
+                    {% for p in pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </tr> 
+    <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Charity Support Groups" in tl.header %}
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                 
+                <ul class="dropdown-menu rightMenu">
+                    {% for p in pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </tr> 
+    <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Therapy Support" in tl.header %}
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                 
+                <ul class="dropdown-menu rightMenu">
+                    {% for p in pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </tr> 
+    <tr>
+        {% for tl in timeline %}
+        {% if tl.child.parent == user %}
+        {% if "Transport Support" in tl.header %}
+        <td>
+            <div class="btn-group"> <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      <h3>{{ tl.header }}</h3>
+                       <span class="right-caret right"></span>
+                 </a>
+                 
+                <ul class="dropdown-menu rightMenu">
+                    {% for p in pdf %}
+                    <li>
+                        <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                           Download pdf 
+                           </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </tr> 
+    
+    
     </table>
-</div>
+</div id="timeline-base">
 
 {% endblock %}

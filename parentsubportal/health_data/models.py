@@ -1,5 +1,4 @@
 from django.db import models
-
 from taggit.managers import TaggableManager
 
 
@@ -21,10 +20,12 @@ class HealthInfo(models.Model):
     name = models.CharField(max_length=200)
     url = models.URLField()
     keywords = TaggableManager()
-    health_condition_id = models.ForeignKey('HealthCondition', related_name='infos', on_delete=models.CASCADE)
+    health_condition_id = models.ForeignKey(
+        'HealthCondition', related_name='infos', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
 
 class PageLink(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

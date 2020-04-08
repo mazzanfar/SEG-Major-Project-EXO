@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">{% if title %}
-    <title>ParentSupportal - {{title}}</title>
+    <title>ParentSuportal - {{title}}</title>
     {% else %}
-    <title>ParentSupportal</title>
+    <title>ParentSuportal</title>
     {% endif %}
     <link rel="icon" href="images/icon.png">
     <!-- Bootstrap core CSS -->
@@ -105,7 +105,7 @@
      /* background: url('https://source.unsplash.com/BIk2ANMmNz4/1920x1080') no-repeat  fixed; */
       background-color:#f8d061;
     }
-    .overlay {
+    .overlaypopup {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -116,7 +116,7 @@
     visibility: hidden;
     opacity: 0;
     }
-    .overlay:target {
+    .overlaypopup:target {
     visibility: visible;
     opacity: 1;
     }
@@ -207,13 +207,80 @@
       background-color:#1896a2;
       background: rgba(230,230,230,0.8);
     }
-    #childrenForm{
+    div.content-section {
       padding-left: 400px;
       padding-right: 450px;
       padding-top: 80px;
       padding-bottom: 90px;
       background-color:#1896a2;
       background: rgba(230,230,230,0.8);
+    }
+    #search_page {
+      padding-bottom: 280px;
+      padding-left: 450px;
+      padding-right: 450px;
+      padding-top: 100px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #search-header{
+      font-size: 40px;
+      /* color:#f8d061; */
+      color:#1E90FF;
+    }
+    #search-input {
+      width: 550px;
+      height: 45px;
+    }
+    ::placeholder {
+      font-size: 20px;
+    }
+    #info-search {
+      color:#1E90FF;
+    }
+    #list {
+      display:subgrid;
+      font-size: 20px;
+      color:#1896a2;
+    }
+    #timeline-base {
+      padding-bottom: 200px;
+      padding-left: 500px;
+      padding-right: 500px;
+      padding-top: 120px;
+      background-color:#1896a2;
+      background: rgba(230,230,230,0.8);
+    }
+    #timeline-table th{
+      padding-bottom: 20px;
+      display: flex;
+    }
+    #timeline-base-header{
+      font-size: 30px;
+
+      color:#f8d061;
+    }
+    #timeline-base-label{
+      font-size: 20px;
+      color:#1896a2;
+    }
+    #child{
+      width: 150px;
+      height: 30px;
+    }
+    #timeline-upload-header{
+      font-size: 40px;
+      color:#1E90FF;
+    }
+    .timeline-form p{
+      color:#1896a2;
+    }
+    .timeline-form input {
+      color: red;
+      padding-top: 10px;
+      text-align: center;
+      padding-bottom: 10px;
+      align-items: flex-start;
     }
     </style>
 
@@ -224,21 +291,21 @@
 
       <nav>
         <div>
-          <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Supportal</h1>
+          <h1 style="color:#f8d061;"id="logo"><img src="images/icon.png">  Parent Suportal</h1>
         </div>
 
-            <ul class="nav-links">
-                <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'search_page' %}">Search</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
-                {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                <li style="padding-left:15px;" class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>{% endif %}
-            </ul>
-        </nav>
+        <ul class="nav-links">
+          <li class="nav-item active"><a class="nav-link" href="{% url 'home_page' %}">Home <span class="sr-only">(current)</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Search</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'blogs_page' %}">Blogs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'timeline' %}">Timeline</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+          <li style="padding-left:20px;"class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>{% else %}
+          <li style="padding-left:15px;"class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li style="padding-left:15px;"class="nav-item"><a class="nav-link" href="#popup1">Register</a></li>{% endif %}
+        </ul>
+      </nav>
 
     </header>
 
@@ -289,16 +356,16 @@
 
 
 
-        <div id="popup1" class="overlay">
+        <div id="popup1" class="overlaypopup">
         	<div class="popup">
-        		<h2>Here i am</h2>
+        		<h2>Here I am</h2>
         		<a class="close" href="#">&times;</a>
         		<div class="content">
-        			<p>Thank to pop me out of that button, but now there will be the video and you need to watch it before you are able to signup.</p>
+        			<p> Watch this video before signing up! </p>
         		</div>
             <iframe class="video" height="430px" width="750px" src="https://www.youtube.com/embed/uo7x2qJuJ-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div class="registerlink">
-              <p> already watched it?<a href="{% url 'register' %}">Register</a><p>
+              <p> Already watched it?  <a href="{% url 'register' %}">Register</a><p>
             </div>
           </div>
         </div>
@@ -313,9 +380,9 @@
             <div class="col-4 col-md">
               <h5><a href="#">Features</a></h5>
               <ul id="footer-ul" class="list-unstyled text-small">
-                <li class="text-muted">future development</li>
-                <li class="text-muted">Team features</li>
-                <li class="text-muted">developers/join us</li>
+                <li class="text-muted">Future Development</li>
+                <li class="text-muted">Team Features</li>
+                <li class="text-muted">Developers/Join us</li>
               </ul>
             </div>
             <div class="col-4 col-md">
@@ -323,7 +390,7 @@
               <ul id="footer-ul" class="list-unstyled text-small">
                 <li class="text-muted">Books</li>
                 <li class="text-muted">Internet</li>
-                <li class="text-muted">communitites</li>
+                <li class="text-muted">Communities</li>
               </ul>
             </div>
             <div class="col-4 col-md">

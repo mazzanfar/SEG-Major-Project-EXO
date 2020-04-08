@@ -1,13 +1,17 @@
-import React, {Fragment} from "react";
-import Posts from "./Posts";
-import Search from "./search/index";
-import Form from "./Form";
+import React, { Fragment } from "react";
+import BlogPosts from "./BlogPosts";
+import { useDispatch } from "react-redux";
+import PostForm from "./PostForm";
+import Test from "./TestComponent";
+import { getUser } from "../../../actions/auth";
 
 export default function LandingPage() {
+    const dispatch = useDispatch();
+    dispatch(getUser());
     return (
         <Fragment>
-            <Posts />
-            <Form />
+            <PostForm />
+            <BlogPosts />
         </Fragment>
     );
 }
