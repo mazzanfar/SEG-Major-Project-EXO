@@ -1,17 +1,32 @@
 import axios from "axios";
 
-import { GET_POSTS, ADD_POST, DELETE_POST } from "./types";
+import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST } from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 // GET POSTS
-export const getPosts = () => (dispatch) => {
+export const getPosts = (topic) => (dispatch) => {
+    console.log(topic);
     axios
-        .get("/api/posts/")
+        .get("/api/posts/", {
+            params: { topic: topic },
+        })
         .then((res) => {
             dispatch({
                 type: GET_POSTS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => console.log(err));
+};
+
+export const getPost = (id) => (dispatch) => {
+    axios
+        .get("/api/posts/{id}/")
+        .then((res) => {
+            dispatch({
+                type: GET_POST,
                 payload: res.data,
             });
         })

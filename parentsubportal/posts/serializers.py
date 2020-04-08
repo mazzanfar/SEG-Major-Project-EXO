@@ -26,17 +26,29 @@ class TopicSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
+    tidy_date = serializers.CharField(read_only=True)
     class Meta:
         model = Comment
-        fields = ["content", "author", "post"]
+        fields = ["content", "author", "post", "tidy_date"]
 
 class PDFSerializer(serializers.ModelSerializer):
+    total_comments = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source="author.username", read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
+    tidy_date = serializers.CharField(read_only=True)
     class Meta:
         model = PDF
         fields = '__all__'
-        #fields = ["content", "author", "title", "source", "content", "topics"]
 
 class VideoSerializer(serializers.ModelSerializer):
+    total_comments = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source="author.username", read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    tidy_date = serializers.CharField(read_only=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     class Meta:
         model = Video
         fields = '__all__'
@@ -44,14 +56,24 @@ class VideoSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
     total_comments = serializers.IntegerField(read_only=True)
+    tidy_date = serializers.CharField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     #rating = serializers.SerializerMethodField()
     author_username = serializers.CharField(source="author.username", read_only=True)
-    #topics = TopicSerializer(many=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
 
     class Meta:
         model = Post
         fields = '__all__'
+
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        topic = self.request.query_params.get('topic', None)
+        print("test")
+        if queryset is not None:
+            queryset = queryset.filter(topics__id[topic])
+
+        return queryset
 
     def get_rating(self, obj):
         requestUser = self.context['request'].user
