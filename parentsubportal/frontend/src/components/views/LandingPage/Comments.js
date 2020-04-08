@@ -29,7 +29,7 @@ function Comments(props) {
                             {post.author_username}
                         </Comment.Author>
                         <Comment.Metadata>
-                            <div>Today at 5:42pm</div>
+                            <div>Posted on {comment.tidy_date}</div>
                         </Comment.Metadata>
                         <Comment.Text>{comment.content}</Comment.Text>
                         <Comment.Actions>Reply</Comment.Actions>

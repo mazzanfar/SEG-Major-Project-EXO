@@ -4,6 +4,7 @@ import {
     ADD_POST,
     DELETE_POST,
     LIKE_POST,
+    POST_COMMENT,
 } from "../actions/types.js";
 
 const initialState = {
@@ -14,7 +15,6 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_POSTS: {
-            console.log(action.type);
             return {
                 ...state,
                 posts: action.payload,
@@ -49,6 +49,20 @@ export default function (state = initialState, action) {
                     return post;
                 }),
             };
+        case POST_COMMENT: {
+            return {
+                ...state,
+                posts: state.posts.map((post) => {
+                    if (post.id === action.payload.post) {
+                        return {
+                            ...post,
+                            comments: post.comments.concat(action.payload),
+                        };
+                    }
+                    return post;
+                }),
+            };
+        }
         default:
             return state;
     }

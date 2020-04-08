@@ -47,7 +47,8 @@ function PostDetail(props) {
                 <Item.Content>
                     <Item.Header as="a">{props.post.title}</Item.Header>
                     <Item.Meta>
-                        Posted by {props.post.author_username}
+                        Posted by {props.post.author_username} on{" "}
+                        {props.post.tidy_date}
                     </Item.Meta>
                     <Item.Description>{props.post.content}</Item.Description>
                     {props.children}

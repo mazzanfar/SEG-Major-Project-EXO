@@ -26,9 +26,10 @@ class TopicSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
+    tidy_date = serializers.CharField(read_only=True)
     class Meta:
         model = Comment
-        fields = ["content", "author", "post"]
+        fields = ["content", "author", "post", "tidy_date"]
 
 class PDFSerializer(serializers.ModelSerializer):
     total_comments = serializers.IntegerField(read_only=True)
@@ -36,6 +37,7 @@ class PDFSerializer(serializers.ModelSerializer):
     author_username = serializers.CharField(source="author.username", read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
+    tidy_date = serializers.CharField(read_only=True)
     class Meta:
         model = PDF
         fields = '__all__'
@@ -45,6 +47,7 @@ class VideoSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     author_username = serializers.CharField(source="author.username", read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    tidy_date = serializers.CharField(read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     class Meta:
         model = Video
@@ -53,6 +56,7 @@ class VideoSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     """DRF serializer listing all the posts"""
     total_comments = serializers.IntegerField(read_only=True)
+    tidy_date = serializers.CharField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     #rating = serializers.SerializerMethodField()
     author_username = serializers.CharField(source="author.username", read_only=True)

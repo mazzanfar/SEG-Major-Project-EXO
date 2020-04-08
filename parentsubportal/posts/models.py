@@ -50,6 +50,10 @@ class Content(models.Model):
         return self.comments.count()
 
     @property
+    def tidy_date(self):
+        return self.date_posted.strftime("%d %b, %Y, %H:%M %p") 
+
+    @property
     def total_likes(self):
         return self.likes.count()
 
@@ -77,7 +81,6 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = [('user', 'content')]
-    
 
 class Comment(models.Model):
     #uid = models.UUIDField(max_length=8, primary_key=True, default=uuid.uuid4, editable=False)
@@ -88,9 +91,12 @@ class Comment(models.Model):
     #modified_on = models.DateTimeField(auto_now_add=False, auto_now=True)
     #parent = TreeForeignKey('self', blank=True, related_name='children', null=True, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return 'Comment by {} on {}'.format(self.author.username, self.post.title)
+
+    @property
+    def tidy_date(self):
+        return self.created_on.strftime("%d %b, %Y, %H:%M %p") 
 
     def get_absolute_url(self):
         return reverse('posts:post-detail', kwargs={'pk': self.post.pk}) #TODO: remove 'posts:'

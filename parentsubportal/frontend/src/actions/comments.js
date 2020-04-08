@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_COMMENTS, POST_COMMENT } from "./types";
+import { POST_COMMENT } from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -22,7 +22,6 @@ export const getComments = (id) => (dispatch) => {
 
 // POST COMMENT
 export const postComment = (comment) => (dispatch) => {
-    console.log("hi");
     axios
         .post("/api/comments/", comment)
         .then((res) => {
