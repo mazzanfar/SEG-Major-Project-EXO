@@ -46,6 +46,7 @@ from pages import views as pages_views
 from frontend import views as views
 from timeline import views as timeline_views
 from disability import views  as disability_views
+from health_data import views  as healthData_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -69,6 +70,7 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('', include('users.urls')),
     #re_path('.*', TemplateView.as_view(template_name='frontend/index.html'), name='index'),
+    path('health_data/', healthData_views.healthData_page, name="health_data"),
 ]
 
 
