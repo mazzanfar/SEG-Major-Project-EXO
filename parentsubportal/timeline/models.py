@@ -21,7 +21,7 @@ AGE_CHOICES = [
 class Timeline(models.Model):
     header = models.CharField(max_length=30, choices=HEADER_CHOICES)
     age = models.CharField(max_length=6, choices=AGE_CHOICES)
-    child = models.OneToOneField(Children, on_delete=models.CASCADE)
+    child = models.ForeignKey(Children, on_delete=models.CASCADE)
 
 class Pdf(models.Model):
     pdf = models.FileField(upload_to='timelinepdfs')

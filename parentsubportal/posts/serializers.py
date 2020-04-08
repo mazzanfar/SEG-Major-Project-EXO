@@ -29,7 +29,7 @@ class CommentSerializer(serializers.ModelSerializer):
     tidy_date = serializers.CharField(read_only=True)
     class Meta:
         model = Comment
-        fields = ["content", "author", "post", "tidy_date"]
+        fields = ["id", "content", "author", "post", "tidy_date"]
 
 class PDFSerializer(serializers.ModelSerializer):
     total_comments = serializers.IntegerField(read_only=True)

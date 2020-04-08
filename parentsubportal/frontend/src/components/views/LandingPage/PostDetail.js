@@ -58,16 +58,16 @@ function PostDetail(props) {
                                 {topic.name}
                             </Label>
                         ))}
-                        <Button.Group color="teal">
-                            <Button>Save</Button>
-                            <Dropdown
-                                className="button icon"
-                                floating
-                                options={state.options}
-                                trigger={<React.Fragment />}
-                            />
-                        </Button.Group>
                     </Item.Extra>
+                    <Button.Group color="teal">
+                        <Button>Save</Button>
+                        <Dropdown
+                            className="button icon"
+                            floating
+                            options={state.options}
+                            trigger={<React.Fragment />}
+                        />
+                    </Button.Group>
                     <Rating
                         maxRating={5}
                         defaultRating={props.post.rating}

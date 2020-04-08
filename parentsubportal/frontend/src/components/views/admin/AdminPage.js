@@ -62,6 +62,7 @@ function AdminPage() {
                 </Sidebar>
                 <Sidebar.Pusher>
                     <Segment basic>
+                        //
                         <TraffiChart />
                         <Tab panes={panes} />
                     </Segment>

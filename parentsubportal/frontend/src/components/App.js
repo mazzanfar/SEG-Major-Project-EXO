@@ -6,12 +6,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import Comments from "./comments/comments"
 import LandingPage from "./views/LandingPage/LandingPage";
-import Post from "./views/PostPage/Post";
 import AdminPage from "./views/admin/AdminPage";
 import TopicPage from "./views/TopicPage";
 import PDFPosts from "./views/LandingPage/PDFPosts";
 import VideoPosts from "./views/LandingPage/VideoPosts";
-import PostDetail from "./views/LandingPage/PostDetail";
 import NavBar from "./views/NavBar";
 import Search from "./SearchBar";
 
@@ -27,6 +25,7 @@ import {
 
 import { Link } from "react-router-dom";
 import VideoDetail from "./views/LandingPage/VideoDetail";
+import PostPage from "./views/PostPage";
 
 function App() {
     return (
@@ -47,8 +46,8 @@ function App() {
                             />
                             <Route
                                 exact
-                                path="/post/:postId"
-                                component={PostDetail}
+                                path="/posts/:postId"
+                                component={PostPage}
                             />
                         </Switch>
                     </NavBar>

@@ -3,6 +3,7 @@ import {
     GET_POST,
     ADD_POST,
     DELETE_POST,
+    DELETE_COMMENT,
     LIKE_POST,
     POST_COMMENT,
 } from "../actions/types.js";
@@ -48,6 +49,11 @@ export default function (state = initialState, action) {
                     }
                     return post;
                 }),
+            };
+        case DELETE_COMMENT:
+            console.log(action.payload);
+            return {
+                ...state,
             };
         case POST_COMMENT: {
             return {

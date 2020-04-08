@@ -1,23 +1,33 @@
 import axios from "axios";
 
-import { POST_COMMENT } from "./types";
+import {
+    POST_COMMENT,
+    DELETE_COMMENT,
+    GET_COMMENTS,
+    EDIT_COMMENT,
+} from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 // GET COMMENTS
 export const getComments = (id) => (dispatch) => {
-    /*
-    axios
-    .get(`/api/posts/${id}/`)
-    .then(res => {
-        dispatch( {
+    axios.get(`/api/posts/${id}/`).then((res) => {
+        dispatch({
             type: GET_COMMENTS,
-            payload: id
-        })
-    })
-    .catch(err => console.log(err));
-    */
+            payload: id,
+        });
+    });
+};
+
+// DELETE_COMMENT
+export const deleteComment = (id) => (dispatch) => {
+    axios.delete(`/api/comments/${id}/`).then((res) => {
+        dispatch({
+            type: DELETE_COMMENT,
+            payload: id,
+        });
+    });
 };
 
 // POST COMMENT

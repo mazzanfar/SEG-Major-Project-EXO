@@ -1,12 +1,13 @@
 import _ from "lodash";
 import React, { Component, useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Search, Grid, Header, Segment } from "semantic-ui-react";
 import { getResources } from "../actions/resources";
 
 const initialState = { isLoading: false, results: [], value: "" };
 
-function SearchBar() {
+function SearchBar(props) {
     const [{ isLoading, results, value }, setState] = useState(initialState);
     const dispatch = useDispatch();
     const sortedResources = useSelector(
@@ -17,9 +18,12 @@ function SearchBar() {
             acc[item.type].name = item.type;
             acc[item.type].results = [];
         }
+        const url = "/" + item.type + "s/" + item.data.id;
+        item.data.url = url;
         acc[item.type].results.push(item.data);
         return acc;
     }, {});
+    console.log(sortedResources);
 
     useEffect(() => {
         dispatch(getResources());
@@ -31,7 +35,7 @@ function SearchBar() {
     };
 
     const handleResultSelect = (e, { result }) => {
-        setState((prevState) => ({ ...prevState, results: result }));
+        props.history.push(result.url);
     };
 
     const handleSearchChange = (e, { value }) => {
@@ -78,4 +82,4 @@ function SearchBar() {
     );
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

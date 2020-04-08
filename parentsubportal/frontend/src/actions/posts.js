@@ -22,15 +22,12 @@ export const getPosts = (topic) => (dispatch) => {
 };
 
 export const getPost = (id) => (dispatch) => {
-    axios
-        .get("/api/posts/{id}/")
-        .then((res) => {
-            dispatch({
-                type: GET_POST,
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log(err));
+    axios.get("/api/posts/" + id + "/").then((res) => {
+        dispatch({
+            type: GET_POST,
+            payload: res.data,
+        });
+    });
 };
 
 export const deletePost = (id) => (dispatch) => {
