@@ -1,23 +1,32 @@
-import { GET_COMMENTS, POST_COMMENT } from '../actions/comments'
+import { GET_POSTS, POST_COMMENT } from "../actions/types.js";
 
 const initialState = {
-    comments: []
+    posts: [],
+    post: null,
 };
 
-export default function(state = initialState, action) {
-    switch(action.type) {
-        case GET_COMMENTS: {
-            console.log(action.payload)
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case GET_POSTS: {
             return {
                 ...state,
-                comments: action.payload
+                posts: action.payload,
             };
         }
-        case POST_COMMENT:
+        case POST_COMMENT: {
             return {
                 ...state,
-                comments: [ ...state.comments, action.payload]
+                posts: state.posts.map((post) => {
+                    if (post.id === action.payload.post) {
+                        return {
+                            ...post,
+                            comments: post.comments.concat(action.payload),
+                        };
+                    }
+                    return post;
+                }),
             };
+        }
         default:
             return state;
     }

@@ -1,21 +1,30 @@
 import {
     GET_POSTS,
+    GET_POST,
     ADD_POST,
     DELETE_POST,
+    DELETE_COMMENT,
     LIKE_POST,
+    POST_COMMENT,
 } from "../actions/types.js";
 
 const initialState = {
     posts: [],
+    post: null,
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_POSTS: {
-            console.log(action.type);
             return {
                 ...state,
                 posts: action.payload,
+            };
+        }
+        case GET_POST: {
+            return {
+                ...state,
+                post: action.payload,
             };
         }
         case ADD_POST:
@@ -41,6 +50,25 @@ export default function (state = initialState, action) {
                     return post;
                 }),
             };
+        case DELETE_COMMENT:
+            console.log(action.payload);
+            return {
+                ...state,
+            };
+        case POST_COMMENT: {
+            return {
+                ...state,
+                posts: state.posts.map((post) => {
+                    if (post.id === action.payload.post) {
+                        return {
+                            ...post,
+                            comments: post.comments.concat(action.payload),
+                        };
+                    }
+                    return post;
+                }),
+            };
+        }
         default:
             return state;
     }

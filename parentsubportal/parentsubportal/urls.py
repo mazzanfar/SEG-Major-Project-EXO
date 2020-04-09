@@ -53,10 +53,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', pages_views.home_page, name="home_page"),
+    #path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
+    #path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
     path('blogs/', pages_views.blogs_page, name="blogs_page"),
     path('resources/', pages_views.blogs_page, name="blogs_page"),
     path('videos/', pages_views.blogs_page, name="blogs_page"),
     path('pdfs/', pages_views.blogs_page, name="blogs_page"),
+    path('adminpage/', pages_views.blogs_page, name="blogs_page"),
+    path('topics/<int:id>', pages_views.blogs_page, name="blogs_page"),
+    path('posts/<int:id>', pages_views.blogs_page, name="blogs_page"),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
@@ -64,7 +69,10 @@ urlpatterns = [
     path('timeline/', timeline_views.timeline, name='timeline'),
     path('upload/', timeline_views.upload, name='upload'),
     path('children', include('children.urls')),
-    # Need to  fix  the serach URL
+
+
+    #Need to  fix  the serach URL 
+
     path('search/', disability_views.HomePageView.as_view(), name="search"),
     path('results/', disability_views.SearchResultsView.as_view(),
          name="search_results"),
