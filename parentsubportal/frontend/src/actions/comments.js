@@ -21,11 +21,11 @@ export const getComments = (id) => (dispatch) => {
 };
 
 // DELETE_COMMENT
-export const deleteComment = (id) => (dispatch) => {
-    axios.delete(`/api/comments/${id}/`).then((res) => {
+export const deleteComment = (comment) => (dispatch) => {
+    axios.delete(`/api/comments/${comment.id}/`).then((res) => {
         dispatch({
             type: DELETE_COMMENT,
-            payload: id,
+            payload: comment,
         });
     });
 };

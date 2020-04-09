@@ -54,14 +54,29 @@ export default function (state = initialState, action) {
             console.log(action.payload);
             return {
                 ...state,
+                posts: state.posts.map((post) => {
+                    if (post.id === action.payload.post) {
+                        console.log("hi");
+                        return {
+                            ...post,
+                            total_comments: post.total_comments - 1,
+                            comments: post.comments.filter(
+                                (comment) => comment.id != action.payload.id
+                            ),
+                        };
+                    }
+                    return post;
+                }),
             };
         case POST_COMMENT: {
             return {
                 ...state,
+                total_comments: state.total_comments + 1,
                 posts: state.posts.map((post) => {
                     if (post.id === action.payload.post) {
                         return {
                             ...post,
+                            total_comments: post.total_comments + 1,
                             comments: post.comments.concat(action.payload),
                         };
                     }

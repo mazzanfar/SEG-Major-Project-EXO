@@ -11,6 +11,7 @@ export const POST_COMMENT = "POST_COMMENT";
 export const GET_RESOURCES = "GET_RESOURCES";
 export const GET_USER = "GET_USER";
 export const RATE_POST = "RATE_POST";
+export const UPDATE_RATING = "UPDATE_RATING";
 export const GET_PDFS = "GET_PDFS";
 export const GET_VIDEOS = "GET_VIDEOS";
 export const GET_TOPIC = "GET_TOPIC";

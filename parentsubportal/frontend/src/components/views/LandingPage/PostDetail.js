@@ -2,11 +2,24 @@ import React, { Component, Fragment } from "react";
 import { useDispatch, useSelector, useEffect } from "react-redux";
 import { Dropdown, Button, Icon, Label, Item, Rating } from "semantic-ui-react";
 import Comments from "./Comments";
-import { ratePost } from "../../../actions/ratings";
+import { ratePost, updateRating } from "../../../actions/ratings";
 
 function PostDetail(props) {
     const user = useSelector((state) => state.auth.user);
+    const getRating = () => {
+        if (!user) {
+            return 3;
+        }
+        // Filter all the ratings of this post based on logged in user's id
+        const user_rating = props.post.ratings.filter(
+            (rating) => rating.user === user.id
+        );
+        // If we found a rating, return its value else return a default of 0
+        if (user_rating.length != 0) return user_rating[0].rating;
+        return 0;
+    };
     const dispatch = useDispatch();
+
     const state = {
         options: [
             { key: "edit", icon: "edit", text: "Edit Post", value: "edit" },
@@ -20,21 +33,15 @@ function PostDetail(props) {
         ],
     };
 
-    /*
-    handleLikePost() {
-        const like = {"post": this.props.post.id, "user": 14, "vote_type": "like"}
-        this.props.likePost(like)
-    }
-    */
-
     const checkRating = (e, data) => {
         const rating = {
+            id: 1,
             rating: data.rating,
             user: user.id,
-            post: props.post.id,
+            content: props.post.id,
         };
-        //console.log(rating);
         dispatch(ratePost(rating));
+        dispatch(updateRating(rating));
     };
 
     return (
@@ -70,7 +77,7 @@ function PostDetail(props) {
                     </Button.Group>
                     <Rating
                         maxRating={5}
-                        defaultRating={props.post.rating}
+                        defaultRating={getRating()}
                         onRate={checkRating}
                         icon="star"
                         size="tiny"

@@ -58,7 +58,7 @@ class PostListSerializer(serializers.ModelSerializer):
     total_comments = serializers.IntegerField(read_only=True)
     tidy_date = serializers.CharField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
-    #rating = serializers.SerializerMethodField()
+    ratings = RatingSerializer(many=True, read_only=True)
     author_username = serializers.CharField(source="author.username", read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
 
@@ -76,7 +76,6 @@ class PostListSerializer(serializers.ModelSerializer):
         return queryset
 
     def get_rating(self, obj):
-        requestUser = self.context['request'].user
         r = obj.post_ratings.filter(user=requestUser).first()
         if (r is not None):
             return r.rating

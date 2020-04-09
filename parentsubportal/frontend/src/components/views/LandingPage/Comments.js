@@ -12,7 +12,7 @@ function CommentItem(props) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        dispatch(deleteComment(props.comment.id));
+        dispatch(deleteComment(props.comment));
     };
 
     const renderCommentText = () => {
@@ -65,7 +65,6 @@ function Comments(props) {
 
     useEffect(() => {
         setPost(props.post);
-        console.log(props.post);
     }, [props.post]);
 
     return (
