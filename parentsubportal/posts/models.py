@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.core.files import File
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from taggit.managers import TaggableManager
+from django.db.models import Sum
 
 class Topic(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -31,6 +33,12 @@ class Content(models.Model):
 
     def votes_count(self):
         return self.post_ratings.all().count()
+
+    def avg_rating(self):
+        if self.ratings.count() == 0:
+            return 0
+        else:
+            return self.ratings.aggregate(sum=Sum('rating'))['sum']
 
     # def likes_count(self):
     #     return sum(v.vote_type == "like" for v in self.post_likes.all())
@@ -60,10 +68,20 @@ class Content(models.Model):
 class Post(Content):
     pass
 
+AGE_GROUP_CHOICES = (
+        ("0-4", "0-4"),
+        ("4-11", "4-11"),
+        ("11-18", "11-18"),
+        ("18-25", "18-25"),
+        ("N/A", "N/A")
+        )
 class Resource(Content):
     source = models.URLField(blank=True)
-    lower_age = models.IntegerField(blank=True)
-    upper_age = models.IntegerField(blank=True)
+    age_group = models.CharField(
+            max_length=20,
+            choices=AGE_GROUP_CHOICES,
+            default = "N/A"
+            )
 
     class Meta:
         abstract = True

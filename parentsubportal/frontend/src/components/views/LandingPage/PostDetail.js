@@ -59,6 +59,7 @@ function PostDetail(props) {
                     </Item.Meta>
                     <Item.Description>{props.post.content}</Item.Description>
                     {props.children}
+                    Average rating: {props.post.avg_rating}
                     <Item.Extra>
                         {props.post.topic_names.map((topic) => (
                             <Label href={"/topic/" + topic.name}>

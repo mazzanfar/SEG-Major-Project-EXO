@@ -1,6 +1,14 @@
 from django.urls import path
 from .views import ChildrenListView, ChildrenDetailView, ChildrenCreateView, ChildrenUpdateView, ChildrenDeleteView
+from django.urls import re_path, path, include
 from . import views
+from rest_framework import routers
+from .api import (
+        ChildrenViewSet
+)
+
+router = routers.DefaultRouter()
+router.register('api/children', ChildrenViewSet, 'children')
 
 urlpatterns = [
     path('', ChildrenListView.as_view(), name='children-list'),

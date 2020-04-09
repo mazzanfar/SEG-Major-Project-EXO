@@ -61,6 +61,7 @@ class PostListSerializer(serializers.ModelSerializer):
     ratings = RatingSerializer(many=True, read_only=True)
     author_username = serializers.CharField(source="author.username", read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
+    avg_rating = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Post
