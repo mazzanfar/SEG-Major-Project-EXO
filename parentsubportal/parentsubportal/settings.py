@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'frontend',
     'timeline',
     'children.apps.ChildrenConfig',
+    # 'disability',
     'health_data'
 ]
 
