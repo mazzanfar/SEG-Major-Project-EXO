@@ -2,10 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import UrlForm
 from .data_fetch.crawler import scrape
+from django.contrib.admin.views.decorators import staff_member_required
+import pdb
 
 
+@staff_member_required
 def healthData_page(request):
-    
+    pdb.set_trace()
     if request.method == 'POST':
         form = UrlForm(request.POST)
         if form.is_valid():
