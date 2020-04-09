@@ -1,0 +1,5 @@
+{% extends 'pages/home_page.html' %} {% block content %}
+<option value="">---------</option>
+{% for child in children %}
+<option value="{{ child.pk }}">{{ child.first_name }}</option>
+{% endfor %} {% endblock %}

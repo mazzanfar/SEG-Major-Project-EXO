@@ -1,12 +1,10 @@
-{% extends 'pages/home_page.html' %}
-{% block content %}
+{% extends 'pages/home_page.html' %} {% block content %}
 <div id="timeline-base">
-  <h1 id="timeline-upload-header">Upload a pdf to the timeline</h1><br>
-  <form class="timeline-form" method="post" enctype="multipart/form-data" action="{% url 'upload' %}">
-      {% csrf_token %}
-      {{ form.as_p }}
-      {{ form_pdf.as_p }}
-      <button type="submit" class = "btn btn-primary">Upload file</button>
-  </form>
+    <h1 id="timeline-upload-header">Upload a pdf to the timeline</h1><br>
+
+    <form class="timeline-form" method="post" enctype="multipart/form-data" action="{% url 'upload' %}">
+        {% csrf_token %} {{ form.as_p }} {{ form_pdf.as_p }}
+        <button type="submit" class="btn btn-primary">Upload file</button>
+    </form>
 </div>
 {% endblock %}
