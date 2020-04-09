@@ -7,9 +7,11 @@ import auth from "./auth";
 import ratings from "./ratings";
 import pdfs from "./pdfs";
 import videos from "./videos";
+import children from "./children";
 
 export default combineReducers({
     comments,
+    children,
     posts,
     topics,
     ratings,

@@ -38,6 +38,14 @@ class PDFSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     tidy_date = serializers.CharField(read_only=True)
+    ratings = RatingSerializer(many=True, read_only=True)
+
+    def get_rating(self, obj):
+        r = obj.post_ratings.filter(user=requestUser).first()
+        if (r is not None):
+            return r.rating
+        return None
+
     class Meta:
         model = PDF
         fields = '__all__'

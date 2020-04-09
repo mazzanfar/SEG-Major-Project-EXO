@@ -44,16 +44,16 @@
 
     <table class="timeline-table">
         <tr id="timeline-base-label">
-            <th>0-4</th>
-            <th>4-11</th>
-            <th>11-18</th>
-            <th>18-25</th>
+            <th>0 - 4 Years</th>
+            <th>4 - 11 Years</th>
+            <th>11 - 18 Years</th>
+            <th>18 - 25 Years</th>
         </tr>
 
         <tr>
             {% for tl in timeline %} {% if tl.child.parent == user %} {% if "Financial Support" in tl.header %}
             <td>
-                <div class="btn-group">
+                <div class="btn-group dropright">
                     <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <h3>{{ tl.header }}</h3>
                         <span class="right-caret right"></span>

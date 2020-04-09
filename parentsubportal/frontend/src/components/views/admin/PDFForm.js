@@ -9,20 +9,30 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 function PDFForm() {
     const author = useSelector((state) => state.auth.user);
     const topics = useSelector((state) => state.topics.topics);
+
     const topicOptions = topics.map((topic) => ({
         key: topic.name,
         text: topic.name,
         value: topic.id,
     }));
+
     const initialState = {
         title: "",
         content: "",
-        lower_age: "",
-        upper_age: "",
+        age_group: "",
         topics: [],
         pdf_file: "",
         formSuccess: false,
     };
+
+    // TODO: Get age groups from backend rather than hardcode
+    const ageGroupOptions = [
+        { key: "0-4", value: "0-4", text: "0-4" },
+        { key: "4-11", value: "4-11", text: "4-11" },
+        { key: "11-18", value: "11-18", text: "11-18" },
+        { key: "18-25", value: "18-25", text: "18-25" },
+        { key: "N/A", value: "N/A", text: "N/A" },
+    ];
 
     const [state, setState] = useState(initialState);
 
@@ -31,8 +41,7 @@ function PDFForm() {
         const formData = new FormData();
         formData.append("title", state.title);
         formData.append("content", state.content);
-        formData.append("lower_age", state.lower_age);
-        formData.append("upper_age", state.upper_age);
+        formData.append("age_group", state.age_group);
         formData.append("author", author.id);
         formData.append("topics", state.topics);
         formData.append("pdf_file", state.pdf_file);
@@ -83,25 +92,21 @@ function PDFForm() {
                     setState({ ...state, lower_age: value })
                 }
             />
-            <Form.Input
-                required
-                label="Upper Age"
-                id="upper_age"
-                value={state.upper_age}
+            <Form.Dropdown
+                fluid
+                placeholder="Age Group"
+                label="Age Group"
+                options={ageGroupOptions}
+                value={state.age_group}
                 onChange={(e, { value }) =>
-                    setState({ ...state, upper_age: value })
-                }
-            />
-            <Form.Input
-                required
-                type="file"
-                accept="pdf"
-                label="Content"
-                onChange={(e, { value }) =>
-                    setState({ ...state, pdf_file: e.target.files[0] })
+                    setState({ ...state, age_group: value })
                 }
             />
             <Form.Dropdown
+                inlineStyle={{
+                    overflow: "initial",
+                    backgroundColor: "#E9573F",
+                }}
                 fluid
                 multiple
                 selection

@@ -9,6 +9,14 @@ from mptt.models import MPTTModel, TreeForeignKey
 from taggit.managers import TaggableManager
 from django.db.models import Sum
 
+AGE_GROUP_CHOICES = (
+        ("0-4", "0-4"),
+        ("4-11", "4-11"),
+        ("11-18", "11-18"),
+        ("18-25", "18-25"),
+        ("N/A", "N/A")
+    )
+
 class Topic(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
@@ -27,6 +35,11 @@ class Content(models.Model):
     views = models.IntegerField(default=0)
     topics = models.ManyToManyField(Topic, null=True, blank=True, related_name="topics")
     visible = models.BooleanField(default=True)
+    age_group = models.CharField(
+            max_length=20,
+            choices=AGE_GROUP_CHOICES,
+            default = "N/A",
+            )
 
     class Meta:
         ordering=['-date_posted']
@@ -68,20 +81,8 @@ class Content(models.Model):
 class Post(Content):
     pass
 
-AGE_GROUP_CHOICES = (
-        ("0-4", "0-4"),
-        ("4-11", "4-11"),
-        ("11-18", "11-18"),
-        ("18-25", "18-25"),
-        ("N/A", "N/A")
-        )
 class Resource(Content):
     source = models.URLField(blank=True)
-    age_group = models.CharField(
-            max_length=20,
-            choices=AGE_GROUP_CHOICES,
-            default = "N/A"
-            )
 
     class Meta:
         abstract = True

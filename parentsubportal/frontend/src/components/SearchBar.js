@@ -18,12 +18,20 @@ function SearchBar(props) {
             acc[item.type].name = item.type;
             acc[item.type].results = [];
         }
+        var searchResult = {};
         const url = "/" + item.type + "s/" + item.data.id;
-        item.data.url = url;
-        acc[item.type].results.push(item.data);
+        var description = "topics: ";
+        item.data.topic_names.forEach((item) => {
+            description += item.name + " ";
+        });
+
+        searchResult.title = item.data.title;
+        searchResult.url = url;
+        searchResult.description = description;
+
+        acc[item.type].results.push(searchResult);
         return acc;
     }, {});
-    console.log(sortedResources);
 
     useEffect(() => {
         dispatch(getResources());
