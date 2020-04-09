@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from children.models import Children
 from .models import Timeline, Pdf
-from .forms import TimelineForm, PdfForm
+from .forms import TimelineForm, PdfForm, TimelineToUploadForm
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -21,12 +21,13 @@ def timeline(request):
 
 def upload(request):
     if request.method == 'POST':
-        form = TimelineForm(request.POST, request.FILES)
+        form = TimelineToUploadForm(request.POST, request.FILES)
         form_pdf = PdfForm(request.POST, request.FILES)
         if form.is_valid() and form_pdf.is_valid():
-            search_result = Timeline.objects.get(
-                Q(header = form.data['header']) & Q(age = form.data['age']) & Q(age = form.data['child'])
-            )
+            header = form.cleaned_data['header']
+            age = form.cleaned_data['age']
+            child = form.cleaned_data['child']
+            search_result = Timeline.objects.get(header = header, age = age, child = child)
             form_pdf.instance.timeline = search_result
             form_pdf.save()
             return redirect('timeline')

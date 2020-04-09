@@ -17,3 +17,10 @@ class PdfForm(forms.ModelForm):
     class Meta:
         model = Pdf
         fields = ('pdf',)
+
+
+class TimelineToUploadForm(forms.ModelForm):
+    class Meta:
+        model = Timeline
+        fields = ('header', 'age', 'child')
+
