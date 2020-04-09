@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from posts.models import PDF
 from children.models import Children
+
 
 HEADER_CHOICES = [
     ('Financial Support', 'Financial Support'),
@@ -15,8 +15,7 @@ AGE_CHOICES = [
     ('0-4', '0-4'),
     ('4-11', '4-11'),
     ('11-18', '11-18'),
-    ('18-25', '18-25'),
-    ('N/A', 'N/A')
+    ('18-25', '18-25')
 ]
 
 class Timeline(models.Model):
