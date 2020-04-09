@@ -60,13 +60,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
@@ -83,13 +85,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
@@ -106,13 +110,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
@@ -129,13 +135,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
@@ -152,13 +160,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
@@ -175,13 +185,15 @@
                     </a>
 
                     <ul class="dropdown-menu rightMenu">
-                        {% for p in pdf %}
+                        {% for p in pdfs %}
+                            {%if p.timeline == tl%}
                         <li>
-                            <div class="btn-group"> <a href="{{ p.pdf }}" style="text-align:center;" class="btn btn-link operationsButtons">
+                            <div class="btn-group"> <a href="{{ p.pdf.url }}" style="text-align:center;" class="btn btn-link operationsButtons" target="_blank">
                            Download pdf 
                            </a>
                             </div>
                         </li>
+                            {% endif %}  
                         {% endfor %}
                     </ul>
                 </div>
