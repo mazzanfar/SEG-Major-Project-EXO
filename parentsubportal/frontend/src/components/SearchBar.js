@@ -1,35 +1,67 @@
 import _ from "lodash";
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Search, Grid, Header, Segment } from "semantic-ui-react";
+import {
+    Search,
+    Container,
+    Dropdown,
+    Grid,
+    Header,
+    Segment,
+} from "semantic-ui-react";
 import { getResources } from "../actions/resources";
 
-const initialState = { isLoading: false, results: [], value: "" };
+const ageGroupOptions = [
+    { key: "0-4", value: "0-4", text: "0-4" },
+    { key: "4-11", value: "4-11", text: "4-11" },
+    { key: "11-18", value: "11-18", text: "11-18" },
+    { key: "18-25", value: "18-25", text: "18-25" },
+    { key: "N/A", value: "N/A", text: "N/A" },
+];
+
+const initialState = {
+    isLoading: false,
+    results: [],
+    value: "",
+    ageGroups: [],
+    contentTypes: [],
+};
 
 function SearchBar(props) {
-    const [{ isLoading, results, value }, setState] = useState(initialState);
+    const [
+        { isLoading, results, value, contentTypes, ageGroups },
+        setState,
+    ] = useState(initialState);
     const dispatch = useDispatch();
     const sortedResources = useSelector(
         (state) => state.resources.resources
     ).reduce((acc, item) => {
-        if (!acc[item.type]) {
-            acc[item.type] = {};
-            acc[item.type].name = item.type;
-            acc[item.type].results = [];
+        // Check if the this result matches the selected content types and age groups
+        if (
+            ageGroups.indexOf(item.data.age_group) != -1 &&
+            contentTypes.indexOf(item.type) != -1
+        ) {
+            if (!acc[item.type]) {
+                acc[item.type] = {};
+                acc[item.type].name = item.type;
+                acc[item.type].results = [];
+            }
+            // Build the data to display as a rule
+            var searchResult = {};
+            const url = "/" + item.type + "s/" + item.data.id;
+            var description = "topics:";
+            item.data.topic_names.forEach((item) => {
+                description += " " + item.name;
+            });
+            description += ", age group: " + item.data.age_group;
+
+            searchResult.title = item.data.title;
+            searchResult.url = url;
+            searchResult.description = description;
+
+            acc[item.type].results.push(searchResult);
         }
-        var searchResult = {};
-        const url = "/" + item.type + "s/" + item.data.id;
-        var description = "topics: ";
-        item.data.topic_names.forEach((item) => {
-            description += item.name + " ";
-        });
-
-        searchResult.title = item.data.title;
-        searchResult.url = url;
-        searchResult.description = description;
-
-        acc[item.type].results.push(searchResult);
         return acc;
     }, {});
 
@@ -76,17 +108,83 @@ function SearchBar(props) {
         }, 300);
     };
 
+    const contentTypeOptions = [
+        {
+            key: "pdf",
+            text: "pdf",
+            value: "pdf",
+            image: {
+                avatar: true,
+                src:
+                    "https://react.semantic-ui.com/images/avatar/small/jenny.jpg",
+            },
+        },
+        {
+            key: "video",
+            text: "video",
+            value: "video",
+            image: {
+                avatar: true,
+                src:
+                    "https://react.semantic-ui.com/images/avatar/small/elliot.jpg",
+            },
+        },
+        {
+            key: "post",
+            text: "post",
+            value: "post",
+            image: {
+                avatar: true,
+                src:
+                    "https://react.semantic-ui.com/images/avatar/small/stevie.jpg",
+            },
+        },
+    ];
+
     return (
-        <Search
-            category
-            loading={isLoading}
-            onResultSelect={handleResultSelect}
-            onSearchChange={_.debounce(handleSearchChange, 500, {
-                leading: true,
-            })}
-            results={results}
-            value={value}
-        />
+        <Fragment>
+            <br />
+            <Grid centered>
+                <Search
+                    category
+                    loading={isLoading}
+                    onResultSelect={handleResultSelect}
+                    onSearchChange={_.debounce(handleSearchChange, 500, {
+                        leading: true,
+                    })}
+                    results={results}
+                    value={value}
+                />
+                <Dropdown
+                    selection
+                    multiple
+                    placeholder="Content Types"
+                    label="Content Types"
+                    value={contentTypes}
+                    options={contentTypeOptions}
+                    onChange={(e, { value }) => {
+                        setState((prevState) => ({
+                            ...prevState,
+                            contentTypes: value,
+                        }));
+                    }}
+                />
+                <Dropdown
+                    selection
+                    multiple
+                    placeholder="Age Group"
+                    label="Age Group"
+                    value={ageGroups}
+                    options={ageGroupOptions}
+                    onChange={(e, { value }) => {
+                        setState((prevState) => ({
+                            ...prevState,
+                            ageGroups: value,
+                        }));
+                    }}
+                />
+            </Grid>
+        </Fragment>
     );
 }
 
