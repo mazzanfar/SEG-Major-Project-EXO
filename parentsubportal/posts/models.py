@@ -26,6 +26,16 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.name
+
+class Disability(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = "Disabilities"
+
+    def __str__(self):
+        return self.name
     
 class Content(models.Model):
     title = models.CharField(max_length=100)
@@ -34,6 +44,7 @@ class Content(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
     topics = models.ManyToManyField(Topic, null=True, blank=True, related_name="topics")
+    disabilities = models.ManyToManyField(Disability, null=True, blank=True, related_name="disabilities")
     visible = models.BooleanField(default=True)
     age_group = models.CharField(
             max_length=20,

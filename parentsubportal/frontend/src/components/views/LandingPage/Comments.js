@@ -2,41 +2,70 @@ import React, { Component, Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Button, Comment, Form, Header, TextArea } from "semantic-ui-react";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../actions/posts";
-import { deleteComment } from "../../../actions/comments";
+import { deleteComment, updateComment } from "../../../actions/comments";
 import CommentForm from "./CommentForm";
 
 function CommentItem(props) {
     const [editing, setEditing] = useState(false);
+    const [newCommentContent, setContent] = useState("");
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user.id);
 
     const handleDelete = () => {
         dispatch(deleteComment(props.comment));
     };
 
+    const handleSave = () => {
+        setEditing(false);
+        dispatch(
+            updateComment({ ...props.comment, content: newCommentContent })
+        );
+    };
+
+    const handleCancel = () => {
+        setEditing(false);
+    };
+
     const renderCommentText = () => {
+        const isAuthor = user == props.comment.author;
         if (!editing)
             return (
                 <Fragment>
                     <Comment.Text>{props.comment.content}</Comment.Text>
-                    <Comment.Actions>
-                        <Comment.Action onClick={() => setEditing(true)}>
-                            Edit
-                        </Comment.Action>
-                        <Comment.Action onClick={() => handleDelete()}>
-                            Delete
-                        </Comment.Action>
-                    </Comment.Actions>
+                    {isAuthor ? (
+                        <Comment.Actions>
+                            <Comment.Action
+                                onClick={() => {
+                                    setContent(props.comment.content);
+                                    setEditing(true);
+                                }}
+                            >
+                                Edit
+                            </Comment.Action>
+                            <Comment.Action onClick={() => handleDelete()}>
+                                Delete
+                            </Comment.Action>
+                        </Comment.Actions>
+                    ) : null}
                 </Fragment>
             );
         else
             return (
                 <Fragment>
-                    <Comment.Text>Currently editing</Comment.Text>
+                    <Comment.Text>
+                        <TextArea
+                            value={newCommentContent}
+                            onChange={(e, { value }) => setContent(value)}
+                        ></TextArea>
+                    </Comment.Text>
                     <Comment.Actions>
-                        <Comment.Action onClick={() => setEditing(false)}>
+                        <Comment.Action onClick={() => handleSave()}>
                             Save
+                        </Comment.Action>
+                        <Comment.Action onClick={() => handleCancel()}>
+                            Cancel
                         </Comment.Action>
                     </Comment.Actions>
                 </Fragment>

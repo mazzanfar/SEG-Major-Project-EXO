@@ -37,23 +37,39 @@ function PostDetail(props) {
         },
     };
 
+    // Returns the rating object for this post, or null if there isn't one
     const getRating = () => {
-        if (!user) {
-            return 3;
-        }
         // Filter all the ratings of this post based on logged in user's id
         const user_rating = props.post.ratings.filter(
             (rating) => rating.user === user.id
         );
         // If we found a rating, return its value else return a default of 0
-        if (user_rating.length != 0) return user_rating[0].rating;
-        return 0;
+        if (user_rating.length != 0) return user_rating[0];
+        else return null;
     };
-    const options = [
-        { key: "m", text: "Male", value: "male" },
-        { key: "f", text: "Female", value: "female" },
-        { key: "o", text: "Other", value: "other" },
-    ];
+
+    // Returns the value of the rating, or 0 if this post is not rated by the user yet
+    const getRatingValue = () => {
+        const rating = getRating();
+        if (rating == null) return 0;
+        else return rating.rating;
+    };
+
+    // Updates the rating when clicked
+    const checkRating = (e, data) => {
+        const user_rating = getRating();
+        var id = null;
+        if (user_rating != null) id = user_rating.id;
+        const rating = {
+            id: id,
+            rating: data.rating,
+            user: user.id,
+            content: props.post.id,
+        };
+        console.log(rating);
+        dispatch(ratePost(rating));
+        dispatch(updateRating(rating));
+    };
 
     const dispatch = useDispatch();
 
@@ -75,17 +91,6 @@ function PostDetail(props) {
         ],
     };
 
-    const checkRating = (e, data) => {
-        const rating = {
-            id: 1,
-            rating: data.rating,
-            user: user.id,
-            content: props.post.id,
-        };
-        dispatch(ratePost(rating));
-        dispatch(updateRating(rating));
-    };
-
     return (
         <Fragment>
             <Item>
@@ -102,12 +107,22 @@ function PostDetail(props) {
                     <Item.Description>{props.post.content}</Item.Description>
                     {props.children}
                     <Item.Extra>
+                        Topics:{" "}
                         {props.post.topic_names.map((topic) => (
                             <Label href={"/topic/" + topic.name}>
                                 {topic.name}
                             </Label>
                         ))}
                     </Item.Extra>
+                    <Item.Extra>
+                        Disabilities:{" "}
+                        {props.post.disability_names.map((disability) => (
+                            <Label href={"/disability/" + disability.name}>
+                                {disability.name}
+                            </Label>
+                        ))}
+                    </Item.Extra>
+                    <Item.Extra>Age group: {props.post.age_group}</Item.Extra>
                     <Button.Group color="teal">
                         <Fragment>
                             <Modal
@@ -144,13 +159,12 @@ function PostDetail(props) {
                     </Button.Group>
                     <Rating
                         maxRating={5}
-                        defaultRating={getRating()}
+                        defaultRating={getRatingValue()}
                         onRate={checkRating}
                         icon="star"
                         size="tiny"
                     />
                     Average rating: {props.post.avg_rating}
-                    Age group: {props.post.age_group}
                 </Item.Content>
             </Item>
             <Comments post={props.post} />

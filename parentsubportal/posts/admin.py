@@ -5,6 +5,7 @@ from .models import (
     Comment, 
     PDF,
     Rating,
+    Disability,
     Video
 )
 
@@ -14,3 +15,4 @@ admin.site.register(Comment)
 admin.site.register(PDF)
 admin.site.register(Rating)
 admin.site.register(Video)
+admin.site.register(Disability)

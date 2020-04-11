@@ -7,7 +7,8 @@ from .api import (
     RatingViewSet,
     PDFViewSet,
     ResourceViewSet,
-    VideoViewSet
+    VideoViewSet,
+    DisabilityViewSet
 )
 from children.api import ChildrenViewSet
 
@@ -21,6 +22,7 @@ router.register('api/pdfs', PDFViewSet, 'pdfs')
 router.register('api/resources', ResourceViewSet, 'resources')
 router.register('api/videos', VideoViewSet, 'videos')
 router.register('api/children', ChildrenViewSet, 'videos')
+router.register('api/disabilities', DisabilityViewSet, 'disabilities')
 #router.register('api/comments/saveComment')
 
 urlpatterns = router.urls

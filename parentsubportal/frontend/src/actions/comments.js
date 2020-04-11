@@ -5,6 +5,7 @@ import {
     DELETE_COMMENT,
     GET_COMMENTS,
     EDIT_COMMENT,
+    UPDATE_COMMENT,
 } from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -41,4 +42,16 @@ export const postComment = (comment) => (dispatch) => {
             });
         })
         .catch((err) => console.log(err));
+};
+
+export const updateComment = (comment) => (dispatch) => {
+    axios
+        .put("/api/comments/" + comment.id + "/", comment)
+        .then((res) => {
+            dispatch({
+                type: UPDATE_COMMENT,
+                payload: res.data,
+            });
+        })
+        .catch((err) => console.log(err.response));
 };

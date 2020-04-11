@@ -11,6 +11,7 @@ import {
     Segment,
 } from "semantic-ui-react";
 import { getResources } from "../actions/resources";
+import { getDisabilities } from "../actions/disabilities";
 
 const ageGroupOptions = [
     { key: "0-4", value: "0-4", text: "0-4" },
@@ -26,21 +27,58 @@ const initialState = {
     value: "",
     ageGroups: [],
     contentTypes: [],
+    disabilityTypes: [],
+    topicTypes: [],
 };
 
 function SearchBar(props) {
     const [
-        { isLoading, results, value, contentTypes, ageGroups },
+        {
+            isLoading,
+            results,
+            value,
+            contentTypes,
+            ageGroups,
+            disabilityTypes,
+            topicTypes,
+        },
         setState,
     ] = useState(initialState);
+
+    const disabilities = useSelector(
+        (state) => state.disabilities.disabilities
+    );
+    const topics = useSelector((state) => state.topics.topics);
+
+    const disabilityOptions = disabilities.map((disability) => ({
+        key: disability.name,
+        text: disability.name,
+        value: disability.id,
+    }));
+
+    const topicOptions = topics.map((topic) => ({
+        key: topic.name,
+        text: topic.name,
+        value: topic.id,
+    }));
+
     const dispatch = useDispatch();
     const sortedResources = useSelector(
         (state) => state.resources.resources
     ).reduce((acc, item) => {
         // Check if the this result matches the selected content types and age groups
+        console.log(item);
         if (
-            ageGroups.indexOf(item.data.age_group) != -1 &&
-            contentTypes.indexOf(item.type) != -1
+            (ageGroups.length == 0 ||
+                ageGroups.indexOf(item.data.age_group) != -1) &&
+            (contentTypes.length == 0 ||
+                contentTypes.indexOf(item.type) != -1) &&
+            (disabilityTypes.length == 0 ||
+                item.data.disability.some((r) =>
+                    disabilityTypes.includes(r)
+                )) &&
+            (topicTypes.length == 0 ||
+                item.data.topics.some((r) => topicTypes.includes(r)))
         ) {
             if (!acc[item.type]) {
                 acc[item.type] = {};
@@ -67,6 +105,7 @@ function SearchBar(props) {
 
     useEffect(() => {
         dispatch(getResources());
+        dispatch(getDisabilities());
     }, [dispatch]);
 
     const clearState = () => {
@@ -180,6 +219,34 @@ function SearchBar(props) {
                         setState((prevState) => ({
                             ...prevState,
                             ageGroups: value,
+                        }));
+                    }}
+                />
+                <Dropdown
+                    selection
+                    multiple
+                    placeholder="Disabilities"
+                    label="Disabilities"
+                    value={disabilityTypes}
+                    options={disabilityOptions}
+                    onChange={(e, { value }) => {
+                        setState((prevState) => ({
+                            ...prevState,
+                            disabilityTypes: value,
+                        }));
+                    }}
+                />
+                <Dropdown
+                    selection
+                    multiple
+                    placeholder="Topics"
+                    label="Topics"
+                    value={topicTypes}
+                    options={topicOptions}
+                    onChange={(e, { value }) => {
+                        setState((prevState) => ({
+                            ...prevState,
+                            topicTypes: value,
                         }));
                     }}
                 />

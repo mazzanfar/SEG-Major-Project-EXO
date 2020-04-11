@@ -14,6 +14,7 @@ export default function (state = initialState, action) {
             };
         }
         case POST_COMMENT: {
+            console.log("hi");
             return {
                 ...state,
                 posts: state.posts.map((post) => {

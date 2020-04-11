@@ -4,7 +4,8 @@ from .models import (
     Comment,
     Rating,
     PDF,
-    Video
+    Video,
+    Disability
 )
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -16,8 +17,16 @@ from .serializers import (
     RatingSerializer,
     PDFSerializer,
     VideoSerializer,
-    ResourceSerializer
+    ResourceSerializer,
+    DisabilitySerializer
 )
+
+class DisabilityViewSet(viewsets.ModelViewSet):
+    queryset = Disability.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = DisabilitySerializer
 
 class ResourceViewSet(viewsets.ViewSet):
     def get_queryset(self):

@@ -7,8 +7,14 @@ from .models import (
     Rating,
     PDF,
     Content,
-    Video
+    Video,
+    Disability,
 )
+
+class DisabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Disability
+        fields = '__all__'
 
 class ResourceSerializer(serializers.Serializer):
     pass
@@ -37,6 +43,7 @@ class PDFSerializer(serializers.ModelSerializer):
     author_username = serializers.CharField(source="author.username", read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
+    disabilities = DisabilitySerializer(many=True, read_only=True)
     tidy_date = serializers.CharField(read_only=True)
     ratings = RatingSerializer(many=True, read_only=True)
 
@@ -70,6 +77,7 @@ class PostListSerializer(serializers.ModelSerializer):
     author_username = serializers.CharField(source="author.username", read_only=True)
     topic_names = TopicSerializer(many=True, read_only=True, source='topics')
     avg_rating = serializers.FloatField(read_only=True)
+    disability_names = DisabilitySerializer(many=True, read_only=True, source='disabilities')
 
     class Meta:
         model = Post
@@ -78,7 +86,6 @@ class PostListSerializer(serializers.ModelSerializer):
     def get_queryset(self):
         queryset = Post.objects.all()
         topic = self.request.query_params.get('topic', None)
-        print("test")
         if queryset is not None:
             queryset = queryset.filter(topics__id[topic])
 

@@ -8,6 +8,7 @@ import ratings from "./ratings";
 import pdfs from "./pdfs";
 import videos from "./videos";
 import children from "./children";
+import disabilities from "./disabilities";
 
 export default combineReducers({
     comments,
@@ -19,4 +20,5 @@ export default combineReducers({
     pdfs,
     videos,
     resources,
+    disabilities,
 });

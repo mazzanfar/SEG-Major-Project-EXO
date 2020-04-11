@@ -6,6 +6,7 @@ import {
     DELETE_COMMENT,
     LIKE_POST,
     POST_COMMENT,
+    UPDATE_COMMENT,
 } from "../actions/types.js";
 
 const initialState = {
@@ -82,6 +83,30 @@ export default function (state = initialState, action) {
                     }
                     return post;
                 }),
+            };
+        }
+        case UPDATE_COMMENT: {
+            const test = state.posts.map((post) => {
+                if (post.id === action.payload.post) {
+                    return {
+                        ...post,
+                        comments: post.comments.map((comment) => {
+                            if (comment.id === action.payload.id) {
+                                return {
+                                    ...comment,
+                                    content: action.payload.content,
+                                };
+                            }
+                            return comment;
+                        }),
+                    };
+                }
+                return post;
+            });
+
+            return {
+                ...state,
+                posts: test,
             };
         }
         default:

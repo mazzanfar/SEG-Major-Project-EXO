@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import BlogPosts from "./BlogPosts";
 import { useDispatch } from "react-redux";
 import { Button, Image, Header, Modal } from "semantic-ui-react";
-import PostForm from "./PostForm";
+import PostForm from "../Forms/PostForm";
 import Test from "./TestComponent";
 import { getUser } from "../../../actions/auth";
 

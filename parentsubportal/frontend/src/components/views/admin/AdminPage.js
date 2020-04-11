@@ -8,8 +8,8 @@ import {
     Icon,
     Tab,
 } from "semantic-ui-react";
-import PDFForm from "./PDFForm";
-import VideoForm from "./VideoForm";
+import PDFForm from "../Forms/PDFForm";
+import VideoForm from "../Forms/VideoForm";
 import TraffiChart from "./TrafficChart";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../../actions/auth";
@@ -63,7 +63,6 @@ function AdminPage() {
                 <Sidebar.Pusher>
                     <Segment basic>
                         //
-                        <TraffiChart />
                         <Tab panes={panes} />
                     </Segment>
                 </Sidebar.Pusher>
