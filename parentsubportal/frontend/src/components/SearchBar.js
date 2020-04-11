@@ -67,19 +67,7 @@ function SearchBar(props) {
         (state) => state.resources.resources
     ).reduce((acc, item) => {
         // Check if the this result matches the selected content types and age groups
-        console.log(item);
-        if (
-            (ageGroups.length == 0 ||
-                ageGroups.indexOf(item.data.age_group) != -1) &&
-            (contentTypes.length == 0 ||
-                contentTypes.indexOf(item.type) != -1) &&
-            (disabilityTypes.length == 0 ||
-                item.data.disability.some((r) =>
-                    disabilityTypes.includes(r)
-                )) &&
-            (topicTypes.length == 0 ||
-                item.data.topics.some((r) => topicTypes.includes(r)))
-        ) {
+        {
             if (!acc[item.type]) {
                 acc[item.type] = {};
                 acc[item.type].name = item.type;
@@ -97,6 +85,10 @@ function SearchBar(props) {
             searchResult.title = item.data.title;
             searchResult.url = url;
             searchResult.description = description;
+            searchResult.age_group = item.data.age_group;
+            searchResult.topics = item.data.topics;
+            searchResult.disabilities = item.data.disabilities;
+            searchResult.type = item.type;
 
             acc[item.type].results.push(searchResult);
         }
@@ -127,7 +119,25 @@ function SearchBar(props) {
             if (value.length < 1) return clearState();
 
             const re = new RegExp(_.escapeRegExp(value), "i");
-            const isMatch = (result) => re.test(result.title);
+
+            // Used to test potential search results for a match absed on the title and the selected dropdowns
+            const isMatch = (result) => {
+                console.log(result);
+                console.log(disabilityTypes);
+                return (
+                    re.test(result.title) &&
+                    (ageGroups.length == 0 ||
+                        ageGroups.indexOf(result.age_group) != -1) &&
+                    (contentTypes.length == 0 ||
+                        contentTypes.indexOf(result.type) != -1) &&
+                    (disabilityTypes.length == 0 ||
+                        result.disabilities.some((r) =>
+                            disabilityTypes.includes(r)
+                        )) &&
+                    (topicTypes.length == 0 ||
+                        result.topics.some((r) => topicTypes.includes(r)))
+                );
+            };
 
             const filteredResults = _.reduce(
                 sortedResources,

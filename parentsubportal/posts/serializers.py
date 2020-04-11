@@ -39,13 +39,13 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class PDFSerializer(serializers.ModelSerializer):
     total_comments = serializers.IntegerField(read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
-    author_username = serializers.CharField(source="author.username", read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
-    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
-    disabilities = DisabilitySerializer(many=True, read_only=True)
     tidy_date = serializers.CharField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
     ratings = RatingSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source="author.username", read_only=True)
+    topic_names = TopicSerializer(many=True, read_only=True, source='topics')
+    avg_rating = serializers.FloatField(read_only=True)
+    disability_names = DisabilitySerializer(many=True, read_only=True, source='disabilities')
 
     def get_rating(self, obj):
         r = obj.post_ratings.filter(user=requestUser).first()
