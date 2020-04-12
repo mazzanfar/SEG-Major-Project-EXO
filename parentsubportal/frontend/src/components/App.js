@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./views/LandingPage/LandingPage";
 import AdminPage from "./views/admin/AdminPage";
 import TopicPage from "./views/TopicPage";
+import DisabilityPage from "./views/DisabilityPage";
 import PDFPosts from "./views/LandingPage/PDFPosts";
 import VideoPosts from "./views/LandingPage/VideoPosts";
 import NavBar from "./views/NavBar";
@@ -48,6 +49,11 @@ function App() {
                                 exact
                                 path="/posts/:postId"
                                 component={PostPage}
+                            />
+                            <Route
+                                exact
+                                path="/disabilities/:disabilityId"
+                                component={DisabilityPage}
                             />
                         </Switch>
                     </NavBar>

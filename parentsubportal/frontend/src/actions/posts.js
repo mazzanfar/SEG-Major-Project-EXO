@@ -6,11 +6,10 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 // GET POSTS
-export const getPosts = (topic) => (dispatch) => {
-    console.log(topic);
+export const getPosts = (params) => (dispatch) => {
     axios
         .get("/api/posts/", {
-            params: { topic: topic },
+            params: params,
         })
         .then((res) => {
             dispatch({

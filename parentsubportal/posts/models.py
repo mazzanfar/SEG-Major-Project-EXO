@@ -8,6 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from taggit.managers import TaggableManager
 from django.db.models import Sum
+from model_utils.managers import InheritanceManager
 
 AGE_GROUP_CHOICES = (
         ("0-4", "0-4"),
@@ -38,6 +39,7 @@ class Disability(models.Model):
         return self.name
     
 class Content(models.Model):
+    objects = InheritanceManager()
     title = models.CharField(max_length=100)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="%(class)s", blank=False)
@@ -55,9 +57,6 @@ class Content(models.Model):
     class Meta:
         ordering=['-date_posted']
 
-    def votes_count(self):
-        return self.post_ratings.all().count()
-
     def avg_rating(self):
         if self.ratings.count() == 0:
             return 0
@@ -74,9 +73,6 @@ class Content(models.Model):
         """Returns whether the post has more likes than dislikes (min 10 votes)"""
         return True
 
-    def get_absolute_url(self):
-        return reverse('posts:post-detail', kwargs={'pk': self.pk}) #TODO: remove 'posts:'
-
     @property
     def total_comments(self):
         return self.comments.count()
@@ -90,7 +86,9 @@ class Content(models.Model):
         return self.likes.count()
 
 class Post(Content):
-    pass
+    @property
+    def get_url(self):
+        return "/posts/" + str(self.id)
 
 class Resource(Content):
     source = models.URLField(blank=True)
@@ -101,8 +99,16 @@ class Resource(Content):
 class PDF(Resource):
     pdf_file = models.FileField(upload_to=f'resources/pdfs', null=False, blank=False)
 
+    @property
+    def get_url(self):
+        return "/pdfs/" + str(self.id)
+
 class Video(Resource):
     videoId = models.CharField(max_length=150, blank=False)
+
+    @property
+    def get_url(self):
+        return "/posts/" + str(self.id)
 
 class Rating(models.Model):
     content = models.ForeignKey(Content, related_name="ratings", on_delete=models.CASCADE)

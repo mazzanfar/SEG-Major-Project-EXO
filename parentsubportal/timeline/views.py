@@ -6,17 +6,35 @@ from children.models import Children
 from .models import Timeline, Pdf
 from .forms import TimelineForm, PdfForm, TimelineToUploadForm
 from django.contrib.auth.models import User
+from collections import defaultdict
+from posts.models import Topic
 # Create your views here.
 
 @login_required
 def timeline(request):
     timeline = Timeline.objects.all()
     children = Children.objects.all()
+    timelineTest = Timeline.objects.last().content.all().select_subclasses()
     pdfs = Pdf.objects.all()
+    age_groups = defaultdict(list)
+    for c in timelineTest:
+        age_groups[c.age_group].append(c)
+    group = {} 
+    for k, v in age_groups.items():
+        group[k] = {}
+        for c in v:
+            for topic in c.topics.all():
+                if not topic.name in group:
+                    group[k][topic.name] = [c]
+                else:
+                    group[k][topic.name].append(c)
+
     return render(request, 'timeline.html', {
         'timeline': timeline,
         'children' : children,
-        'pdfs' :pdfs
+        'pdfs' :pdfs,
+        'group': group
+
     })
 
 def upload(request):

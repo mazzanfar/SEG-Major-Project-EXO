@@ -5,10 +5,13 @@ import PostDetail from "./LandingPage/PostDetail";
 import { useSelector, useDispatch } from "react-redux";
 import { getTopics } from "../../actions/topics";
 import { getPosts } from "../../actions/posts";
+import { getResources } from "../../actions/resources";
 
 function TopicPage(props) {
+    const isFetching = useSelector((state) => state);
     const topics = useSelector((state) => state.topics.topics);
-    const posts = useSelector((state) => state.posts.posts);
+    const resources = useSelector((state) => state.resources.resources);
+    console.log(resources);
     const topic = topics.filter(
         (topic) => topic.id == props.match.params.topicId
     )[0];
@@ -16,19 +19,16 @@ function TopicPage(props) {
 
     useEffect(() => {
         dispatch(getTopics());
-        dispatch(getPosts(props.match.params.topicId));
+        dispatch(getResources({ topic: props.match.params.topicId }));
     }, [dispatch]);
 
     return (
         <Fragment>
-            <Header>{topic && topic.name}</Header>
-            <br />
-            {posts &&
-                posts.map((post) => (
-                    <Item.Group>
-                        <PostDetail post={post}></PostDetail>
-                    </Item.Group>
-                ))}
+            {isFetching ? (
+                <Header>Loading...</Header>
+            ) : (
+                <Header>Viewing by {topic && topic.name}</Header>
+            )}
         </Fragment>
     );
 }

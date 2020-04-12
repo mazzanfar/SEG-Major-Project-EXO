@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from children.models import Children
+from posts.models import Topic, Content, Resource
+from collections import defaultdict
 
 
 HEADER_CHOICES = [
@@ -11,6 +13,7 @@ HEADER_CHOICES = [
     ('Therapy Support', 'Therapy Support '),
     ('Transport Support', 'Transport Support ')
 ]
+
 AGE_CHOICES = [
     ('0-4', '0-4'),
     ('4-11', '4-11'),
@@ -22,6 +25,7 @@ class Timeline(models.Model):
     header = models.CharField(max_length=30, choices=HEADER_CHOICES)
     age = models.CharField(max_length=6, choices=AGE_CHOICES)
     child = models.ForeignKey(Children, on_delete=models.CASCADE)
+    content = models.ManyToManyField(Content, null=True, blank=True, related_name="contents")
 
 class Pdf(models.Model):
     pdf = models.FileField(upload_to='timelinepdfs')

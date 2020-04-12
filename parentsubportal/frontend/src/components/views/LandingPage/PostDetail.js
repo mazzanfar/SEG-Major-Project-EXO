@@ -77,6 +77,10 @@ function PostDetail(props) {
         console.log("test");
     };
 
+    const handleOnChange = (e, data) => {
+        console.log(data.value);
+    };
+
     const state = {
         options: [
             { key: "edit", icon: "edit", text: "Edit Post", value: "edit" },
@@ -86,8 +90,6 @@ function PostDetail(props) {
                 text: "Remove Post",
                 value: "delete",
             },
-            { key: "add", icon: "edit", text: "Add To Timeline", value: "add" },
-            { key: "hide", icon: "hide", text: "Hide Post", value: "hide" },
         ],
     };
 
@@ -154,6 +156,7 @@ function PostDetail(props) {
                             className="button icon"
                             floating
                             options={state.options}
+                            onChange={handleOnChange}
                             trigger={<React.Fragment />}
                         />
                     </Button.Group>
