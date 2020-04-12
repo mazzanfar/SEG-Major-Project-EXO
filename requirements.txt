@@ -23,3 +23,6 @@ sqlparse==0.3.0
 wcwidth==0.1.8
 zipp==3.1.0
 coverage>=5.0.4
+beautifulsoup4
+requests==2.19.1
+requests-oauthlib==1.0.0
