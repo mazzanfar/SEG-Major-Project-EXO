@@ -1,5 +1,8 @@
+{% extends 'pages/home_page.html' %} {% block content %}
 <form method="POST">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="crawl">
 </form>
+
+{% endblock %}
