@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_VIDEOS } from "./types";
+import { GET_VIDEOS, GET_VIDEO } from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -16,4 +16,14 @@ export const getVideos = () => (dispatch) => {
             });
         })
         .catch((err) => console.log(err));
+};
+
+// GET VIDEO
+export const getVideo = (id) => (dispatch) => {
+    axios.get("/api/videos/" + id + "/").then((res) => {
+        dispatch({
+            type: GET_VIDEO,
+            payload: res.data,
+        });
+    });
 };

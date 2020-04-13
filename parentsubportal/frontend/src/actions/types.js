@@ -20,3 +20,5 @@ export const GET_DISABILITIES = "GET_DISABILITIES";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
 export const GET_PDF = "GET_PDF";
 export const GET_TIMELINE = "GET_TIMELINE";
+export const DELETE_RESOURCE = "DELETE_RESOURCE";
+export const GET_VIDEO = "GET_VIDEO";

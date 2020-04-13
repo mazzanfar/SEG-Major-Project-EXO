@@ -106,6 +106,7 @@ function SearchBar(props) {
     };
 
     const handleResultSelect = (e, { result }) => {
+        console.log(result.url);
         props.history.push(result.url);
     };
 
@@ -122,8 +123,6 @@ function SearchBar(props) {
 
             // Used to test potential search results for a match absed on the title and the selected dropdowns
             const isMatch = (result) => {
-                console.log(result);
-                console.log(disabilityTypes);
                 return (
                     re.test(result.title) &&
                     (ageGroups.length == 0 ||

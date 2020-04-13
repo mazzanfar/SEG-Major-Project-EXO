@@ -99,6 +99,20 @@ class Resource(Content):
 
 class PDF(Resource):
     pdf_file = models.FileField(upload_to=f'resources/pdfs', null=False, blank=False)
+    pdf_url = models.URLField(null=True, blank=True)
+
+    """ Save the PDF from a URL """
+    # def save(self, *args, **kwargs):
+    #     if self.pdf_url:
+    #         import urllib, os
+    #         from urllib.parse import urlparse
+    #         import requests
+    #         from django.core.files.base import ContentFile
+    #         response = requests.get(pdf_url)
+    #         if response.status_code == 200:
+    #            self.pdf_file = ContentFile(response.content) 
+    #         self.pdf_url = ''
+    #     super(Product, self).save()
 
     @property
     def get_url(self):

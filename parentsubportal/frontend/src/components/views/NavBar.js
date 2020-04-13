@@ -46,10 +46,10 @@ function NavBar(props) {
                 )}
                 <Menu.Menu>
                     <Menu.Header>Resources</Menu.Header>
-                    <Menu.Item as={NavLink} to="/pdfs">
+                    <Menu.Item as={NavLink} to="/pdf">
                         PDFs
                     </Menu.Item>
-                    <Menu.Item as={NavLink} to="/videos">
+                    <Menu.Item as={NavLink} to="/video">
                         Videos
                     </Menu.Item>
                     <Menu.Item as={NavLink} to="/blogs">

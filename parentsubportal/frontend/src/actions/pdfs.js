@@ -19,8 +19,8 @@ export const getPDFs = () => (dispatch) => {
 };
 
 // GET PDF
-export const getPost = (id) => (dispatch) => {
-    axios.get("/api/pdf/" + id + "/").then((res) => {
+export const getPDF = (id) => (dispatch) => {
+    axios.get("/api/pdfs/" + id + "/").then((res) => {
         dispatch({
             type: GET_PDF,
             payload: res.data,

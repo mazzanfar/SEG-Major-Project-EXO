@@ -1,14 +1,17 @@
 from bs4 import BeautifulSoup
 from ..models import PageLink
+import re
 import requests
 from urllib.parse import urljoin, urlparse, urldefrag
 import pdb
+from posts.models import PDF
+from django.core.files import File
 
 
 headers = requests.utils.default_headers()
 USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
 
-def scrape(url):
+def scrape(url, user):
 
     headers.update({'User-Agent': USER_AGENT})
 
@@ -21,6 +24,8 @@ def scrape(url):
     links = content.select('body a')
 
     visited_urls = []
+
+    pdfs = []
 
     for link in links:
         child_url = get_parsed_url(
@@ -53,8 +58,11 @@ def scrape(url):
             'title': get_title(child_content),
             'description': get_description(child_content),
             'source': get_site_name(child_content, url),
+            'content': get_content(child_content),
             'url': child_url
         }
+
+        pdfs += get_pdfs(child_content, user)
 
         page_link = PageLink(**preview_dict)
 
@@ -62,6 +70,8 @@ def scrape(url):
             page_link.save()
         except:
             print('Error saving url', child_url)
+
+    return pdfs
 
 
 def get_title(link):
@@ -75,16 +85,51 @@ def get_title(link):
 
     return title
 
+def get_pdfs(link, user):
+    """Attempt to get pdf links from page"""
+    pdf_links = link.find_all('a', href=re.compile(r'(.pdf)'))
+    # clean the pdf link names
+    url_list = []
+    for el in pdf_links:
+        url_list.append(el.get_text())
+
+        """ Save the PDF from a URL """
+        import requests
+        #from django.core.files.base import ContentFile
+        #response = requests.get(el['href'])
+        #pdf = ContentFile(response.content) import urllib.request
+        try:
+            import urllib.request
+            from django.core.files.uploadedfile import SimpleUploadedFile
+            from urllib.parse import urlparse
+            pdf_url = el['href']
+            basename = urlparse(pdf_url).path.split('/')[-1]
+            tmpfile, _ = urllib.request.urlretrieve(pdf_url)
+            p = PDF(title=el.get_text(), content="This is a crawled PDF", author=user, pdf_file=SimpleUploadedFile(basename, open(tmpfile, "rb").read()), age_group="N/A")
+            p.save()
+        except:
+            print("failed to scrape " + pdf_url)
+        print(el['href'])
+    return url_list
 
 def get_description(link):
     """Attempt to get description."""
     description = ''
     if link.find("meta", property="og:description") is not None:
         description = link.find("meta", property="og:description").get('content')
+    elif link.find("strong") is not None:
+        description = link.find("strong").content
     elif link.find("p") is not None:
         description = link.find("p").content
     return description
 
+def get_content(link):
+    """Attempt to get content."""
+    content = ''
+    paragraphs = link.findAll('p', attrs={'class': None})
+    for each in paragraphs:
+        content += each.get_text()
+    return content
 
 def get_site_name(link, url):
     """Attempt to get the site's base name."""

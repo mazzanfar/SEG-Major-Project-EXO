@@ -14,21 +14,40 @@ function TopicPage(props) {
     const topic = topics.filter(
         (topic) => topic.id == props.match.params.topicId
     )[0];
+    const sortedResources = resources.filter((resource) =>
+        resource.data.topics.includes(topic.id)
+    );
+    console.log(sortedResources);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getTopics());
-        dispatch(getResources({ topic: props.match.params.topicId }));
+        dispatch(getResources({ topics: props.match.params.topicId }));
     }, [dispatch]);
 
     const getItemDetail = (resource) => {
         switch (resource.type) {
             case "pdf":
-                return <PDFDetail post={resource.data} />;
+                return (
+                    <Fragment>
+                        <h3>PDF</h3>
+                        <PDFDetail post={resource.data} />
+                    </Fragment>
+                );
             case "post":
-                return <PostDetail post={resource.data} />;
+                return (
+                    <Fragment>
+                        <h3>Post</h3>
+                        <PostDetail post={resource.data} />
+                    </Fragment>
+                );
             case "video":
-                return <VideoDetail post={resource.data} />;
+                return (
+                    <Fragment>
+                        <h3>Video</h3>
+                        <VideoDetail post={resource.data} />
+                    </Fragment>
+                );
             default:
                 return null;
         }
@@ -37,9 +56,8 @@ function TopicPage(props) {
     return (
         <Fragment>
             <Header>Viewing by {topic && topic.name}</Header>
-            <p>{topic && topic.description}</p>
             {resources &&
-                resources.map((resource) => (
+                sortedResources.map((resource) => (
                     <Item.Group>{getItemDetail(resource)}</Item.Group>
                 ))}
         </Fragment>

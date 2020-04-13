@@ -4,8 +4,8 @@ from Timeline.forms import TimelineForm, PdfForm
 class TextForms(SimpleTestCase):
     def test_TimelineForm_valid_data(self):
         form = TimelineForm(data={
-            'header': 'Educational Support'
-            'age': '4'
+            'header': 'Educational Support',
+            'age': '4',
             'child': 'hedi'
         })
         self.assertTrue(form.is_valid())

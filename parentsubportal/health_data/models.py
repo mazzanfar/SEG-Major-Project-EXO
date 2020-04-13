@@ -13,7 +13,6 @@ class HealthCondition(models.Model):
     def __str__(self):
         return self.name
 
-
 class HealthInfo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -22,6 +21,7 @@ class HealthInfo(models.Model):
     keywords = TaggableManager()
     health_condition_id = models.ForeignKey(
         'HealthCondition', related_name='infos', on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
@@ -36,6 +36,7 @@ class PageLink(models.Model):
     description = models.TextField(null=True)
     title = models.CharField(max_length=200, null=True)
     source = models.CharField(max_length=200, null=False)
+    content = models.TextField(null=True)
     keywords = TaggableManager()
 
     def __str__(self):

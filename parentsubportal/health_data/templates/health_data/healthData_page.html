@@ -1,5 +1,15 @@
+{% extends 'pages/home_page.html' %} {% block content %}
 <form method="POST">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="crawl">
 </form>
+
+{% if pdfs %}
+	<h3>Scraped PDFS:</h3>
+	{% for pdf in pdfs %}
+	<p>{{pdf}}</p>
+	{% endfor %}
+{% endif %}
+
+{% endblock %}

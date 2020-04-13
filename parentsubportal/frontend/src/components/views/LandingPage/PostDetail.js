@@ -65,14 +65,12 @@ function PostDetail(props) {
     // Updates the rating when clicked
     const checkRating = (e, data) => {
         const user_rating = getRating();
-        var id = null;
-        if (user_rating != null) id = user_rating.id;
         const rating = {
-            id: id,
             rating: data.rating,
             user: user.id,
             content: props.post.id,
         };
+        if (user_rating != null) rating.id = user_rating.id;
         console.log(rating);
         dispatch(ratePost(rating));
         dispatch(updateRating(rating));

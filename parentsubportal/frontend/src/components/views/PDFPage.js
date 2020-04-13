@@ -6,15 +6,16 @@ import PDFDetail from "./LandingPage/PDFDetail";
 import { Item } from "semantic-ui-react";
 
 function PDFPage(props) {
-    const pdfId = props.match.params.paramId;
+    const pdfId = props.match.params.pdfId;
     const pdf = useSelector((state) => state.pdfs.pdf);
     const dispatch = useDispatch();
+    console.log(pdfId);
 
     useEffect(() => {
         dispatch(getPDF(pdfId));
     }, [dispatch]);
 
-    return post ? (
+    return pdf ? (
         <Item.Group>
             <PDFDetail post={pdf} />
         </Item.Group>
