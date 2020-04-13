@@ -85,6 +85,7 @@ function PostForm() {
             />
             <Form.Dropdown
                 fluid
+                required
                 placeholder="Age Group"
                 label="Age Group"
                 options={ageGroupOptions}
