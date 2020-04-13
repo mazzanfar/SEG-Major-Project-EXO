@@ -56,6 +56,7 @@ function PostForm() {
             content: state.content,
             author: author.id,
             topics: state.topics,
+            age_group: state.age_group,
             disabilities: state.disabilities,
         };
         dispatch(addPost(post));

@@ -52,6 +52,7 @@ function VideoForm() {
             title: state.title,
             content: state.content,
             author: author.id,
+            age_group: state.age_group,
             topics: state.topics,
             disabilities: state.disabilities,
             videoId: state.videoId,

@@ -123,7 +123,7 @@ class Video(Resource):
 
     @property
     def get_url(self):
-        return "/posts/" + str(self.id)
+        return "/videos/" + str(self.id)
 
 class Rating(models.Model):
     content = models.ForeignKey(Content, related_name="ratings", on_delete=models.CASCADE)

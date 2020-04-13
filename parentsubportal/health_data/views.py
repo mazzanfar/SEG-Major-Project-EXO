@@ -11,7 +11,7 @@ def healthData_page(request):
     if request.method == 'POST':
         form = UrlForm(request.POST)
         if form.is_valid():
-            pdfs = scrape(request.POST['url'])
+            pdfs = scrape(request.POST['url'], request.user)
             return render(request, 'health_data/healthData_page.html', {'form': form, 'pdfs': pdfs})
 
     else:
