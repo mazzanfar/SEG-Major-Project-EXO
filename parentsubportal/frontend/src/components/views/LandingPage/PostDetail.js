@@ -121,7 +121,7 @@ function PostDetail(props) {
                     <Item.Extra>
                         Topics:{" "}
                         {props.post.topic_names.map((topic) => (
-                            <Label href={"/topic/" + topic.id}>
+                            <Label href={"/topics/" + topic.id}>
                                 {topic.name}
                             </Label>
                         ))}
@@ -129,7 +129,7 @@ function PostDetail(props) {
                     <Item.Extra>
                         Disabilities:{" "}
                         {props.post.disability_names.map((disability) => (
-                            <Label href={"/disability/" + disability.id}>
+                            <Label href={"/disabilities/" + disability.id}>
                                 {disability.name}
                             </Label>
                         ))}
