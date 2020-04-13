@@ -30,6 +30,7 @@ class Topic(models.Model):
 
 class Disability(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    description = models.CharField(blank=True, max_length=400)
 
     class Meta:
         ordering = ['name']
@@ -46,7 +47,7 @@ class Content(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
     topics = models.ManyToManyField(Topic, null=True, blank=True, related_name="topics")
-    disabilities = models.ManyToManyField(Disability, null=True, blank=True, related_name="disabilities")
+    disabilities = models.ManyToManyField(Disability, null=True, blank=True, related_name="content")
     visible = models.BooleanField(default=True)
     age_group = models.CharField(
             max_length=20,

@@ -25,7 +25,7 @@ class ChildrenDetailView(DetailView):
 
 class ChildrenCreateView(LoginRequiredMixin,  CreateView):
     model = Children
-    fields = ['first_name', 'last_name', 'age', 'diagnosis', 'disability']
+    fields = ['first_name', 'last_name', 'age', 'disabilities']
 
     def form_valid(self, form):
         form.instance.parent = self.request.user
@@ -33,7 +33,7 @@ class ChildrenCreateView(LoginRequiredMixin,  CreateView):
 
 class ChildrenUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Children
-    fields = ['first_name', 'last_name', 'age', 'diagnosis', 'disability']
+    fields = ['first_name', 'last_name', 'age', 'disabilities']
 
     def form_valid(self, form):
         form.instance.parent = self.request.user

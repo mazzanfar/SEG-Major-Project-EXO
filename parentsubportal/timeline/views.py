@@ -25,7 +25,10 @@ def timeline(request):
     })
     else: 
         child = user.children.first()
-        timeline = child.timeline.get()
+        if (child != None): 
+            timeline = child.timeline.get()
+        else:
+            timeline = None
         return render(request, 'timeline.html', {
         'children' : children,
         'group': timeline,
