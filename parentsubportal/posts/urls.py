@@ -11,6 +11,7 @@ from .api import (
     DisabilityViewSet
 )
 from children.api import ChildrenViewSet
+from timeline.api import TimelineViewSet
 
 router = routers.DefaultRouter()
 router.register('api/topics', TopicViewSet, 'topics')
@@ -23,6 +24,7 @@ router.register('api/resources', ResourceViewSet, 'resources')
 router.register('api/videos', VideoViewSet, 'videos')
 router.register('api/children', ChildrenViewSet, 'videos')
 router.register('api/disabilities', DisabilityViewSet, 'disabilities')
+router.register('api/timelines', TimelineViewSet, 'timelines')
 #router.register('api/comments/saveComment')
 
 urlpatterns = router.urls

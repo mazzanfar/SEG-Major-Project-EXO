@@ -62,7 +62,6 @@ function AdminPage() {
                 </Sidebar>
                 <Sidebar.Pusher>
                     <Segment basic>
-                        //
                         <Tab panes={panes} />
                     </Segment>
                 </Sidebar.Pusher>

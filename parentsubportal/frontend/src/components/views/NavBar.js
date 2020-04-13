@@ -3,6 +3,7 @@ import { getTopics } from "../../actions/topics";
 import { getChildren } from "../../actions/children";
 import { getUser } from "../../actions/auth";
 import { getDisabilities } from "../../actions/disabilities";
+import { getTimeline } from "../../actions/timelines";
 import { Route, Switch, Link, NavLink, withRouter } from "react-router-dom";
 import { Sidebar, Menu, Segment } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +14,7 @@ function NavBar(props) {
     useEffect(() => {
         dispatch(getUser());
         dispatch(getTopics());
+        dispatch(getTimeline());
         // TODO: call with current user's id
         dispatch(getChildren(1));
         dispatch(getDisabilities(1));

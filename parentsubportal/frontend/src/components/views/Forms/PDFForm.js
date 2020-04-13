@@ -9,7 +9,9 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 function PDFForm() {
     const author = useSelector((state) => state.auth.user);
     const topics = useSelector((state) => state.topics.topics);
-    const disabilities = useSelector((state) => state.topics.topics);
+    const disabilities = useSelector(
+        (state) => state.disabilities.disabilities
+    );
 
     const topicOptions = topics.map((topic) => ({
         key: topic.name,
@@ -52,9 +54,11 @@ function PDFForm() {
         formData.append("content", state.content);
         formData.append("age_group", state.age_group);
         formData.append("author", author.id);
-        formData.append("topics", state.topics);
-        formData.append("disabilties", state.disabilities);
+        if (state.topics.length > 0) formData.append("topics", state.topics);
+        if (state.disabilities.length > 0)
+            formData.append("disabilities", state.disabilities);
         formData.append("pdf_file", state.pdf_file);
+
         /* Inspect form data
         for (var pair of formData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
@@ -118,15 +122,6 @@ function PDFForm() {
                     setState({ ...state, topics: value })
                 }
             />
-            <Form.Input
-                required
-                type="file"
-                accept="pdf"
-                label="Content"
-                onChange={(e, { value }) =>
-                    setState({ ...state, pdf_file: e.target.files[0] })
-                }
-            />
             <Form.Dropdown
                 inlineStyle={{
                     overflow: "initial",
@@ -140,6 +135,15 @@ function PDFForm() {
                 value={state.disabilities}
                 onChange={(e, { value }) =>
                     setState({ ...state, disabilities: value })
+                }
+            />
+            <Form.Input
+                required
+                type="file"
+                accept="pdf"
+                label="PDF file"
+                onChange={(e, { value }) =>
+                    setState({ ...state, pdf_file: e.target.files[0] })
                 }
             />
             <Button>Submit</Button>

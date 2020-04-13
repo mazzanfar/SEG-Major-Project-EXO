@@ -12,29 +12,23 @@ from posts.models import Topic
 
 @login_required
 def timeline(request):
-    timeline = Timeline.objects.all()
-    children = Children.objects.all()
-    timelineTest = Timeline.objects.last().content.all().select_subclasses()
-    pdfs = Pdf.objects.all()
-    age_groups = defaultdict(list)
-    for c in timelineTest:
-        age_groups[c.age_group].append(c)
-    group = {} 
-    for k, v in age_groups.items():
-        group[k] = {}
-        for c in v:
-            for topic in c.topics.all():
-                if not topic.name in group:
-                    group[k][topic.name] = [c]
-                else:
-                    group[k][topic.name].append(c)
-
-    return render(request, 'timeline.html', {
-        'timeline': timeline,
+    user = request.user
+    children = user.children.all()
+    if request.method == "POST":
+        childId = request.POST['child']
+        child = children.get(id=childId)
+        timeline = child.timeline.get()
+        children = user.children.all()
+        return render(request, 'timeline.html', {
+            'children' : children,
+            'group': timeline,
+    })
+    else: 
+        child = user.children.first()
+        timeline = child.timeline.get()
+        return render(request, 'timeline.html', {
         'children' : children,
-        'pdfs' :pdfs,
-        'group': group
-
+        'group': timeline,
     })
 
 def upload(request):

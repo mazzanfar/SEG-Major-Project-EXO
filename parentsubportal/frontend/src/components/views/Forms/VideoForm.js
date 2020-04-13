@@ -7,34 +7,57 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 function VideoForm() {
+    const initialState = {
+        title: "",
+        content: "",
+        age_group: "",
+        topics: [],
+        disabilities: [],
+        videoId: "",
+        formSuccess: false,
+    };
+
     const author = useSelector((state) => state.auth.user);
     const topics = useSelector((state) => state.topics.topics);
+    const disabilities = useSelector(
+        (state) => state.disabilities.disabilities
+    );
+
     const topicOptions = topics.map((topic) => ({
         key: topic.name,
         text: topic.name,
         value: topic.id,
     }));
-    const initialState = {
-        title: "",
-        content: "",
-        lower_age: "",
-        upper_age: "",
-        videoId: "",
-        topics: [],
-        formSuccess: false,
-    };
+
+    const disabilityOptions = disabilities.map((disability) => ({
+        key: disability.name,
+        text: disability.name,
+        value: disability.id,
+    }));
+
+    // TODO: Get age groups from backend rather than hardcode
+    const ageGroupOptions = [
+        { key: "0-4", value: "0-4", text: "0-4" },
+        { key: "4-11", value: "4-11", text: "4-11" },
+        { key: "11-18", value: "11-18", text: "11-18" },
+        { key: "18-25", value: "18-25", text: "18-25" },
+        { key: "N/A", value: "N/A", text: "N/A" },
+    ];
 
     const [state, setState] = useState(initialState);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        e.preventDefault();
+        console.log(state);
         const formData = new FormData();
         formData.append("title", state.title);
         formData.append("content", state.content);
-        formData.append("lower_age", state.lower_age);
-        formData.append("upper_age", state.upper_age);
+        formData.append("age_group", state.age_group);
         formData.append("author", author.id);
-        formData.append("topics", [state.topics]);
+        if (state.topics.length > 0) formData.append("topics", state.topics);
+        if (state.disabilities.length > 0)
+            formData.append("disabilities", state.disabilities);
         formData.append("videoId", state.videoId);
         for (var pair of formData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
@@ -72,30 +95,14 @@ function VideoForm() {
                     setState({ ...state, content: value })
                 }
             />
-            <Form.Input
-                required
-                label="Lower Age"
-                id="lower_age"
-                value={state.lower_age}
+            <Form.Dropdown
+                fluid
+                placeholder="Age Group"
+                label="Age Group"
+                options={ageGroupOptions}
+                value={state.age_group}
                 onChange={(e, { value }) =>
-                    setState({ ...state, lower_age: value })
-                }
-            />
-            <Form.Input
-                required
-                label="Upper Age"
-                id="upper_age"
-                value={state.upper_age}
-                onChange={(e, { value }) =>
-                    setState({ ...state, upper_age: value })
-                }
-            />
-            <Form.Input
-                required
-                label="Video ID"
-                id="videoId"
-                onChange={(e, { value }) =>
-                    setState({ ...state, videoId: value })
+                    setState({ ...state, age_group: value })
                 }
             />
             <Form.Dropdown
@@ -108,6 +115,29 @@ function VideoForm() {
                 value={state.topic}
                 onChange={(e, { value }) =>
                     setState({ ...state, topics: value })
+                }
+            />
+            <Form.Dropdown
+                inlineStyle={{
+                    overflow: "initial",
+                }}
+                fluid
+                multiple
+                selection
+                placeholder="Disabilities"
+                label="Disabilities"
+                options={disabilityOptions}
+                value={state.disabilities}
+                onChange={(e, { value }) =>
+                    setState({ ...state, disabilities: value })
+                }
+            />
+            <Form.Input
+                required
+                label="Video ID"
+                id="videoId"
+                onChange={(e, { value }) =>
+                    setState({ ...state, videoId: value })
                 }
             />
             <Button>Submit</Button>

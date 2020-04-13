@@ -27,6 +27,7 @@ import {
 import { Link } from "react-router-dom";
 import VideoDetail from "./views/LandingPage/VideoDetail";
 import PostPage from "./views/PostPage";
+import PDFPage from "./views/PDFPage";
 
 function App() {
     return (
@@ -54,6 +55,11 @@ function App() {
                                 exact
                                 path="/disabilities/:disabilityId"
                                 component={DisabilityPage}
+                            />
+                            <Route
+                                exact
+                                path="/pdfs/:pdfId"
+                                component={PDFPage}
                             />
                         </Switch>
                     </NavBar>

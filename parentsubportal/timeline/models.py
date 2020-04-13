@@ -22,10 +22,27 @@ AGE_CHOICES = [
 ]
 
 class Timeline(models.Model):
-    header = models.CharField(max_length=30, choices=HEADER_CHOICES)
-    age = models.CharField(max_length=6, choices=AGE_CHOICES)
-    child = models.ForeignKey(Children, on_delete=models.CASCADE)
+    header = models.CharField(max_length=30, choices=HEADER_CHOICES, blank=True)
+    age = models.CharField(max_length=6, choices=AGE_CHOICES, blank=True)
+    child = models.ForeignKey(Children, on_delete=models.CASCADE, related_name="timeline")
     content = models.ManyToManyField(Content, null=True, blank=True, related_name="contents")
+
+    """ Returns a dictionary of pdfs sorted by age group, then topic"""
+    @property
+    def get_sorted_pdfs(self):
+        age_groups = defaultdict(list, { k:[] for k in ('0-4', '4-11', '11-18', '18-25', 'N/A',)})
+        for c in self.content.all().select_subclasses():
+            age_groups[c.age_group].append(c)
+        group = {} 
+        for k, v in age_groups.items():
+            group[k] = {}
+            for c in v:
+                for topic in c.topics.all():
+                    if not topic.name in group:
+                        group[k][topic.name] = [c]
+                    else:
+                        group[k][topic.name].append(c)
+        return group
 
 class Pdf(models.Model):
     pdf = models.FileField(upload_to='timelinepdfs')

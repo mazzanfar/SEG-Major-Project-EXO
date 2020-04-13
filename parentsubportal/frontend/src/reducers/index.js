@@ -9,6 +9,7 @@ import pdfs from "./pdfs";
 import videos from "./videos";
 import children from "./children";
 import disabilities from "./disabilities";
+import timeline from "./timeline";
 
 export default combineReducers({
     comments,
@@ -21,4 +22,5 @@ export default combineReducers({
     videos,
     resources,
     disabilities,
+    timeline,
 });

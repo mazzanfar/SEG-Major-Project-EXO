@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { useDispatch, useSelector, useEffect } from "react-redux";
 import {
     Dropdown,
@@ -13,15 +13,20 @@ import {
 } from "semantic-ui-react";
 import Comments from "./Comments";
 import { ratePost, updateRating } from "../../../actions/ratings";
+import { updateTimeline } from "../../../actions/timelines";
 
 function PostDetail(props) {
+    const [child, setChild] = useState(null);
     const user = useSelector((state) => state.auth.user);
+    const timelines = useSelector((state) => state.timeline.timeline);
     const children = useSelector((state) => state.children.children);
     const childrenOptions = children.map((child) => ({
         key: child.id,
         text: child.first_name + " " + child.last_name,
         value: child.id,
     }));
+
+    const dispatch = useDispatch();
 
     const inlineStyle = {
         modal: {
@@ -71,10 +76,14 @@ function PostDetail(props) {
         dispatch(updateRating(rating));
     };
 
-    const dispatch = useDispatch();
-
     const handleAddToTimeline = () => {
-        console.log("test");
+        console.log(timelines);
+        const t = timelines.filter((timeline) => timeline.child == child);
+        console.log(t);
+        if (t[0].content.includes(props.post.id)) {
+            console.log("Already exists in timeline");
+        } else t[0].content.push(props.post.id);
+        dispatch(updateTimeline(t[0]));
     };
 
     const handleOnChange = (e, data) => {
@@ -133,13 +142,17 @@ function PostDetail(props) {
                             >
                                 <Modal.Header>Add To Timeline</Modal.Header>
                                 <Modal.Content>
-                                    <Form>
+                                    <Form onSubmit={handleAddToTimeline}>
                                         <Form.Group>
                                             <Form.Field
                                                 options={childrenOptions}
                                                 label="Child"
                                                 placeholder="Child"
                                                 control={Select}
+                                                value={child}
+                                                onChange={(e, { value }) =>
+                                                    setChild(value)
+                                                }
                                             />
                                         </Form.Group>
                                         <Button

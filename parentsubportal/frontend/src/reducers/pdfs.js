@@ -3,10 +3,12 @@ import {
     POST_COMMENT,
     DELETE_COMMENT,
     UPDATE_COMMENT,
+    GET_PDF,
 } from "../actions/types.js";
 
 const initialState = {
     pdfs: [],
+    pdf: null,
 };
 
 export default function (state = initialState, action) {
@@ -15,6 +17,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 pdfs: action.payload,
+            };
+        }
+        case GET_PDF: {
+            return {
+                ...state,
+                pdf: action.payload,
             };
         }
         case POST_COMMENT: {

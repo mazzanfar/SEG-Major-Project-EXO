@@ -58,7 +58,6 @@ function PostForm() {
             topics: state.topics,
             disabilities: state.disabilities,
         };
-        console.log(post);
         dispatch(addPost(post));
         setState(initialState);
     };

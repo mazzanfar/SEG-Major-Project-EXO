@@ -18,49 +18,52 @@
     <h1 id="timeline-base-header">Your Timeline</h1>
     <label id="timeline-base-label" for="child">Choose a Child:</label>
 
-    <select id="child">
-        {% for cl in children %}
-            {% if cl.parent == user %}
-                <option value="{{child.first_name}}">{{ cl.first_name }}  {{ cl.last_name }}</option>
-            {% endif %}
+	<form method="post">
+    <select id="child" name="child">
+        {% for child in children %}
+            <option value="{{child.id}}">{{ child.first_name }} {{ child.last_name }}</option>
         {% endfor %}
-        
-        
+		{% csrf_token %}
+		<input type="submit" class="btn btn-success" value="view">
     </select>
-    <form action="{% url 'upload' %}">
-        <input type="submit" value="Add to timeline" />
-    </form>
+	</form>
 
+	<h3>Viewing timeline for {{group.child.first_name}} {{group.child.last_name}} </h3>
     <table class="timeline-table">
-        <tr id="timeline-base-label">
-			{% for age_group, topic_group in group.items %}
-			<th>{{ age_group}} Years</th>
-			{% endfor %}
-        </tr>
-
-	{% for age_group, topic_group in group.items %}
 		<tr>
-		{% for topic, content in topic_group.items %}
+		{% for age_group, topic_group in group.get_sorted_pdfs.items %}
 		<td>
 			<table>
+				<thead>
+					<tr id="timeline-base-label">
+						<th>{{ age_group }} Years</th>
+					</tr>
+				</thead>
 				<tbody>
-				<div class="btn-group dropright">
-					<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
-						<h3>{{ topic }}</h3>
-						<span class="right-caret right"></span>
-					</a>
+				{% for topic, content in topic_group.items %}
+				<tr>
+					<td>
+						<div class="btn-group dropright">
+							<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+								<h3>{{ topic }}</h3>
+								<span class="right-caret right"></span>
+							</a>
 
-					<ul class="dropdown-menu rightMenu">
-					{% for c in content %}
-					<li> <a href="{{ c.get_url }}"> {{c.title}} </a> </li>
-					{% endfor %}
-					</ul>
-				</div>
+							<ul class="dropdown-menu rightMenu">
+							{% for c in content %}
+							<li> <a href="{{ c.get_url }}"> {{c.title}} </a> </li>
+							{% endfor %}
+							</ul>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
 				</tbody>
 			</table>
+		</td>
 			{% endfor %}
+		</td>
 		</tr>
-		{% endfor %}
     </table>
 </div id="timeline-base">
 

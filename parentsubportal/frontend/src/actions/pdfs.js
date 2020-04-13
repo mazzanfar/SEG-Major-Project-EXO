@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { GET_PDFS } from "./types";
+import { GET_PDFS, GET_PDF } from "./types";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-// GET POSTS
+// GET PDF
 export const getPDFs = () => (dispatch) => {
     axios
         .get("/api/pdfs/")
@@ -16,4 +16,14 @@ export const getPDFs = () => (dispatch) => {
             });
         })
         .catch((err) => console.log(err));
+};
+
+// GET PDF
+export const getPost = (id) => (dispatch) => {
+    axios.get("/api/pdf/" + id + "/").then((res) => {
+        dispatch({
+            type: GET_PDF,
+            payload: res.data,
+        });
+    });
 };
