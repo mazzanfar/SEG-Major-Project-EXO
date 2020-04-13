@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Item, Label } from "semantic-ui-react";
-import PostDetail from "./PostDetail";
+import VideoDetail from "./VideoDetail";
 import { getVideos } from "../../../actions/videos";
 import YouTube from "react-youtube";
 import Comments from "./Comments";
@@ -26,9 +26,7 @@ function VideoPosts() {
             <br />
             {videos.map((video) => (
                 <Item.Group>
-                    <PostDetail post={video}>
-                        <YouTube videoId={video.videoId} opts={opts} />
-                    </PostDetail>
+                    <VideoDetail post={video} />
                 </Item.Group>
             ))}
         </Fragment>

@@ -48,30 +48,21 @@ function VideoForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        e.preventDefault();
-        console.log(state);
-        const formData = new FormData();
-        formData.append("title", state.title);
-        formData.append("content", state.content);
-        formData.append("age_group", state.age_group);
-        formData.append("author", author.id);
-        if (state.topics.length > 0) formData.append("topics", state.topics);
-        if (state.disabilities.length > 0)
-            formData.append("disabilities", state.disabilities);
-        formData.append("videoId", state.videoId);
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ", " + pair[1]);
-        }
+        const video = {
+            title: state.title,
+            content: state.content,
+            author: author.id,
+            topics: state.topics,
+            disabilities: state.disabilities,
+            videoId: state.videoId,
+        };
         axios
-            .post("/api/videos/", formData, {
-                headers: {
-                    "content-type": "multipart/form-data",
-                },
-            })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => console.log(err.response.data));
+            .post("/api/videos/", video)
+            .then((res) => {})
+            .catch((err) => {
+                console.log(err.response.data);
+            });
+        setState(initialState);
         setState({ ...state, formSuccess: true });
     };
 
@@ -108,6 +99,7 @@ function VideoForm() {
             <Form.Dropdown
                 fluid
                 multiple
+                required
                 selection
                 placeholder="Topics"
                 label="Topics"

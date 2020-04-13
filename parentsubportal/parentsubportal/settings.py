@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'rest_framework',
     'frontend',
-    'timeline',
+    'timeline.apps.TimelineConfig',
     'children.apps.ChildrenConfig',
     # 'disability',
     'health_data'

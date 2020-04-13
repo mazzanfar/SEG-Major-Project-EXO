@@ -54,16 +54,13 @@ function PDFForm() {
         formData.append("content", state.content);
         formData.append("age_group", state.age_group);
         formData.append("author", author.id);
-        if (state.topics.length > 0) formData.append("topics", state.topics);
-        if (state.disabilities.length > 0)
-            formData.append("disabilities", state.disabilities);
+        state.topics.forEach((item) => {
+            formData.append("topics", item);
+        });
+        state.disabilities.forEach((item) => {
+            formData.append("disabilities", item);
+        });
         formData.append("pdf_file", state.pdf_file);
-
-        /* Inspect form data
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ", " + pair[1]);
-        }
-		*/
         axios
             .post("/api/pdfs/", formData, {
                 headers: {
@@ -112,6 +109,7 @@ function PDFForm() {
                     overflow: "initial",
                 }}
                 fluid
+                required
                 multiple
                 selection
                 placeholder="Topics"

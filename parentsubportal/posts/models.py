@@ -46,7 +46,7 @@ class Content(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="%(class)s", blank=False)
     date_posted = models.DateTimeField(default=timezone.now)
     views = models.IntegerField(default=0)
-    topics = models.ManyToManyField(Topic, null=True, blank=True, related_name="topics")
+    topics = models.ManyToManyField(Topic, null=True, related_name="topics")
     disabilities = models.ManyToManyField(Disability, null=True, blank=True, related_name="content")
     visible = models.BooleanField(default=True)
     age_group = models.CharField(

@@ -27,6 +27,7 @@ def timeline(request):
         child = user.children.first()
         if (child != None): 
             timeline = child.timeline.get()
+            print(timeline.content.all())
         else:
             timeline = None
         return render(request, 'timeline.html', {

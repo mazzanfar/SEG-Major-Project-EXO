@@ -96,6 +96,7 @@ function PostForm() {
                 fluid
                 multiple
                 selection
+                required
                 placeholder="Topics"
                 label="Topics"
                 options={topicOptions}

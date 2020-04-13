@@ -6,6 +6,9 @@ from .models import Children
 # from .forms import ChildrenRegisterForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.apps import apps
+
+Timeline = apps.get_model("timeline", "Timeline")
 
 def home(request):
     context = {
@@ -29,6 +32,15 @@ class ChildrenCreateView(LoginRequiredMixin,  CreateView):
 
     def form_valid(self, form):
         form.instance.parent = self.request.user
+        self.object = form.save(commit=False)
+        self.object.save()
+        timeline = Timeline()
+        timeline.child = self.object
+        timeline.save()
+        for disability in form.cleaned_data['disabilities'].all():
+            for c in disability.content.all():
+                print(c.title)
+                timeline.content.add(c)
         return super().form_valid(form)
 
 class ChildrenUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

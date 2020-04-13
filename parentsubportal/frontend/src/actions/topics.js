@@ -27,7 +27,7 @@ export const getTopic = (id) => (dispatch) => {
         .catch((err) => console.log(err));
 };
 
-// ADD LEAD
+// ADD TOPIC
 export const addTopic = (topic) => (dispatch) => {
     axios
         .post("/api/topics/", topic)
