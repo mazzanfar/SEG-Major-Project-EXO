@@ -10,13 +10,16 @@ import {
 } from "semantic-ui-react";
 import PDFForm from "../Forms/PDFForm";
 import VideoForm from "../Forms/VideoForm";
+import { withRouter } from "react-router-dom";
 import TraffiChart from "./TrafficChart";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../../actions/auth";
 import { useEffect } from "react";
 import { getTopics } from "../../../actions/topics";
 
-function AdminPage() {
+function AdminPage(props) {
+    const user = useSelector((state) => state.auth.user);
+    if (user && !user.is_staff) props.history.goBack();
     const dispatch = useDispatch();
     const panes = [
         {
@@ -38,36 +41,10 @@ function AdminPage() {
     ];
 
     useEffect(() => {
-        dispatch(getUser(), getTopics());
+        dispatch(getTopics());
     }, [dispatch]);
 
-    return (
-        <Container fluid>
-            <Sidebar.Pushable as={Segment}>
-                <Sidebar
-                    as={Menu}
-                    animation="push"
-                    icon="labeled"
-                    vertical
-                    visible
-                    width="thin"
-                    color="grey"
-                >
-                    <Menu.Header>Hi</Menu.Header>
-                    <Menu.Menu>
-                        <Menu.Item as="a">Home</Menu.Item>
-                        <Menu.Item as="a">Analytics</Menu.Item>
-                        <Menu.Item as="a">Resources</Menu.Item>
-                    </Menu.Menu>
-                </Sidebar>
-                <Sidebar.Pusher>
-                    <Segment basic>
-                        <Tab panes={panes} />
-                    </Segment>
-                </Sidebar.Pusher>
-            </Sidebar.Pushable>
-        </Container>
-    );
+    return <Tab panes={panes} />;
 }
 
-export default AdminPage;
+export default withRouter(AdminPage);

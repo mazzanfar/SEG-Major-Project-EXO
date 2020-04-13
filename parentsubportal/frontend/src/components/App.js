@@ -37,11 +37,10 @@ function App() {
                     <Search />
                     <NavBar>
                         <Switch>
-                            <Route path="/pdfs" component={PDFPosts} />
-                            <Route path="/blogs" component={LandingPage} />
-                            <Route path="/videos" component={VideoPosts} />
-                            <Route path="/timeline" component={LandingPage} />
                             <Route path="/adminpage" component={AdminPage} />
+                            <Route path="/blogs" component={LandingPage} />
+                            <Route path="/pdfs" component={PDFPosts} />
+                            <Route path="/videos" component={VideoPosts} />
                             <Route
                                 path="/topics/:topicId"
                                 component={TopicPage}

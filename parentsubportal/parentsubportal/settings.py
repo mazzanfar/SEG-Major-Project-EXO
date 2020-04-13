@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'timeline.apps.TimelineConfig',
     'children.apps.ChildrenConfig',
     # 'disability',
-    'health_data'
+    'health_data',
+    'rest_framework_serializer_extensions'
 ]
 
 REST_FRAMEWORK = {

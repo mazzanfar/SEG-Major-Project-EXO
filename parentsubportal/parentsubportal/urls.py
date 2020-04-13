@@ -49,21 +49,22 @@ from frontend import views as views
 from timeline import views as timeline_views
 from disability import views  as disability_views
 from health_data import views  as healthData_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', pages_views.home_page, name="home_page"),
     #path('welcome_page/', pages_views.welcome_page, name="welcome_page"),
     #path('welcome_page2/', pages_views.welcome_page2, name="welcome_page2"),
-    path('blogs/', pages_views.blogs_page, name="blogs_page"),
-    path('resources/', pages_views.blogs_page, name="blogs_page"),
-    path('videos/', pages_views.blogs_page, name="blogs_page"),
-    path('pdfs/', pages_views.blogs_page, name="blogs_page"),
-    path('adminpage/', pages_views.blogs_page, name="blogs_page"),
-    path('topics/<int:id>', pages_views.blogs_page, name="blogs_page"),
-    path('posts/<int:id>', pages_views.blogs_page, name="blogs_page"),
-    path('pdfs/<int:id>', pages_views.blogs_page, name="blogs_page"),
-    path('disabilities/<int:id>', pages_views.blogs_page, name="blogs_page"),
+    path('blogs/', pages_views.blogs_page, name="blogs"),
+    path('resources/', pages_views.blogs_page, name="resources"),
+    path('videos/', pages_views.blogs_page, name="videos"),
+    path('pdfs/', pages_views.blogs_page, name="pdfs"),
+    path('adminpage/', pages_views.blogs_page, name="adminpage"),
+    path('topics/<int:id>', pages_views.blogs_page, name="topics"),
+    path('posts/<int:id>', pages_views.blogs_page, name="post"),
+    path('pdfs/<int:id>', pages_views.blogs_page, name="pdf"),
+    path('disabilities/<int:id>', pages_views.blogs_page, name="disability"),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),

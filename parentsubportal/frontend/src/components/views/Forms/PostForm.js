@@ -92,6 +92,7 @@ function PostForm() {
                     setState({ ...state, age_group: value })
                 }
             />
+            <small>Bug: topics required not enforced</small>
             <Form.Dropdown
                 fluid
                 multiple

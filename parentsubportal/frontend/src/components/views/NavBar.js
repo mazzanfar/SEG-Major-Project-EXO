@@ -21,6 +21,7 @@ function NavBar(props) {
     }, [dispatch]);
 
     const topics = useSelector((state) => state.topics.topics);
+    const user = useSelector((state) => state.auth.user);
     const disabilities = useSelector(
         (state) => state.disabilities.disabilities
     );
@@ -35,8 +36,16 @@ function NavBar(props) {
                 vertical
                 width="thin"
             >
-                <Menu.Header>Resources</Menu.Header>
+                {user && user.is_staff && (
+                    <Menu.Menu>
+                        <Menu.Header>Admin</Menu.Header>
+                        <Menu.Item as={NavLink} to="/adminpage">
+                            Add Resource
+                        </Menu.Item>
+                    </Menu.Menu>
+                )}
                 <Menu.Menu>
+                    <Menu.Header>Resources</Menu.Header>
                     <Menu.Item as={NavLink} to="/pdfs">
                         PDFs
                     </Menu.Item>

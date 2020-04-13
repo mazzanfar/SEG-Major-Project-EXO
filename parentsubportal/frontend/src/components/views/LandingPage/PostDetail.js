@@ -145,6 +145,7 @@ function PostDetail(props) {
                                     <Form onSubmit={handleAddToTimeline}>
                                         <Form.Group>
                                             <Form.Field
+                                                required
                                                 options={childrenOptions}
                                                 label="Child"
                                                 placeholder="Child"
