@@ -13,10 +13,12 @@ import {
 } from "semantic-ui-react";
 import Comments from "./Comments";
 import { ratePost, updateRating } from "../../../actions/ratings";
+import { deleteResource } from "../../../actions/resources";
 import { updateTimeline } from "../../../actions/timelines";
 
 function PostDetail(props) {
     const [child, setChild] = useState(null);
+    const [value, setValue] = useState(null);
     const user = useSelector((state) => state.auth.user);
     const timelines = useSelector((state) => state.timeline.timeline);
     const children = useSelector((state) => state.children.children);
@@ -86,13 +88,14 @@ function PostDetail(props) {
         dispatch(updateTimeline(t[0]));
     };
 
-    const handleOnChange = (e, data) => {
-        console.log(data.value);
+    const handleOnChange = (e, { value }) => {
+        setValue(value);
+        if (value == "delete") dispatch(deleteResource(props.post));
+        window.location.reload();
     };
 
     const state = {
         options: [
-            { key: "edit", icon: "edit", text: "Edit Post", value: "edit" },
             {
                 key: "delete",
                 icon: "delete",
@@ -170,6 +173,7 @@ function PostDetail(props) {
                             className="button icon"
                             floating
                             options={state.options}
+                            value={value}
                             onChange={handleOnChange}
                             trigger={<React.Fragment />}
                         />
